@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Partners</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dragging {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+{% endblock meta %}
+{% block content %}
+<body class="bg-[#629584] text-gray-800 pt-20">
+    <h1 class="text-3xl font-bold mb-6 text-center text-white">Manage Partners</h1>
+
+    <!-- Area Accept dan Reject -->
+    <div class="flex justify-center mb-6">
+        <div class="accept-zone p-4 bg-green-200 rounded-lg m-2 text-center w-1/4">Accept</div>
+        <div class="reject-zone p-4 bg-red-200 rounded-lg m-2 text-center w-1/4">Reject</div>
+    </div>
+
+    <!-- List Pending Partners -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% for partner in pending_partners %}
+            <div class="draggable-partner p-4 bg-[#fafafa] rounded-lg shadow cursor-pointer text-center" draggable="true" data-id="{{ partner.id }}">
+                <h3 class="font-bold">{{ partner.store_name }}</h3>
+                <p><a href="{{ partner.gmaps_link }}" target="_blank">{{ partner.gmaps_link }}</a></p>
+                <p>{{ partner.phone_number }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // CSRF Token
+        const csrfToken = getCookie('csrftoken');
+
+        // Draggable Partners
+        const draggablePartners = document.querySelectorAll(".draggable-partner");
+        const acceptZone = document.querySelector(".accept-zone");
+        const rejectZone = document.querySelector(".reject-zone");
+
+        draggablePartners.forEach(partner => {
+            partner.addEventListener("dragstart", e => {
+                e.target.classList.add("dragging"); // Add class while dragging
+                const id = e.target.dataset.id;
+                e.dataTransfer.setData("id", id);
+            });
+
+            partner.addEventListener("dragend", e => {
+                e.target.classList.remove("dragging"); // Remove class when done dragging
+            });
+        });
+
+        acceptZone.addEventListener("dragover", e => {
+            e.preventDefault();
+        });
+
+        rejectZone.addEventListener("dragover", e => {
+            e.preventDefault();
+        });
+
+        acceptZone.addEventListener("drop", e => {
+            e.preventDefault();
+            const id = e.dataTransfer.getData("id");
+            fetch(`/approve_partner/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    location.reload(); // Reload page after accept
+                }
+            }).catch(error => console.error("Error: ", error));
+        });
+
+        rejectZone.addEventListener("drop", e => {
+            e.preventDefault();
+            const id = e.dataTransfer.getData("id");
+            fetch(`/reject_partner/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    location.reload(); // Reload page after reject
+                }
+            }).catch(error => console.error("Error: ", error));
+        });
+
+        // Function to get CSRF cookie
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+{% endblock content %}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+    <title>Join as Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+{% endblock meta %}
+
+{% block content %}
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Left Side: Image -->
+        <div class="w-3/5 bg-cover bg-center overflow-hidden">
+            <img src="{% static 'images/bg_join.jpeg' %}" alt="Sad face"/> 
+        </div>
+
+        <!-- Right Side: Form -->
+        <div class="w-2/5 flex items-center justify-center bg-teal-700">
+            <div class="bg-white p-8 rounded-lg shadow-md w-3/4">
+                <h2 class="text-2xl font-bold mb-6">Daftar Partner</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="store_name" class="block text-gray-700 font-bold mb-2">Nama Toko</label>
+                        <input type="text" id="store_name" name="store_name" class="w-full px-3 py-2 border rounded-lg bg-teal-50" required/>
+                        {% if errors.store_name %}
+                            <p class="error">{{ errors.store_name }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="gmaps_link" class="block text-gray-700 font-bold mb-2">Alamat Toko</label>
+                        <input type="text" id="gmaps_link" name="gmaps_link" class="w-full px-3 py-2 border rounded-lg bg-teal-50" required/>
+                        {% if errors.gmaps_link %}
+                            <p class="error">{{ errors.gmaps_link }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="mb-6">
+                        <label for="phone_number" class="block text-gray-700 font-bold mb-2">Nomor Telepon</label>
+                        <input type="text" id="phone_number" name="phone_number" class="w-full px-3 py-2 border rounded-lg bg-teal-50" required/>
+                        {% if errors.phone_number %}
+                            <p class="error">{{ errors.phone_number }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="mb-6 flex justify-end">
+                        <a href="{% url 'joinpartner:login' %}" 
+                        class="w-1/2 inline-block bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg font-bold text-center">
+                         Cancel
+                     </a>
+                     <button type="submit" 
+                             class="w-1/2 bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg font-bold">
+                         Daftar
+                     </button>                     
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}
