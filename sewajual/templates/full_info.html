@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ vehicle.merk }} {{ vehicle.tipe }}</title>
+    <style>
+        :root {
+            --dark-blue: #243642;
+            --teal: #387478;
+            --sage: #629584;
+            --light-sage: #e2f1e7;
+            --white: #fafafa;
+            --dark-gray: #272828;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--white);
+            padding: 20px;
+            margin: 0;
+            color: var(--dark-gray);
+        }
+
+        #judul h1 {
+            color: var(--dark-blue);
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .data {
+            display: flex;
+            gap: 20px;
+        }
+
+        .data img {
+            width: 700px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #lengkap {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            font-size: 18px;
+            color: var(--sage);
+            line-height: 1.6;
+        }
+
+        #lengkap p {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        #lengkap a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: var(--teal);
+            font-weight: bold;
+        }
+
+        #lengkap a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="judul">
+        <h1>{{ vehicle.merk }} {{ vehicle.tipe }}</h1>
+    </div>
+    <div class="data">
+        <img src="https://via.placeholder.com/500x700.png?text=Placeholder+Image"
+            alt="{{ vehicle.merk }} {{ vehicle.tipe }}">
+        <div id="lengkap">
+            <p>Merk: {{ vehicle.merk }}</p>
+            <p>Tipe: {{ vehicle.tipe }}</p>
+            <p>Warna: {{ vehicle.warna }}</p>
+            <p>Toko: {{ vehicle.toko }}</p>
+            <a href="{{ vehicle.link_lokasi }}" target="_blank">📍 Tautan Menuju Lokasi</a>
+        </div>
+    </div>
+</body>
+
+</html>
