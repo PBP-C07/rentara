@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+    <title>{{ partner.store_name }} - Vehicles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dragging {
+            opacity: 0.5;
+        }
+    </style>
+{% endblock meta %}
+
+{% block content %}
+<body class="bg-teal-700 text-gray-800 pt-20">
+    <div class="max-w-7xl mx-auto p-5">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8">
+            <!-- Search Bar -->
+            <div class="flex-grow">
+                <input 
+                    type="text" 
+                    placeholder="Search your product" 
+                    class="w-full p-3 rounded-full bg-gray-300 text-sm outline-none focus:ring-2 focus:ring-teal-400"
+                />
+            </div>
+            <!-- Action Buttons -->
+            <div class="flex gap-3 ml-4">
+                <button id="add-vehicle-btn" class="bg-gray-300 hover:bg-gray-400 text-sm px-4 py-2 rounded-full">
+                    Add
+                </button>
+                <button id="delete-area" class="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-full">
+                    Delete
+                </button>
+            </div>
+        </div>
+
+        <!-- Grid Layout for Vehicles -->
+        <div id="vehicle-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for vehicle in vehicles %}
+            <div 
+                class="vehicle-card bg-emerald-50 p-4 rounded-xl shadow-md text-center cursor-pointer"
+                draggable="true"
+                data-vehicle-id="{{ vehicle.id }}"
+            >
+                <p class="font-semibold">{{ vehicle.brand }} {{ vehicle.brand_type }} {{ vehicle.color }}</p>
+                <div class="text-center">
+                    <img src="{{ vehicle.vehicle_image }}" alt="{{ vehicle.brand }}" class="max-w-md h-40 object-cover rounded-lg mb-4 mx-auto">
+                </div>
+                <p>Rp{{ vehicle.price_per_day }},-</p>
+                <p>{{ vehicle.status }}</p>
+                
+                <!-- Edit Button -->
+                <div class="mt-4">
+                    <a href="{% url 'joinpartner:edit_product' vehicle.id %}" class="bg-teal-700 text-white font-bold py-2 px-4 rounded-full hover:bg-teal-600">
+                        Edit
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-white">No vehicles available.</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="hidden md:flex items-center space-x-4">
+        <!-- Logout Button -->
+        <a href="{% url 'joinpartner:logout' %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+          Logout
+        </a>
+    </div>
+
+    <script>
+        // Add button functionality
+        document.getElementById('add-vehicle-btn').addEventListener('click', function() {
+            // Redirect to the add vehicle page
+            window.location.href = "{% url 'joinpartner:add_product' %}";
+        });
+
+        // Make vehicle cards draggable
+        const vehicleCards = document.querySelectorAll('.vehicle-card');
+        const deleteArea = document.getElementById('delete-area');
+
+        vehicleCards.forEach(card => {
+            card.addEventListener('dragstart', (e) => {
+                card.classList.add('dragging');
+                e.dataTransfer.setData('vehicle-id', card.getAttribute('data-vehicle-id'));
+            });
+
+            card.addEventListener('dragend', () => {
+                card.classList.remove('dragging');
+            });
+        });
+
+        // Enable delete area to accept dragged elements
+        deleteArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            deleteArea.classList.add('bg-red-700');  // Highlight the delete area when hovering
+        });
+
+        deleteArea.addEventListener('dragleave', () => {
+            deleteArea.classList.remove('bg-red-700');
+        });
+
+        deleteArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const vehicleId = e.dataTransfer.getData('vehicle-id');
+            if (confirm("Are you sure you want to delete this vehicle?")) {
+                deleteVehicle(vehicleId);
+            }
+            deleteArea.classList.remove('bg-red-700');
+        });
+
+        // Function to delete the vehicle card
+        function deleteVehicle(vehicleId) {
+            const cardToDelete = document.querySelector(`[data-vehicle-id="${vehicleId}"]`);
+            if (cardToDelete) {
+                // Hapus elemen dari DOM
+                cardToDelete.remove();
+
+                // Kirim permintaan penghapusan ke server
+                fetch(`/vehicles/${vehicleId}/delete/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'),  // Ambil token CSRF
+                        'Content-Type': 'application/json'
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Kendaraan berhasil dihapus');
+                    } else {
+                        console.error('Gagal menghapus kendaraan');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+        // Fungsi untuk mendapatkan cookie CSRF
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Periksa apakah cookie ini adalah cookie yang kita cari
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+{% endblock content %}
