@@ -1,0 +1,546 @@
+[
+    {
+        "model": "sewajual.vehicle",
+        "pk": 1,
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Toyota",
+            "tipe": "Avanza All New",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://i.imgur.com/o19wIrT.png"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 2,
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1uV7DyQhxRkQyEZ6-g7Dwf9QPR-pn47nD"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 3,
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Honda",
+            "tipe": "Brio",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 325000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1RJaT2lbv1yOpgCEilH-1_LH_BDS-kKJS"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 4,
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Toyota",
+            "tipe": "Agya",
+            "warna": "Abu-abu",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1iWguysbK-bvNEuYbTVF46UPXzBoWOsX1"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 5,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Raize 1.0 Turbo GR Sport CVT TSS",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1jktbnI1FZo22iBlxObXybu5-hIEoGpKl"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 6,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Innova Zenix G",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 700000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1H6hLAPpMA9be9zi8yfRmKsPuGH2i9M4F"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 7,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Innova Zenix Q",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1200000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1H22u6hZsGJZZDzC_y2QcE8Bh8cJurDxO"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 8,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Fortuner GR",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1500000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1kGkLbYE8OX4cKI4ogHw4HbQeeYhEhi7R"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 9,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Nissan",
+            "tipe": "Grand Livina",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1BLxDlrV-6qfQ9f8SbngU9bRdXMnKJmd6"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 10,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Suzuki",
+            "tipe": "Ertiga GLX",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1WAZHCcphtudcrLiH0tOWYY1GQmjHvUbj"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 11,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Honda",
+            "tipe": "Mobilio",
+            "warna": "Abu-Abu",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=19VBB4KOHKnN-R_f8rxfvNYg0eItdwY5-"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 12,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Vellfire 2.5 G A/T",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 3000000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1QW9Xn35g2xNyyrmVnpyt2-nza1Cu-jH8"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 13,
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Alphard Hybrid",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 4500000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=13vOB7Fspmm-y03PzkiveHeDiTogSJP0m"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 14,
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Vespa",
+            "tipe": "Sprint",
+            "warna": "Kuning",
+            "jenis_kendaraan": "Motor",
+            "harga": 250000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/thumbnail?id=1hpmLJ_kx1JrR8Za1fzihSAuV-h_7L4gj"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 15,
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Honda",
+            "tipe": "Stylo 160",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 140000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/thumbnail?id=1-RP_yV0oIG_Fg8CvGgIlsEJbYhZ9hfZK"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 16,
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Vespa",
+            "tipe": "Sprint",
+            "warna": "Dark Blue",
+            "jenis_kendaraan": "Motor",
+            "harga": 250000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/thumbnail?id=1QXZqph4j35NYq3-X6ZTDgCE6alWcUHmg"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 17,
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Vespa",
+            "tipe": "Primavera",
+            "warna": "Green Relax",
+            "jenis_kendaraan": "Motor",
+            "harga": 250000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/thumbnail?id=175bUaq4fIVt4T6bO1mLDokSH2_OklYP2"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 18,
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Honda",
+            "tipe": "Scoopy",
+            "warna": "Fashion Blue Matte",
+            "jenis_kendaraan": "Motor",
+            "harga": 90000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/thumbnail?id=1SBI0JRsoaFD6QsflBMPDOwa6RMlUcjhp"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 19,
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Honda",
+            "tipe": "PCX 160",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 150000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/thumbnail?id=1nsK_P0roWbKBOyBZfUWt4CL-RnJ8FOgi"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 20,
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Honda",
+            "tipe": "WR-V",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 375000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/thumbnail?id=1jODhi-JraHa8ueD-NHY5LgU0AlAYgxXJ"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 21,
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Honda",
+            "tipe": "City HS",
+            "warna": "Merah",
+            "jenis_kendaraan": "Mobil",
+            "harga": 400000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/thumbnail?id=1hY1hvpe7WbBL01f9bGH6DEFwlVWxGdeX"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 22,
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Mitsubishi",
+            "tipe": "New Xpander Ultimate",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/thumbnail?id=1GPGzom_3VB7VwUgCP-ZvRLJaH83I7oaI"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 23,
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Suzuki",
+            "tipe": "XL7",
+            "warna": "Oranye",
+            "jenis_kendaraan": "Mobil",
+            "harga": 400000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/thumbnail?id=1oKio-OIrIJx53qzMDM_ZkagfV8Dndu7C"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 24,
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Daihatsu",
+            "tipe": "All New Terios",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/thumbnail?id=1pc58Zx03qu0ZjpKIA5M6xqLZ6Lk5H5Zb"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 25,
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Honda",
+            "tipe": "Vario 160 ABS",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 140000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/thumbnail?id=1y_vx35zS5yunoJBlMT7gZQYVHHPvOJmi"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 26,
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Yamaha",
+            "tipe": "Filano 125",
+            "warna": "Violet",
+            "jenis_kendaraan": "Motor",
+            "harga": 120000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/thumbnail?id=18JLypjfS2HkKR5rhH-vxOKQPuh9ZXuTC"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 27,
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Wuling",
+            "tipe": "Almaz",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1_qkvBN4Q81Vp_C1ZF_P4vRxN0HvkEQOU"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 28,
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Honda",
+            "tipe": "BRV",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1V_dJ5rd2WR_ldgLF_5O4mwH0LIsFAN7_"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 29,
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Honda",
+            "tipe": "Jazz RS",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1g3t8J44l5dACYpXPihLp-hB9t2rFgFjE"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 30,
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Toyota",
+            "tipe": "Yaris TRD Sportivo",
+            "warna": "Hijau",
+            "jenis_kendaraan": "Mobil",
+            "harga": 375000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/thumbnail?id=116CPC94d849ZDSYU6VQRqj9lvI4-WcBI"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 31,
+        "fields": {
+            "toko": "Teman Holiday Transport",
+            "merk": "Honda",
+            "tipe": "New HR-V",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 550000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/p8vQRg5Ho9yGGKNR6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1gmOdawQBQoPcHwqEPWavXfgYjsk8aBWO"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 32,
+        "fields": {
+            "toko": "Hasmi",
+            "merk": "Honda",
+            "tipe": "Spacy 110",
+            "warna": "Biru",
+            "jenis_kendaraan": "Motor",
+            "harga": 65000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/zmSb8SXQLqHnyrzY6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1j5jjXKEKiC1-YiRw15DdGSxjUasRsTmQ"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 33,
+        "fields": {
+            "toko": "Hasmi",
+            "merk": "Honda",
+            "tipe": "Vario 160 CBS",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/zmSb8SXQLqHnyrzY6",
+            "link_foto": "https://drive.google.com/thumbnail?id=1JPAlO9D1nT64qBGPDUQvM_qHPkIYphMZ"
+        }
+    },
+    {
+        "model": "sewajual.vehicle",
+        "pk": 34,
+        "fields": {
+            "toko": "HaloTrans",
+            "merk": "Mitsubishi",
+            "tipe": "Pajero Sport",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1200000,
+            "status": "Sewa",
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/dzfGHLy89wydPSVs8",
+            "link_foto": "https://drive.google.com/thumbnail?id=1qH9rXwRhapOw4pOFl936P8ydjGIKUUIB"
+        }
+    }
+]
