@@ -1,0 +1,133 @@
+/* Main colors */
+:root {
+    --primary-color: #5A9A8E; /* Button color */
+    --secondary-color: #F4F9F6; /* Background color */
+    --card-background-color: #243642; /* Card background color */
+    --text-color: #FFFFFF; /* Text color */
+    --accent-color: #D1EAE2; /* Accent for borders */
+    --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow for cards */
+}
+
+body {
+    background-color: var( --secondary-color);
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: var(--card-background-color);
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Box container for the driver cards */
+.card-container {
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden; /* To contain sliding elements */
+    position: relative; /* For positioning of buttons */
+}
+
+/* Driver row styling */
+.driver-row {
+    margin-top: 50px;
+    display: flex;
+    transition: transform 0.5s ease; /* Smooth sliding effect */
+    width: 100%; /* Full width */
+}
+
+/* Driver card styling */
+.driver-card {
+    background-color: var(--card-background-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    width: 250px; /* Fixed width for cards */
+    height: 350px;
+    margin: 20px; /* Space around cards */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align content */
+}
+
+/* Add a decorative icon at the top of the card */
+.driver-card::before {
+    content: '👤'; /* Decorative icon for decoration */
+    font-size: 3rem; /* Larger icon */
+    margin-top: 60px;
+    margin-bottom: 10px; /* Space between icon and title */
+}
+
+/* Card body */
+.card-body {
+    text-align: center;
+}
+
+/* Card title (driver name) */
+.card-title {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Card content */
+.card-text {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Button styling */
+.add-driver-container {
+    width: 100%; /* Full width */
+    text-align: center; /* Center the content horizontally */
+    margin-top: 20px; /* Optional: Add some spacing above the button */
+}
+
+.btn {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 12px 20px;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #497d71;
+}
+
+/* Navigation buttons */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.nav-button.left {
+    left: 10px;
+}
+
+.nav-button.right {
+    right: 10px;
+}
