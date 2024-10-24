@@ -1,0 +1,2144 @@
+[
+    {
+        "model": "main.vehicle",
+        "pk": "f852bf32-1814-4f08-a3ea-f08fdfc092a1",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Honda",
+            "tipe": "Beat",
+            "warna": "Merah",
+            "jenis_kendaraan": "Motor",
+            "harga": 80000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://drive.google.com/file/d/1fKbd4DRcg9txUbR5pvSpUH7xaKCIGopW/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "f0bc67e0-3ffa-4a17-a475-4efd32ffcb7d",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Honda",
+            "tipe": "Beat ",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 85000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://drive.google.com/file/d/1kJPZxTZ7yzWST-U2wRyrYMnldBb_4oky/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "bdf1bf59-08fe-40d5-9191-c84d47527be2",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Honda",
+            "tipe": "Scoopy",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 85000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://drive.google.com/file/d/1Jp4KqjbvibAlitwrF4p5Z8t8HzMdVfAz/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "a3afd5e9-77e7-4505-a7f0-c8db1e9df323",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Yamaha",
+            "tipe": "Xride 125",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 85000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://drive.google.com/file/d/1qhIoP9DhEr2jDY4W6m7VXezIOw9P-qsV/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "5b3bd8c8-1126-4c05-bbe9-952bd2bb720b",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Honda",
+            "tipe": "Vario 125",
+            "warna": "Silver",
+            "jenis_kendaraan": "Motor",
+            "harga": 90000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://drive.google.com/file/d/13YiL36LrMdu7KFNewuNhl-ob0wGiwWNg/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "5fd50a48-c9fc-4319-9ce9-c8ddade74da6",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Honda",
+            "tipe": "Vario 150",
+            "warna": "Silver",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://drive.google.com/file/d/1KC9Cm_KtpLQjHWeH-tNzGHHfUJOFey23/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "ac367b61-6e2d-4d89-ad8a-4c446fd70495",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Yamaha",
+            "tipe": "Lexi",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://drive.google.com/file/d/1EusnvqQg_ifh2Ev1PmQyZ4NC_1qIVK-U/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "23e7da4d-994b-4011-87e3-cea9c0d35f26",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Yamaha",
+            "tipe": "Aerox",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 130000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "61ea33ba-3aae-4959-bcff-2edcaf06c7d5",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Honda",
+            "tipe": "PCX",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 140000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "6d777aa6-51c1-4a80-ba49-e3d97be8dfa2",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Yamaha",
+            "tipe": "NMAX",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 140000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "a66cd1e5-d571-4b16-9a9a-853bb6b883b1",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Yamaha",
+            "tipe": "XMAX",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "b94c33c0-7d2d-4eb0-9a6e-379f0bd344bb",
+        "fields": {
+            "toko": "Motor Lombok",
+            "merk": "Honda",
+            "tipe": "CRF 150",
+            "warna": "Merah",
+            "jenis_kendaraan": "Motor",
+            "harga": 160000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/ExZJBikB184qyGSW9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "487eb217-65ee-417b-9247-a21125bb7b39",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Yamaha ",
+            "tipe": "NMAX 155",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 150000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "e8733893-e699-4061-b5d0-fd5b7103203f",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Yamaha ",
+            "tipe": "NMAX 155",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 135000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "49eb7402-9f4e-4430-8f8a-7943c59351b2",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Yamaha ",
+            "tipe": "Fazzio 125",
+            "warna": "Merah",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4c6f43fd-23d3-4b66-bdd6-45bd6021e963",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Yamaha",
+            "tipe": "Lexi 125",
+            "warna": "Merah",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "7034032e-6817-44af-9b01-27ca5e999c8a",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Honda",
+            "tipe": "Vario 125",
+            "warna": "Merah",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "606496bf-6be1-41ab-84c4-c22daf704ff3",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Honda ",
+            "tipe": "Beat 110",
+            "warna": "Merah Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 85000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "9b03d59d-7b2a-47b9-8ba0-48a92e3143c6",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Honda ",
+            "tipe": "Vario 125",
+            "warna": "Silver",
+            "jenis_kendaraan": "Motor",
+            "harga": 85000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "7531bfa6-efc7-4371-89f0-87167dbf7fdd",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Yamaha",
+            "tipe": "Xride 125",
+            "warna": "Merah",
+            "jenis_kendaraan": "Motor",
+            "harga": 90000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "07705ef3-36b0-480f-8fa1-ce83931ec3eb",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Honda ",
+            "tipe": "Beat 110",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 75000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "01df1c07-ac8a-42e2-9962-fcdd8158d6e7",
+        "fields": {
+            "toko": "Lombok motor bike ",
+            "merk": "Honda",
+            "tipe": "Vario 110",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 75000,
+            "status": "Sewa",
+            "notelp": 6287765448040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/FQUNSUQpdmc7kdUS6",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "6c89467e-42e2-47a5-8595-0bcf7c0f9eb9",
+        "fields": {
+            "toko": "Rent Motor Lombok",
+            "merk": "Honda ",
+            "tipe": "Scopy 110",
+            "warna": "Hijau",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6282339881910,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/AgkCNBHEfZDWwZXs5",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "95ed0384-b19e-4eba-ab11-8638d0e23162",
+        "fields": {
+            "toko": "Rent Motor Lombok",
+            "merk": "Honda",
+            "tipe": "Beat 110",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 75000,
+            "status": "Sewa",
+            "notelp": 6282339881910,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/AgkCNBHEfZDWwZXs5",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "08d64b9b-4558-4bf7-be8f-85b0979c2fa0",
+        "fields": {
+            "toko": "Rent Motor Lombok",
+            "merk": "Honda",
+            "tipe": "Beat Street",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6282339881910,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/AgkCNBHEfZDWwZXs5",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "a8c55af1-6512-4fac-8747-85f84c95f4e4",
+        "fields": {
+            "toko": "Rent Motor Lombok",
+            "merk": "Honda ",
+            "tipe": "Vario 110",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 75000,
+            "status": "Sewa",
+            "notelp": 6282339881910,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/AgkCNBHEfZDWwZXs5",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "082617fe-68a7-4617-be53-6163b11ac7f7",
+        "fields": {
+            "toko": "Rent Motor Lombok",
+            "merk": "Honda ",
+            "tipe": "Vario 150",
+            "warna": "Silver",
+            "jenis_kendaraan": "Motor",
+            "harga": 125000,
+            "status": "Sewa",
+            "notelp": 6282339881910,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/AgkCNBHEfZDWwZXs5",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "c336eb8d-97f1-4442-bc70-651a02f243d0",
+        "fields": {
+            "toko": "Rent Motor Lombok",
+            "merk": "Yamaha",
+            "tipe": "NMAX",
+            "warna": "Hijau",
+            "jenis_kendaraan": "Motor",
+            "harga": 150000,
+            "status": "Sewa",
+            "notelp": 6282339881910,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/AgkCNBHEfZDWwZXs5",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "8639a81e-ec05-4607-9a8b-eab9e9dd39ca",
+        "fields": {
+            "toko": "Rent Motor Lombok",
+            "merk": "Yamaha",
+            "tipe": "Aerox",
+            "warna": "Kuning",
+            "jenis_kendaraan": "Motor",
+            "harga": 150000,
+            "status": "Sewa",
+            "notelp": 6282339881910,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/AgkCNBHEfZDWwZXs5",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "d9527835-34af-41e1-83e1-bdc45c23fd2d",
+        "fields": {
+            "toko": "Global Transport Lombok",
+            "merk": "Daihatsu",
+            "tipe": "Xenia",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 250000,
+            "status": "Sewa",
+            "notelp": 6285729282928,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://goo.gl/maps/F5G5LAMNiEWmHLHb7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "51f748c9-a90c-4791-9cee-a494d948b283",
+        "fields": {
+            "toko": "Global Transport Lombok",
+            "merk": "Daihatsu ",
+            "tipe": "All New Xenia",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 275000,
+            "status": "Sewa",
+            "notelp": 6285729282928,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://goo.gl/maps/F5G5LAMNiEWmHLHb7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "9b0ed03c-2f41-4fdd-a594-a2f3e8af7cf9",
+        "fields": {
+            "toko": "Global Transport Lombok",
+            "merk": "Daihatsu ",
+            "tipe": "Great Xenia",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6285729282928,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://goo.gl/maps/F5G5LAMNiEWmHLHb7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "9f974f48-e680-48e5-9a86-a60dc1dec706",
+        "fields": {
+            "toko": "Global Transport Lombok",
+            "merk": "Toyota",
+            "tipe": "Avanza",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 250000,
+            "status": "Sewa",
+            "notelp": 6285729282928,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://goo.gl/maps/F5G5LAMNiEWmHLHb7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "0d29d878-72f8-48b5-bc40-b03130fd4256",
+        "fields": {
+            "toko": "Global Transport Lombok",
+            "merk": "Toyota ",
+            "tipe": "All New Avanza",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6285729282928,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://goo.gl/maps/F5G5LAMNiEWmHLHb7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "72a3a64d-d75c-4213-b689-36e35b252271",
+        "fields": {
+            "toko": "Global Transport Lombok",
+            "merk": "Toyota ",
+            "tipe": "Grand Avanza",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6285729282928,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://goo.gl/maps/F5G5LAMNiEWmHLHb7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "fbdf1a11-7cdc-4bfe-a672-6fc389740461",
+        "fields": {
+            "toko": "Rental Lombok",
+            "merk": "Toyota",
+            "tipe": "New Avanza",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281337067190,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RvQWPAZyFCWCm4qa8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "df0276ae-fe4d-4cda-ac30-567782ff63ef",
+        "fields": {
+            "toko": "Rental Lombok",
+            "merk": "Toyota",
+            "tipe": "Agya",
+            "warna": "Kuning",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6281337067190,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RvQWPAZyFCWCm4qa8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "9f5c20fa-a1f2-4eec-b832-97506236704f",
+        "fields": {
+            "toko": "Rental Lombok",
+            "merk": "Toyota",
+            "tipe": "Avanza",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 325000,
+            "status": "Sewa",
+            "notelp": 6281337067190,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RvQWPAZyFCWCm4qa8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "a2b084cc-4862-49c1-b374-0bc7aaf58609",
+        "fields": {
+            "toko": "Rental Lombok",
+            "merk": "Mitshubishi",
+            "tipe": "Xpander",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 375000,
+            "status": "Sewa",
+            "notelp": 6281337067190,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RvQWPAZyFCWCm4qa8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "b3553b37-d4d6-4b57-9310-98460ab71a6c",
+        "fields": {
+            "toko": "Rental Lombok",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 6281337067190,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RvQWPAZyFCWCm4qa8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "7ad31962-678e-40a2-a5a7-27e346da0e55",
+        "fields": {
+            "toko": "Rental Lombok",
+            "merk": "Toyota",
+            "tipe": "Fortuner",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 2700000,
+            "status": "Sewa",
+            "notelp": 6281337067190,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RvQWPAZyFCWCm4qa8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "690c158a-5ba6-4920-8247-736617489e8c",
+        "fields": {
+            "toko": "Epica Lombok Trans",
+            "merk": "Toyota",
+            "tipe": "New Avanza",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 375000,
+            "status": "Sewa",
+            "notelp": 6281939499009,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/rU3SsyfprD8hch2w8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "19413051-2cd5-4047-9411-e54da8e301c0",
+        "fields": {
+            "toko": "Epica Lombok Trans",
+            "merk": "Toyota",
+            "tipe": "Agya",
+            "warna": "Kuning",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281939499009,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/rU3SsyfprD8hch2w8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "66b11a16-3a28-4d0d-b904-b80821204e1e",
+        "fields": {
+            "toko": "Epica Lombok Trans",
+            "merk": "Toyota",
+            "tipe": "Avanza",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281939499009,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/rU3SsyfprD8hch2w8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "a88c83eb-3359-4965-9c72-6434be0dbdd2",
+        "fields": {
+            "toko": "Epica Lombok Trans",
+            "merk": "Honda",
+            "tipe": "Brio",
+            "warna": "Kuning",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281939499009,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/rU3SsyfprD8hch2w8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "80e06dd2-c4f3-4ced-a0f6-3b6ad1c03e31",
+        "fields": {
+            "toko": "Epica Lombok Trans",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn",
+            "warna": "Abu abu",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "notelp": 6281939499009,
+            "bahan_bakar": "Diesel",
+            "link_lokasi": "https://maps.app.goo.gl/rU3SsyfprD8hch2w8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "22d6eec3-41c7-49cf-8894-744e43abcc4e",
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Toyota",
+            "tipe": "Avanza All New",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6287787019929,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://drive.google.com/file/d/1gF_CPK36_LiY9H-mF9G9qRbJUyEBAD-D/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "1b1c747e-46b2-4d43-a63e-7e6f035ee87e",
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "notelp": 6287787019929,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://drive.google.com/file/d/1uV7DyQhxRkQyEZ6-g7Dwf9QPR-pn47nD/view?usp=sharing"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "c3f9e534-3deb-4745-84e3-240244effb4e",
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Honda",
+            "tipe": "Brio",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 325000,
+            "status": "Sewa",
+            "notelp": 6287787019929,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://drive.google.com/file/d/1RJaT2lbv1yOpgCEilH-1_LH_BDS-kKJS/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4c2e1e0b-82e0-4dc3-ac63-aadcf7e4c780",
+        "fields": {
+            "toko": "Sungkar trans",
+            "merk": "Toyota",
+            "tipe": "Agya",
+            "warna": "Abu-abu",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6287787019929,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
+            "link_foto": "https://drive.google.com/file/d/1iWguysbK-bvNEuYbTVF46UPXzBoWOsX1/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "e1bf879b-cd44-4c5f-a71f-bc2ab9df11e8",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Raize 1.0 Turbo GR Sport CVT TSS",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1jktbnI1FZo22iBlxObXybu5-hIEoGpKl/view?usp=sharing"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "ae06dfb1-a22a-4c8e-a057-12ac3dc7f07d",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Innova Zenix G",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 700000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1H6hLAPpMA9be9zi8yfRmKsPuGH2i9M4F/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "76c1270e-16c4-40f2-b520-8ec083e3cf70",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Innova Zenix Q",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1200000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1H22u6hZsGJZZDzC_y2QcE8Bh8cJurDxO/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "9c3a6312-e47c-4981-9c85-a62bd49ef88b",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Fortuner GR",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1500000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1kGkLbYE8OX4cKI4ogHw4HbQeeYhEhi7R/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "37235f4b-2381-4f61-af92-3cb30e0dacb7",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Nissan",
+            "tipe": "Grand Livina",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1BLxDlrV-6qfQ9f8SbngU9bRdXMnKJmd6/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "86c8ac0b-528d-430f-a676-cb15796a5d8e",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Suzuki",
+            "tipe": "Ertiga GLX",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1WAZHCcphtudcrLiH0tOWYY1GQmjHvUbj/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "915c37ad-fb28-4ccc-a21c-8d741098fc96",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Honda",
+            "tipe": "Mobilio",
+            "warna": "Abu-Abu",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/19VBB4KOHKnN-R_f8rxfvNYg0eItdwY5-/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "025a5cc2-f086-4a27-ae65-697f0f9a3bab",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Vellfire 2.5 G A/T",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 3000000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1QW9Xn35g2xNyyrmVnpyt2-nza1Cu-jH8/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "0249f0a5-29c3-45fd-825f-11f2166603c7",
+        "fields": {
+            "toko": "Rental 99",
+            "merk": "Toyota",
+            "tipe": "Alphard Hybrid",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 4500000,
+            "status": "Sewa",
+            "notelp": 6285239168707,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/13vOB7Fspmm-y03PzkiveHeDiTogSJP0m/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "18073a8e-08b6-4d8f-a04c-9598dd2ecd76",
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Vespa",
+            "tipe": "Sprint",
+            "warna": "Kuning",
+            "jenis_kendaraan": "Motor",
+            "harga": 250000,
+            "status": "Sewa",
+            "notelp": 6281997614030,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/file/d/1hpmLJ_kx1JrR8Za1fzihSAuV-h_7L4gj/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "382c60c3-1f93-4f51-9379-50b4b804cacb",
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Honda",
+            "tipe": "Stylo 160",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 140000,
+            "status": "Sewa",
+            "notelp": 6281997614030,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/file/d/1-RP_yV0oIG_Fg8CvGgIlsEJbYhZ9hfZK/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "b5fc345c-f6b8-4cc5-9395-274102d0e581",
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Vespa",
+            "tipe": "Sprint",
+            "warna": "Dark Blue",
+            "jenis_kendaraan": "Motor",
+            "harga": 250000,
+            "status": "Sewa",
+            "notelp": 6281997614030,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/file/d/1QXZqph4j35NYq3-X6ZTDgCE6alWcUHmg/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "eff28f31-4374-4d73-840c-84878c1682f5",
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Vespa",
+            "tipe": "Primavera",
+            "warna": "Green Relax",
+            "jenis_kendaraan": "Motor",
+            "harga": 250000,
+            "status": "Sewa",
+            "notelp": 6281997614030,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/file/d/175bUaq4fIVt4T6bO1mLDokSH2_OklYP2/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "3b5c6feb-5e86-4dc2-bc3d-35bba324b1e3",
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Honda",
+            "tipe": "Scoopy",
+            "warna": "Fashion Blue Matte",
+            "jenis_kendaraan": "Motor",
+            "harga": 90000,
+            "status": "Sewa",
+            "notelp": 6281997614030,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/file/d/1SBI0JRsoaFD6QsflBMPDOwa6RMlUcjhp/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "8d261be9-a1ca-4614-b30a-9fa4e6955b56",
+        "fields": {
+            "toko": "Arka Bike",
+            "merk": "Honda",
+            "tipe": "PCX 160",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 150000,
+            "status": "Sewa",
+            "notelp": 6281997614030,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
+            "link_foto": "https://drive.google.com/file/d/1nsK_P0roWbKBOyBZfUWt4CL-RnJ8FOgi/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "a2dcf12e-3d32-4417-b279-3f37db98defe",
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Honda",
+            "tipe": "WR-V",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 375000,
+            "status": "Sewa",
+            "notelp": 6281907367197,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/file/d/1jODhi-JraHa8ueD-NHY5LgU0AlAYgxXJ/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "44899985-d0c2-4b94-9d4b-a57d4bb6aa10",
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Honda",
+            "tipe": "City HS",
+            "warna": "Merah",
+            "jenis_kendaraan": "Mobil",
+            "harga": 400000,
+            "status": "Sewa",
+            "notelp": 6281907367197,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/file/d/1hY1hvpe7WbBL01f9bGH6DEFwlVWxGdeX/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "097e707a-e296-4a95-82fa-5c8efb4b0dd1",
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Mitsubishi",
+            "tipe": "New Xpander Ultimate",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281907367197,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/file/d/1GPGzom_3VB7VwUgCP-ZvRLJaH83I7oaI/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "03c5af76-8195-47d6-ab6e-eabcb4e47453",
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Suzuki",
+            "tipe": "XL7",
+            "warna": "Oranye",
+            "jenis_kendaraan": "Mobil",
+            "harga": 400000,
+            "status": "Sewa",
+            "notelp": 6281907367197,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/file/d/1oKio-OIrIJx53qzMDM_ZkagfV8Dndu7C/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "db980f65-ad3b-46c3-af41-0c6aef73c231",
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Daihatsu",
+            "tipe": "All New Terios",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281907367197,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/file/d/1pc58Zx03qu0ZjpKIA5M6xqLZ6Lk5H5Zb/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "c77b3e69-87b1-42da-8ecc-024789a62297",
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Honda",
+            "tipe": "Vario 160 ABS",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 140000,
+            "status": "Sewa",
+            "notelp": 6281907367197,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/file/d/1y_vx35zS5yunoJBlMT7gZQYVHHPvOJmi/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "1d9b15a8-498f-4fd5-b30a-2fac918498cc",
+        "fields": {
+            "toko": "Semeton Pesiar",
+            "merk": "Yamaha",
+            "tipe": "Filano 125",
+            "warna": "Violet",
+            "jenis_kendaraan": "Motor",
+            "harga": 120000,
+            "status": "Sewa",
+            "notelp": 6281907367197,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/U7E26Gd",
+            "link_foto": "https://drive.google.com/file/d/18JLypjfS2HkKR5rhH-vxOKQPuh9ZXuTC/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "29790ba0-d2bd-46bb-8380-503b5857f340",
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Wuling",
+            "tipe": "Almaz",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1_qkvBN4Q81Vp_C1ZF_P4vRxN0HvkEQOU/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "e86068fa-b3c0-42a5-a738-c3a2cd7186b1",
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Honda",
+            "tipe": "BRV",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1V_dJ5rd2WR_ldgLF_5O4mwH0LIsFAN7_/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "b45f0aeb-219e-48a7-b602-8e0dd53428f9",
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Honda",
+            "tipe": "Jazz RS",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/1g3t8J44l5dACYpXPihLp-hB9t2rFgFjE/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "8d901fb6-047e-4791-8108-3bfc83c59b54",
+        "fields": {
+            "toko": "Mataram Trans",
+            "merk": "Toyota",
+            "tipe": "Yaris TRD Sportivo",
+            "warna": "Hijau",
+            "jenis_kendaraan": "Mobil",
+            "harga": 375000,
+            "status": "Sewa",
+            "notelp": 6281339777080,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
+            "link_foto": "https://drive.google.com/file/d/116CPC94d849ZDSYU6VQRqj9lvI4-WcBI/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "2c1a1f21-96de-4260-b126-7b39c9c0d3fd",
+        "fields": {
+            "toko": "Teman Holiday Transport",
+            "merk": "Honda",
+            "tipe": "New HR-V",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 550000,
+            "status": "Sewa",
+            "notelp": 6281916097230,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/p8vQRg5Ho9yGGKNR6",
+            "link_foto": "https://drive.google.com/file/d/1gmOdawQBQoPcHwqEPWavXfgYjsk8aBWO/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "2f3b5573-7ab6-4e4a-ade6-49828819225b",
+        "fields": {
+            "toko": "Hasmi",
+            "merk": "Honda",
+            "tipe": "Spacy 110",
+            "warna": "Biru",
+            "jenis_kendaraan": "Motor",
+            "harga": 65000,
+            "status": "Sewa",
+            "notelp": 6281237342267,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/zmSb8SXQLqHnyrzY6",
+            "link_foto": "https://drive.google.com/file/d/1j5jjXKEKiC1-YiRw15DdGSxjUasRsTmQ/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "90a95af2-b57d-4a1c-9945-3e3321546feb",
+        "fields": {
+            "toko": "Hasmi",
+            "merk": "Honda",
+            "tipe": "Vario 160 CBS",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 100000,
+            "status": "Sewa",
+            "notelp": 6281237342267,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/zmSb8SXQLqHnyrzY6",
+            "link_foto": "https://drive.google.com/file/d/1JPAlO9D1nT64qBGPDUQvM_qHPkIYphMZ/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "2fb01f23-9454-41aa-bfa9-b12b48d90e05",
+        "fields": {
+            "toko": "HaloTrans",
+            "merk": "Mitsubishi",
+            "tipe": "Pajero Sport",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1200000,
+            "status": "Sewa",
+            "notelp": 6281999397078,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/dzfGHLy89wydPSVs8",
+            "link_foto": "https://drive.google.com/file/d/1qH9rXwRhapOw4pOFl936P8ydjGIKUUIB/view?usp=drive_link"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "e1b191d4-f5aa-473d-bd58-ff3e585d9379",
+        "fields": {
+            "toko": "BINA TRANS",
+            "merk": "Toyota",
+            "tipe": "Rush",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 6281388885754,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/4qxNYyw3NAG7U6px7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "31f76b7a-b09f-4091-a544-9a38cf2a5c64",
+        "fields": {
+            "toko": "BINA TRANS",
+            "merk": "Wuling",
+            "tipe": "Cortez",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 400000,
+            "status": "Sewa",
+            "notelp": 6281388885754,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/4qxNYyw3NAG7U6px7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "321a89da-3380-49a4-af5d-73dd2588187a",
+        "fields": {
+            "toko": "BINA TRANS",
+            "merk": "Vespa",
+            "tipe": "GTS Classic 150",
+            "warna": "Green Relax",
+            "jenis_kendaraan": "Motor",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6281388885754,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/4qxNYyw3NAG7U6px7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "02a85325-0c6a-4c50-a653-61a4248ebbef",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Toyota",
+            "tipe": "Avanza",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "644dbe76-2a95-4d3c-8995-3b9314c56c02",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4f9430ff-56e8-4c98-980c-a4514f4a97f4",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Toyota",
+            "tipe": "Innova Zenix",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 700000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "fd067c08-f413-4121-bdcf-dbf5e3306c4f",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Toyota",
+            "tipe": "Agya",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 325000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "20cd31f5-fe97-4e47-ba16-aace912ac937",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Toyota",
+            "tipe": "Yaris",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "9b3ce74e-02ae-4afc-b518-8df0e8da1ece",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Honda",
+            "tipe": "Brio",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "edd2feb4-0f0c-4787-8e74-eb8266faa979",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Honda",
+            "tipe": "BRV",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "b35cac1f-12ff-4b5f-8420-5a2cf80ff8ae",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Honda",
+            "tipe": "Jazz",
+            "warna": "Merah",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "5b2472d3-65fb-4e6f-9043-1f875fdd3418",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Honda",
+            "tipe": "Mobilio",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "5ec53ed9-088e-48ed-ae1f-b562e795bb7d",
+        "fields": {
+            "toko": "Gilitrans",
+            "merk": "Daihatsu",
+            "tipe": "Terios",
+            "warna": "Hijau",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 628113900480,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/1e4vhnYHkBXFoD828",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "18c488aa-1fb8-44df-8f45-f6b3df5dc432",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Toyota",
+            "tipe": "Agya",
+            "warna": "Kuning",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4da1c0bb-6be3-4839-9fa7-bf0196ead000",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Toyota",
+            "tipe": "Raize",
+            "warna": "Biru",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "50fdc729-3882-4a7c-924f-6aa19a3940e3",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Toyota",
+            "tipe": "Avanza",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "471d2106-70d3-414f-8729-323cc9bc2b6c",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Diesel",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4656de91-b380-4007-9454-de6096101a0d",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Honda",
+            "tipe": "Brio",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "91473622-4c48-455c-bbd7-14a70d0d9f78",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Honda",
+            "tipe": "BRV",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4be30a10-ef64-4440-98c5-2195d4cedcbc",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Honda",
+            "tipe": "Mobilio",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "939b6a8d-be2c-43f6-8884-bd496f53cc98",
+        "fields": {
+            "toko": "Albitrans",
+            "merk": "Honda",
+            "tipe": "Jazz",
+            "warna": "Merah",
+            "jenis_kendaraan": "Mobil",
+            "harga": 450000,
+            "status": "Sewa",
+            "notelp": 6285945883428,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/VEsy8MihA1jqo8Z68",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "e7895360-a340-47f4-8817-8d8753e09929",
+        "fields": {
+            "toko": "Boat Gili",
+            "merk": "Toyota",
+            "tipe": "Hiace",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 850000,
+            "status": "Sewa",
+            "notelp": 6281916002163,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/6UGiy1ZH9YZ4S1YC7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "b0366e42-8e33-461a-be22-0dfe702f2fd4",
+        "fields": {
+            "toko": "Boat Gili",
+            "merk": "Toyota",
+            "tipe": "Avanza",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 400000,
+            "status": "Sewa",
+            "notelp": 6281916002163,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/6UGiy1ZH9YZ4S1YC7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "514883eb-eb4f-4c07-b6d9-7e0a3937202b",
+        "fields": {
+            "toko": "Boat Gili",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 500000,
+            "status": "Sewa",
+            "notelp": 6281916002163,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/6UGiy1ZH9YZ4S1YC7",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "53de662a-7ee2-4d3b-9159-fd28f555bf12",
+        "fields": {
+            "toko": "Best Rent Car",
+            "merk": "Honda",
+            "tipe": "Beat Sporty",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 75000,
+            "status": "Sewa",
+            "notelp": 6287718524666,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/PUB5WwhhZikTDHR77",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "f1259b49-f81e-453c-afd8-7994149d4a2a",
+        "fields": {
+            "toko": "Best Rent Car",
+            "merk": "Yamaha",
+            "tipe": "Mio",
+            "warna": "Hitam-Biru",
+            "jenis_kendaraan": "Motor",
+            "harga": 75000,
+            "status": "Sewa",
+            "notelp": 6287718524666,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/PUB5WwhhZikTDHR77",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "f403b0e8-7d64-41db-8f13-ed80a394a2ca",
+        "fields": {
+            "toko": "Best Rent Car",
+            "merk": "Yamaha",
+            "tipe": "Freego",
+            "warna": "Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 85000,
+            "status": "Sewa",
+            "notelp": 6287718524666,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/PUB5WwhhZikTDHR77",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "67ce1eac-51ec-470d-9e7e-bd225e91ccc6",
+        "fields": {
+            "toko": "Best Rent Car",
+            "merk": "Suzuki",
+            "tipe": "Swift Manual",
+            "warna": "Merah",
+            "jenis_kendaraan": "Mobil",
+            "harga": 300000,
+            "status": "Sewa",
+            "notelp": 6287718524666,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/PUB5WwhhZikTDHR77",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4e5dce0f-da63-4b97-9c07-82458df110e7",
+        "fields": {
+            "toko": "Best Rent Car",
+            "merk": "Wuling",
+            "tipe": "Confero Manual",
+            "warna": "Merah",
+            "jenis_kendaraan": "Mobil",
+            "harga": 350000,
+            "status": "Sewa",
+            "notelp": 6287718524666,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/PUB5WwhhZikTDHR77",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "c49f9097-97b6-4b27-bffa-224581ea0ee5",
+        "fields": {
+            "toko": "Best Rent Car",
+            "merk": "Isuzu",
+            "tipe": "Elf Long",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1100000,
+            "status": "Sewa",
+            "notelp": 6287718524666,
+            "bahan_bakar": "Diesel",
+            "link_lokasi": "https://maps.app.goo.gl/PUB5WwhhZikTDHR77",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "f57966b2-14df-47cd-9fbd-7499580a5eb0",
+        "fields": {
+            "toko": "Best Rent Car",
+            "merk": "Isuzu",
+            "tipe": "Elf Short",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 1000000,
+            "status": "Sewa",
+            "notelp": 6287718524666,
+            "bahan_bakar": "Diesel",
+            "link_lokasi": "https://maps.app.goo.gl/PUB5WwhhZikTDHR77",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "6e65adfc-fe23-4d48-86bf-7bc904a6de26",
+        "fields": {
+            "toko": "Astra Motor Sriwijaya",
+            "merk": "Honda",
+            "tipe": "BEAT SPORTY CBS ISS DELUXE",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 21330000,
+            "status": "Jual",
+            "notelp": 6285964375040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/zN5LsyY",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "2db2b0a2-ddb1-439a-bd3d-fcb765c30444",
+        "fields": {
+            "toko": "Astra Motor Sriwijaya",
+            "merk": "Honda",
+            "tipe": "BEAT SPORTY DELUXE SMART KEY",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 21680000,
+            "status": "Jual",
+            "notelp": 6285964375040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/zN5LsyY",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "da773210-96d3-4ebb-a167-db2d2c7cca9c",
+        "fields": {
+            "toko": "Astra Motor Sriwijaya",
+            "merk": "Honda",
+            "tipe": "BEAT STREET",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 21310000,
+            "status": "Jual",
+            "notelp": 6285964375040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/zN5LsyY",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "3879ed20-abf1-4474-8307-8310c83d6bf3",
+        "fields": {
+            "toko": "Astra Motor Sriwijaya",
+            "merk": "Honda",
+            "tipe": "BEAT SPORTY CBS",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 20510000,
+            "status": "Jual",
+            "notelp": 6285964375040,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/zN5LsyY",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "c96a1115-2c0c-4575-b090-ae8ab495ceed",
+        "fields": {
+            "toko": "SPS Honda Mataram",
+            "merk": "Honda",
+            "tipe": "New Stylo ABS",
+            "warna": "Hijau",
+            "jenis_kendaraan": "Motor",
+            "harga": 31840000,
+            "status": "Jual",
+            "notelp": 6282339457770,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/ctvGNJy",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "7897535e-b834-46a4-ae15-a3752eb288d5",
+        "fields": {
+            "toko": "SPS Honda Mataram",
+            "merk": "Honda",
+            "tipe": "New Stylo ABS",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 31840000,
+            "status": "Jual",
+            "notelp": 6282339457770,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/ctvGNJy",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "18ba0144-46b3-4b5e-a23b-a83e951046fb",
+        "fields": {
+            "toko": "SPS Honda Mataram",
+            "merk": "Honda",
+            "tipe": "New BeAT Sporty CBS",
+            "warna": "Hitam Putih",
+            "jenis_kendaraan": "Motor",
+            "harga": 20510000,
+            "status": "Jual",
+            "notelp": 6282339457770,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/ctvGNJy",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "ba11cde3-8c1d-418f-8493-ad40ce672207",
+        "fields": {
+            "toko": "SPS Honda Mataram",
+            "merk": "Honda",
+            "tipe": "New BeAT Sporty CBS",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 20510000,
+            "status": "Jual",
+            "notelp": 6282339457770,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/ctvGNJy",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "518c717b-a3a3-49e1-80fa-97283bdf79d3",
+        "fields": {
+            "toko": "SPS Honda Mataram",
+            "merk": "Honda",
+            "tipe": "New BeAT Sporty CBS",
+            "warna": "Merah Hitam",
+            "jenis_kendaraan": "Motor",
+            "harga": 20510000,
+            "status": "Jual",
+            "notelp": 6282339457770,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://g.co/kgs/ctvGNJy",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "f42ddbbf-76ec-442a-a2d0-8aaca3b1d347",
+        "fields": {
+            "toko": "Emhamotor",
+            "merk": "Honda",
+            "tipe": "Brio RS Manual 2018",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 129000000,
+            "status": "Jual",
+            "notelp": 6287865370897,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RUtjmrxEmYQuBCvJ9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "a98fd722-040f-4c4d-9699-7e3752e45302",
+        "fields": {
+            "toko": "Emhamotor",
+            "merk": "Toyota",
+            "tipe": "Innova Reborn G",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 275000000,
+            "status": "Jual",
+            "notelp": 6287865370897,
+            "bahan_bakar": "Diesel",
+            "link_lokasi": "https://maps.app.goo.gl/RUtjmrxEmYQuBCvJ9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "c8cac884-c262-4e08-aa1b-31e00b14edab",
+        "fields": {
+            "toko": "Emhamotor",
+            "merk": "Honda",
+            "tipe": "WR-V RS",
+            "warna": "Merah",
+            "jenis_kendaraan": "Mobil",
+            "harga": 249000000,
+            "status": "Jual",
+            "notelp": 6287865370897,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RUtjmrxEmYQuBCvJ9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "4d8a632f-8b76-4814-8da2-45a6d80cbdb0",
+        "fields": {
+            "toko": "Emhamotor",
+            "merk": "Toyota",
+            "tipe": "Agya G",
+            "warna": "Silver",
+            "jenis_kendaraan": "Mobil",
+            "harga": 119000000,
+            "status": "Jual",
+            "notelp": 6287865370897,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/RUtjmrxEmYQuBCvJ9",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "1120fc99-edd2-4cdc-9f3c-dcde792b1ca7",
+        "fields": {
+            "toko": "Duta Mobil",
+            "merk": "Mitsubishi",
+            "tipe": "Xpander Ultimate",
+            "warna": "Putih",
+            "jenis_kendaraan": "Mobil",
+            "harga": 250000000,
+            "status": "Jual",
+            "notelp": 6281818888027,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/n2jvXacqJEutfc9b8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    },
+    {
+        "model": "main.vehicle",
+        "pk": "fd144bc9-e28f-4ae1-9ec9-5f95d9f3ec47",
+        "fields": {
+            "toko": "Duta Mobil",
+            "merk": "Toyota",
+            "tipe": "Rush TRD Sportivo",
+            "warna": "Hitam",
+            "jenis_kendaraan": "Mobil",
+            "harga": 195000000,
+            "status": "Jual",
+            "notelp": 6281818888027,
+            "bahan_bakar": "Bensin",
+            "link_lokasi": "https://maps.app.goo.gl/n2jvXacqJEutfc9b8",
+            "link_foto": "https://placehold.co/600x400"
+        }
+    }
+]
