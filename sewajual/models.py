@@ -1,6 +1,8 @@
 from django.db import models
+import uuid
 
 class Vehicle(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     toko = models.CharField(max_length=255)
     merk = models.CharField(max_length=50)
     tipe = models.CharField(max_length=100)

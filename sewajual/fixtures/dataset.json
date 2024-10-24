@@ -1,7 +1,6 @@
 [
     {
         "model": "sewajual.vehicle",
-        "pk": 1,
         "fields": {
             "toko": "Sungkar trans",
             "merk": "Toyota",
@@ -12,12 +11,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
-            "link_foto": "https://i.imgur.com/o19wIrT.png"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1gF_CPK36_LiY9H-mF9G9qRbJUyEBAD-D"
+        },
+        "pk": "9102ddac-f46f-4550-a6cb-fa22ad22951a"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 2,
         "fields": {
             "toko": "Sungkar trans",
             "merk": "Toyota",
@@ -28,12 +27,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1uV7DyQhxRkQyEZ6-g7Dwf9QPR-pn47nD"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1uV7DyQhxRkQyEZ6-g7Dwf9QPR-pn47nD/view?usp=sharing"
+        },
+        "pk": "d54c1e00-a075-4534-90b0-81eadbbb1c88"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 3,
         "fields": {
             "toko": "Sungkar trans",
             "merk": "Honda",
@@ -44,12 +43,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1RJaT2lbv1yOpgCEilH-1_LH_BDS-kKJS"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1RJaT2lbv1yOpgCEilH-1_LH_BDS-kKJS"
+        },
+        "pk": "1446391a-63cc-4779-b15c-7a757fbffc25"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 4,
         "fields": {
             "toko": "Sungkar trans",
             "merk": "Toyota",
@@ -60,12 +59,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/b8z1tobBJ5eg73gP6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1iWguysbK-bvNEuYbTVF46UPXzBoWOsX1"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1iWguysbK-bvNEuYbTVF46UPXzBoWOsX1"
+        },
+        "pk": "75692f3d-4146-406b-b8b7-6c484be3b095"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 5,
         "fields": {
             "toko": "Rental 99",
             "merk": "Toyota",
@@ -76,12 +75,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1jktbnI1FZo22iBlxObXybu5-hIEoGpKl"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1jktbnI1FZo22iBlxObXybu5-hIEoGpKl/view?usp=sharing"
+        },
+        "pk": "1572ec87-a0d3-4cfc-864c-758ada242e5f"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 6,
         "fields": {
             "toko": "Rental 99",
             "merk": "Toyota",
@@ -92,12 +91,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1H6hLAPpMA9be9zi8yfRmKsPuGH2i9M4F"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1H6hLAPpMA9be9zi8yfRmKsPuGH2i9M4F"
+        },
+        "pk": "1796f61c-ad24-48c6-81fe-c472087afd05"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 7,
         "fields": {
             "toko": "Rental 99",
             "merk": "Toyota",
@@ -108,12 +107,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1H22u6hZsGJZZDzC_y2QcE8Bh8cJurDxO"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1H22u6hZsGJZZDzC_y2QcE8Bh8cJurDxO"
+        },
+        "pk": "d62ad81d-ae6c-4724-ad78-8e503e58a094"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 8,
         "fields": {
             "toko": "Rental 99",
             "merk": "Toyota",
@@ -124,12 +123,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1kGkLbYE8OX4cKI4ogHw4HbQeeYhEhi7R"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1kGkLbYE8OX4cKI4ogHw4HbQeeYhEhi7R"
+        },
+        "pk": "4aaedc3d-68a6-4147-a334-1781b04ef80c"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 9,
         "fields": {
             "toko": "Rental 99",
             "merk": "Nissan",
@@ -140,12 +139,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1BLxDlrV-6qfQ9f8SbngU9bRdXMnKJmd6"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1BLxDlrV-6qfQ9f8SbngU9bRdXMnKJmd6"
+        },
+        "pk": "1108a5a5-f9c8-4c3c-bcbb-6a9b3154cdac"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 10,
         "fields": {
             "toko": "Rental 99",
             "merk": "Suzuki",
@@ -156,12 +155,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1WAZHCcphtudcrLiH0tOWYY1GQmjHvUbj"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1WAZHCcphtudcrLiH0tOWYY1GQmjHvUbj"
+        },
+        "pk": "67cb2726-b222-4957-9d91-9d47bd01080d"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 11,
         "fields": {
             "toko": "Rental 99",
             "merk": "Honda",
@@ -172,12 +171,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=19VBB4KOHKnN-R_f8rxfvNYg0eItdwY5-"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=19VBB4KOHKnN-R_f8rxfvNYg0eItdwY5-"
+        },
+        "pk": "aa908d16-7029-45d3-836a-2392cda0c1d0"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 12,
         "fields": {
             "toko": "Rental 99",
             "merk": "Toyota",
@@ -188,12 +187,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1QW9Xn35g2xNyyrmVnpyt2-nza1Cu-jH8"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1QW9Xn35g2xNyyrmVnpyt2-nza1Cu-jH8"
+        },
+        "pk": "81d29acb-888e-4913-a338-0f42bfdb5df6"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 13,
         "fields": {
             "toko": "Rental 99",
             "merk": "Toyota",
@@ -204,12 +203,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=13vOB7Fspmm-y03PzkiveHeDiTogSJP0m"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=13vOB7Fspmm-y03PzkiveHeDiTogSJP0m"
+        },
+        "pk": "42f777e1-566c-493a-b315-eb64a41b8c14"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 14,
         "fields": {
             "toko": "Arka Bike",
             "merk": "Vespa",
@@ -220,12 +219,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
-            "link_foto": "https://drive.google.com/thumbnail?id=1hpmLJ_kx1JrR8Za1fzihSAuV-h_7L4gj"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1hpmLJ_kx1JrR8Za1fzihSAuV-h_7L4gj"
+        },
+        "pk": "40143028-2cba-4ee4-95c3-64c2fd5e7f6f"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 15,
         "fields": {
             "toko": "Arka Bike",
             "merk": "Honda",
@@ -236,12 +235,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
-            "link_foto": "https://drive.google.com/thumbnail?id=1-RP_yV0oIG_Fg8CvGgIlsEJbYhZ9hfZK"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1-RP_yV0oIG_Fg8CvGgIlsEJbYhZ9hfZK"
+        },
+        "pk": "8dafe9c4-81fb-475a-999a-8209e5a12afe"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 16,
         "fields": {
             "toko": "Arka Bike",
             "merk": "Vespa",
@@ -252,12 +251,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
-            "link_foto": "https://drive.google.com/thumbnail?id=1QXZqph4j35NYq3-X6ZTDgCE6alWcUHmg"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1QXZqph4j35NYq3-X6ZTDgCE6alWcUHmg"
+        },
+        "pk": "a8c34a38-22ba-4db2-925a-87fa1100087d"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 17,
         "fields": {
             "toko": "Arka Bike",
             "merk": "Vespa",
@@ -268,12 +267,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
-            "link_foto": "https://drive.google.com/thumbnail?id=175bUaq4fIVt4T6bO1mLDokSH2_OklYP2"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=175bUaq4fIVt4T6bO1mLDokSH2_OklYP2"
+        },
+        "pk": "2cdafe3c-8369-499c-b6c8-76398a61278e"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 18,
         "fields": {
             "toko": "Arka Bike",
             "merk": "Honda",
@@ -284,12 +283,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
-            "link_foto": "https://drive.google.com/thumbnail?id=1SBI0JRsoaFD6QsflBMPDOwa6RMlUcjhp"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1SBI0JRsoaFD6QsflBMPDOwa6RMlUcjhp"
+        },
+        "pk": "bb1866d9-7cc4-491c-9928-d90f7d055696"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 19,
         "fields": {
             "toko": "Arka Bike",
             "merk": "Honda",
@@ -300,12 +299,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/LcXRpZdtgGf9wYYf8",
-            "link_foto": "https://drive.google.com/thumbnail?id=1nsK_P0roWbKBOyBZfUWt4CL-RnJ8FOgi"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1nsK_P0roWbKBOyBZfUWt4CL-RnJ8FOgi"
+        },
+        "pk": "1f893412-be02-4e2b-a3bb-838a3694ab8b"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 20,
         "fields": {
             "toko": "Semeton Pesiar",
             "merk": "Honda",
@@ -316,12 +315,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://g.co/kgs/U7E26Gd",
-            "link_foto": "https://drive.google.com/thumbnail?id=1jODhi-JraHa8ueD-NHY5LgU0AlAYgxXJ"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1jODhi-JraHa8ueD-NHY5LgU0AlAYgxXJ"
+        },
+        "pk": "97026296-ed6e-4282-967b-97458f07f57a"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 21,
         "fields": {
             "toko": "Semeton Pesiar",
             "merk": "Honda",
@@ -332,12 +331,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://g.co/kgs/U7E26Gd",
-            "link_foto": "https://drive.google.com/thumbnail?id=1hY1hvpe7WbBL01f9bGH6DEFwlVWxGdeX"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1hY1hvpe7WbBL01f9bGH6DEFwlVWxGdeX"
+        },
+        "pk": "56884223-6502-426b-9d59-4ece6298cb25"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 22,
         "fields": {
             "toko": "Semeton Pesiar",
             "merk": "Mitsubishi",
@@ -348,12 +347,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://g.co/kgs/U7E26Gd",
-            "link_foto": "https://drive.google.com/thumbnail?id=1GPGzom_3VB7VwUgCP-ZvRLJaH83I7oaI"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1GPGzom_3VB7VwUgCP-ZvRLJaH83I7oaI"
+        },
+        "pk": "448315bd-cb25-4aeb-a6b0-6159f4818dc9"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 23,
         "fields": {
             "toko": "Semeton Pesiar",
             "merk": "Suzuki",
@@ -364,12 +363,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://g.co/kgs/U7E26Gd",
-            "link_foto": "https://drive.google.com/thumbnail?id=1oKio-OIrIJx53qzMDM_ZkagfV8Dndu7C"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1oKio-OIrIJx53qzMDM_ZkagfV8Dndu7C"
+        },
+        "pk": "7f190b5d-7a45-4e4f-a0c2-9fc6bda9256c"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 24,
         "fields": {
             "toko": "Semeton Pesiar",
             "merk": "Daihatsu",
@@ -380,12 +379,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://g.co/kgs/U7E26Gd",
-            "link_foto": "https://drive.google.com/thumbnail?id=1pc58Zx03qu0ZjpKIA5M6xqLZ6Lk5H5Zb"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1pc58Zx03qu0ZjpKIA5M6xqLZ6Lk5H5Zb"
+        },
+        "pk": "8af8d2b9-42b2-4b88-9dc3-4fe8db50904b"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 25,
         "fields": {
             "toko": "Semeton Pesiar",
             "merk": "Honda",
@@ -396,12 +395,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://g.co/kgs/U7E26Gd",
-            "link_foto": "https://drive.google.com/thumbnail?id=1y_vx35zS5yunoJBlMT7gZQYVHHPvOJmi"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1y_vx35zS5yunoJBlMT7gZQYVHHPvOJmi"
+        },
+        "pk": "d3d09ff5-c7b7-484c-b11f-6cec1b8ddbfe"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 26,
         "fields": {
             "toko": "Semeton Pesiar",
             "merk": "Yamaha",
@@ -412,12 +411,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://g.co/kgs/U7E26Gd",
-            "link_foto": "https://drive.google.com/thumbnail?id=18JLypjfS2HkKR5rhH-vxOKQPuh9ZXuTC"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=18JLypjfS2HkKR5rhH-vxOKQPuh9ZXuTC"
+        },
+        "pk": "930d107c-da32-4eb0-83a8-6039aa71c639"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 27,
         "fields": {
             "toko": "Mataram Trans",
             "merk": "Wuling",
@@ -428,12 +427,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1_qkvBN4Q81Vp_C1ZF_P4vRxN0HvkEQOU"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1_qkvBN4Q81Vp_C1ZF_P4vRxN0HvkEQOU"
+        },
+        "pk": "db6d1b67-243f-405e-96c5-b650a7902e19"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 28,
         "fields": {
             "toko": "Mataram Trans",
             "merk": "Honda",
@@ -444,12 +443,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1V_dJ5rd2WR_ldgLF_5O4mwH0LIsFAN7_"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1V_dJ5rd2WR_ldgLF_5O4mwH0LIsFAN7_"
+        },
+        "pk": "e50df4bb-2135-476e-9e01-d169bf338fb2"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 29,
         "fields": {
             "toko": "Mataram Trans",
             "merk": "Honda",
@@ -460,12 +459,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1g3t8J44l5dACYpXPihLp-hB9t2rFgFjE"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1g3t8J44l5dACYpXPihLp-hB9t2rFgFjE"
+        },
+        "pk": "f6dd4c7d-4dc8-4c1b-b870-cb69ff5f3382"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 30,
         "fields": {
             "toko": "Mataram Trans",
             "merk": "Toyota",
@@ -476,12 +475,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/NU2TfXuNwxWeiRsg6",
-            "link_foto": "https://drive.google.com/thumbnail?id=116CPC94d849ZDSYU6VQRqj9lvI4-WcBI"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=116CPC94d849ZDSYU6VQRqj9lvI4-WcBI"
+        },
+        "pk": "e91c0d0e-7c11-4677-b200-96c15878bdb0"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 31,
         "fields": {
             "toko": "Teman Holiday Transport",
             "merk": "Honda",
@@ -492,12 +491,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/p8vQRg5Ho9yGGKNR6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1gmOdawQBQoPcHwqEPWavXfgYjsk8aBWO"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1gmOdawQBQoPcHwqEPWavXfgYjsk8aBWO"
+        },
+        "pk": "6960e918-3d12-4c87-b063-6f62070cc388"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 32,
         "fields": {
             "toko": "Hasmi",
             "merk": "Honda",
@@ -508,12 +507,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/zmSb8SXQLqHnyrzY6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1j5jjXKEKiC1-YiRw15DdGSxjUasRsTmQ"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1j5jjXKEKiC1-YiRw15DdGSxjUasRsTmQ"
+        },
+        "pk": "dd1e6e89-edfa-49c4-8e6e-4feda751e3df"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 33,
         "fields": {
             "toko": "Hasmi",
             "merk": "Honda",
@@ -524,12 +523,12 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/zmSb8SXQLqHnyrzY6",
-            "link_foto": "https://drive.google.com/thumbnail?id=1JPAlO9D1nT64qBGPDUQvM_qHPkIYphMZ"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1JPAlO9D1nT64qBGPDUQvM_qHPkIYphMZ"
+        },
+        "pk": "94a2a31b-eb18-4778-9d33-8f85b8b39c36"
     },
     {
         "model": "sewajual.vehicle",
-        "pk": 34,
         "fields": {
             "toko": "HaloTrans",
             "merk": "Mitsubishi",
@@ -540,7 +539,8 @@
             "status": "Sewa",
             "bahan_bakar": "Bensin",
             "link_lokasi": "https://maps.app.goo.gl/dzfGHLy89wydPSVs8",
-            "link_foto": "https://drive.google.com/thumbnail?id=1qH9rXwRhapOw4pOFl936P8ydjGIKUUIB"
-        }
+            "link_foto": "https://drive.google.com/uc?export=view&id=1qH9rXwRhapOw4pOFl936P8ydjGIKUUIB"
+        },
+        "pk": "94b96f8c-2641-47d1-a863-3718c42f15b2"
     }
 ]
