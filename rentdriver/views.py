@@ -1,4 +1,6 @@
-from django.contrib.auth.decorators import user_passes_test, login_required
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from rentdriver.forms import DriverForm
 from rentdriver.models import Driver
@@ -18,15 +20,13 @@ def load_drivers_from_json(file_path = 'rentdriver/data/drivers.json'):
                 }
             )
 
+@login_required(login_url='main:login')
 def show_main(request):
     load_drivers_from_json()
 
     drivers = Driver.objects.all()
 
     context = {
-        'npm' : '2306123456',
-        'name': 'Pak Bepe',
-        'class': 'PBP E',
         'driver_entries': drivers,
     }
 
