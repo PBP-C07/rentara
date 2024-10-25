@@ -147,3 +147,28 @@ h1 {
     right: 10px;
 }
 
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary-color); /* Ensure primary color is used */
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 10; /* Ensure buttons are above other elements */
+  }
+
+  .nav-button.left {
+    left: 10px;
+  }
+
+  .nav-button.right {
+    right: 10px;
+  }
+
+  .card-container {
+    position: relative; /* Ensure the card container positions its children correctly */
+    overflow: hidden; /* Hide overflow to prevent scroll bars */
+  }
