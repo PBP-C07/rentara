@@ -1,30 +1,27 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sewa dan Jual Kendaraan Mataram</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'dark-blue': '#243642',
-                        'teal': '#387478',
-                        'sage': '#629584',
-                        'light-sage': '#e2f1e7',
-                        'dark-gray': '#272828',
-                    }
+{% block meta %}
+<title>Sewa dan Jual Kendaraan Mataram</title>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'dark-blue': '#243642',
+                    'teal': '#387478',
+                    'sage': '#629584',
+                    'light-sage': '#e2f1e7',
+                    'dark-gray': '#272828',
                 }
             }
         }
-    </script>
-</head>
+    }
+</script>
+{% endblock meta %}
 
-<body class="bg-gray-50 p-5">
+{% block content %}
+{% include 'navbar.html' %}
+<div class="bg-gray-50 p-5">
     <div class="max-w-7xl mx-auto px-5 mb-8">
         <div class="flex gap-4">
             <div class="flex gap-4">
@@ -47,7 +44,8 @@
 
             <style>
                 .filter-button.active {
-                    @apply bg-dark-blue border-dark-blue;
+                    background-color: #243642;
+                    border-color: #243642;
                 }
             </style>
         </div>
@@ -68,7 +66,7 @@
             </h2>
 
             <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
-                class="w-full h-48 object-cover rounded-lg mb-4">
+                class="object-cover rounded-lg mb-4" width="600" height="400">
 
             <div class="space-y-3 mb-6">
                 <div class="flex items-center justify-between">
@@ -92,7 +90,7 @@
                     </span>
                     <span class="text-sm text-teal">/ hari</span>
                 </div>
-                <a href="{% url 'full_info' vehicle.pk %}">
+                <a href="{% url 'sewajual:full_info' vehicle.pk %}">
                     <button
                         class="bg-teal hover:bg-sage text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
                         Lebih Lanjut
@@ -138,6 +136,5 @@
             });
         });
     </script>
-</body>
-
-</html>
+</div>
+{% endblock content %}
