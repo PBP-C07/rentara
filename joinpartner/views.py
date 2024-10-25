@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Partner, Vehicles
+from main.models import Vehicle
 from django.contrib.auth.decorators import login_required
 from .forms import PartnerForm, VehicleForm
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -25,20 +26,27 @@ def show_vehicle(request):
     if partner.status == 'Rejected':
         partner.delete()
         return redirect('joinpartner:rejected')
+    
+    partner_vehicles = Vehicles.objects.filter(partner=partner)
+    
+    from sewajual.models import Katalog
+    katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
+    main_vehicles = [katalog.vehicle for katalog in katalogs]  
+
+    vehicles = list(main_vehicles) + list(partner_vehicles)
 
     query = request.GET.get('query', '')  # Get search query
     if query:
-        vehicles = Vehicles.objects.filter(
-            partner=partner
-        ).filter(
-            Q(merk__icontains=query) | Q(tipe__icontains=query) | Q(jenis_kendaraan__icontains=query) | Q(warna__icontains=query)
-        )
-    else:
-        vehicles = Vehicles.objects.filter(partner=partner)
+        vehicles = [v for v in vehicles if (
+            query.lower() in v.merk.lower() or
+            query.lower() in v.tipe.lower() or
+            query.lower() in v.jenis_kendaraan.lower() or
+            query.lower() in v.warna.lower()
+        )]
 
     return render(request, 'show_vehicle.html', {
         'partner': partner,
-        'vehicles': vehicles, 
+        'vehicles': vehicles,
         'last_login': request.COOKIES.get('last_login', ''),
         'query': query,
     })
@@ -46,50 +54,50 @@ def show_vehicle(request):
 @login_required(login_url='/login')
 def add_product(request):
     partner = get_object_or_404(Partner, user=request.user)
+    errors = {}
 
     if request.method == "POST":
-        link_foto = request.POST.get("link_foto")  # Menggunakan request.FILES untuk mengakses gambar
+        link_foto = request.POST.get("link_foto")
         merk = strip_tags(request.POST.get("merk"))
         tipe = strip_tags(request.POST.get("tipe"))
-        jenis_kendaraan = strip_tags(request.POST.get("jenis_kendaraan"))  # seperti mobil, motor, dll.
-        warna = strip_tags(request.POST.get("warna")) 
+        jenis_kendaraan = strip_tags(request.POST.get("jenis_kendaraan"))
+        warna = strip_tags(request.POST.get("warna"))
         harga = request.POST.get("harga")
         status = request.POST.get("status")
+        bahan_bakar = strip_tags(request.POST.get("bahan_bakar"))  # Make sure to get this value
 
-        errors = {}
-
-        # Validasi input
+        # Validate input
         if not merk:
-            errors['merk'] = "Nama merk tidak boleh kosong."
+            errors['merk'] = ["Nama merk tidak boleh kosong."]
         if not tipe:
-            errors['tipe'] = "Tipe merk tidak boleh kosong."
+            errors['tipe'] = ["Tipe tidak boleh kosong."]
         if not jenis_kendaraan:
-            errors['jenis_kendaraan'] = "Tipe kendaraan tidak boleh kosong."
+            errors['jenis_kendaraan'] = ["Jenis kendaraan tidak boleh kosong."]
         if not warna:
-            errors['warna'] = "Warna kendaraan tidak boleh kosong."
+            errors['warna'] = ["Warna kendaraan tidak boleh kosong."]
         if not harga or not harga.isdigit():
-            errors['harga'] = "Harga per hari harus diisi dan berupa angka."
+            errors['harga'] = ["Harga per hari harus diisi dan berupa angka."]
+        if not bahan_bakar:
+            errors['bahan_bakar'] = ["Bahan bakar tidak boleh kosong."]
 
-        # Jika tidak ada error, simpan kendaraan baru
-        if not errors:
-            new_vehicle = Vehicles(
-                partner=partner,
-                link_foto=link_foto,
-                merk=merk,
-                tipe=tipe,
-                jenis_kendaraan=jenis_kendaraan,
-                warna=warna,
-                harga=harga,
-                status=status
-            )
-            new_vehicle.save()
-            return redirect('joinpartner:show_vehicle')
-        
-    else:
-        # Jika metode bukan POST, tidak perlu mengisi 'errors'
-        errors = {}
+        if errors:
+            return JsonResponse({'errors': errors}, status=400)
 
-    # Pastikan ada respons yang dikembalikan
+        # If there are no errors, save the new vehicle
+        new_vehicle = Vehicles(
+            partner=partner,
+            link_foto=link_foto,
+            merk=merk,
+            tipe=tipe,
+            jenis_kendaraan=jenis_kendaraan,
+            warna=warna,
+            harga=harga,
+            status=status,
+            bahan_bakar=bahan_bakar  # Make sure to include this field
+        )
+        new_vehicle.save()
+        return JsonResponse({'success': True})
+
     return render(request, "add_product.html", {'errors': errors})
 
 
@@ -127,6 +135,8 @@ def join_partner(request):
 
 
 
+from django.http import JsonResponse
+
 @login_required(login_url='/login')
 def edit_product(request, product_id):
     product = get_object_or_404(Vehicles, id=product_id)
@@ -135,19 +145,19 @@ def edit_product(request, product_id):
     # Memastikan pengguna adalah pemilik produk
     if product.partner != partner:
         return HttpResponseForbidden("Anda tidak diizinkan untuk mengedit produk ini.")
-    
+
     # Mengisi form dengan data produk saat ini
     form = VehicleForm(request.POST or None, instance=product)
     errors = {}
+    
     if request.method == "POST":
-        link_foto = request.POST.get("link_foto") or product.link_foto  # Menggunakan gambar lama jika tidak ada gambar baru
+        link_foto = request.POST.get("link_foto") or product.link_foto
         merk = strip_tags(request.POST.get("merk"))
         tipe = strip_tags(request.POST.get("tipe"))
         jenis_kendaraan = strip_tags(request.POST.get("jenis_kendaraan"))
         warna = strip_tags(request.POST.get("warna"))
         harga = request.POST.get("harga")
         status = request.POST.get("status")
-
 
         # Validasi input
         if not merk:
@@ -161,25 +171,30 @@ def edit_product(request, product_id):
 
         # Jika tidak ada error, simpan perubahan
         if not errors:
-            product.link_foto = link_foto  # Mengupdate gambar jika ada
+            # Update Vehicles instance
+            product.link_foto = link_foto
             product.merk = merk
             product.tipe = tipe
             product.jenis_kendaraan = jenis_kendaraan
             product.warna = warna
             product.harga = harga
-            product.status=status
+            product.status = status
             product.save()
+
             return redirect('joinpartner:show_vehicle')
 
     return render(request, "edit_product.html", {'form': form, 'errors': errors})
-
 
 @login_required(login_url='/login')
 def delete_product(request, product_id):
     product = get_object_or_404(Vehicles, id=product_id)
 
+
     product.delete()
+    print("Deletion successful") 
+
     return redirect('joinpartner:show_vehicle')
+
 
 @login_required(login_url='/login')
 def edit_profile(request):

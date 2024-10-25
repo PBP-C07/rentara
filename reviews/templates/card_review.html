@@ -1,0 +1,35 @@
+<div class="relative break-inside-avoid bg-white shadow-lg rounded-lg p-6 font-[Poppins]" style="width: 445px; height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+        <div class="flex justify-between items-center mb-4">
+            <h3 style="color: #243642; font-size: 20px; font-style: normal; font-weight: 600; line-height: normal;">
+                {{ review_entry.title }}
+            </h3>
+            <div class="text-xl">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= review_entry.rating %}
+                        <i class="fas fa-star" style="color: #FFDE4D;"></i>
+                    {% else %}
+                        <i class="far fa-star" style="color: #FFDE4D;"></i>
+                    {% endif %}
+                {% endfor %}
+            </div>        
+        </div>
+        
+        <p style="color: #243642; font-size: 18px; font-style: normal; font-weight: 400; line-height: normal; margin-bottom: 16px; overflow: hidden; max-height: 3.5em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+            {{ review_entry.description }}
+        </p>
+    </div>
+
+    <div class="flex justify-between items-center" style="color: #243642; font-size: 16px; font-style: normal; font-weight: 400; line-height: normal;">
+        <span>{{ review_entry.user }} • {{ review_entry.time|date:"d/m/y" }}</span>
+        
+        <div class="flex space-x-3">
+            <a href="{% url 'reviews:delete_review' review_entries.0.pk %}" class="bg-transparent border border-[#832424] hover:bg-[#832424] text-[#832424] hover:text-white font-bold py-2 px-4 rounded-lg">
+                Delete
+            </a>
+            <a href="{% url 'reviews:edit_review' review_entries.0.pk %}" class="bg-[#629584] hover:bg-[#387478] text-white font-bold py-2 px-4 rounded-lg">
+                Edit
+            </a>
+        </div>
+    </div>
+</div>

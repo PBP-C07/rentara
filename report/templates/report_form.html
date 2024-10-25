@@ -1,68 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<title>Upload Report</title>
+<title>Add Report</title>
 {% endblock meta %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
-<div class="flex flex-col min-h-screen bg-gray-100 relative overflow-hidden">
-  <div class="absolute top-10 left-10 w-32 h-32" style="background-color: #233E4D; opacity: 0.7; filter: blur(10px); border-radius: 50%;"></div>
-  <div class="absolute top-40 right-20 w-40 h-40" style="background-color: #3D716D; opacity: 0.5; filter: blur(20px); border-radius: 50%;"></div>
-  <div class="absolute bottom-10 left-32 w-24 h-24" style="background-color: #D34D44; opacity: 0.4; transform: rotate(45deg); border-radius: 5px;"></div>
-  <div class="absolute top-60 right-0 w-56 h-56" style="background-color: #D1D5D8; opacity: 0.2; filter: blur(20px); border-radius: 8px;"></div>
+<div class="flex flex-col min-h-screen bg-[#E2F1E7] relative overflow-hidden">
+
+  <!-- Minimalist Decorative Elements -->
+  <div class="absolute top-10 left-10 w-24 h-24 bg-[#FADFA1] rounded-full opacity-50"></div>
+  <div class="absolute top-40 right-20 w-36 h-36 bg-[#629584] rounded-full opacity-30"></div>
+
+  <div class="absolute bottom-10 left-32 w-20 h-20 bg-[#D9D9D9] rounded-md opacity-40"></div>
+  <div class="absolute top-60 right-0 w-48 h-48 bg-[#387478] opacity-20 rounded-lg"></div>
 
   <div class="container mx-auto px-4 py-10 mt-16 max-w-lg relative z-10">
-    <h1 class="text-4xl font-bold text-center mb-6" style="color: #8FA69E;">Create New Report</h1>
+    <h1 class="text-3xl font-bold text-center mb-6 text-[#243642]">Post New Report</h1>
     
-    <div class="bg-white rounded-lg shadow-lg p-8 form-style border border-gray-400">
+    <div class="bg-[#FAFAFA] rounded-lg shadow-md p-8 border border-[#D9D9D9]">
       <form method="POST" class="space-y-6">
         {% csrf_token %}
-
-        <!-- Nama User -->
-        <div class="flex flex-col">
-          <label class="mb-2 font-semibold" style="color: #2C2F2E;">Nama User</label>
-          <input type="text" value="{{ user.username }}" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800">
-        </div>
-
-        <!-- Tanggal Pemesanan -->
-        <div class="flex flex-col">
-          <label class="mb-2 font-semibold" style="color: #2C2F2E;">Tanggal Pemesanan</label>
-          <input type="date" value="{{ order_date }}" readonly class="w-full p-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-800">
-        </div>
-
-        <!-- Brand Kendaraan -->
-        <div class="flex flex-col">
-          <label class="mb-2 font-semibold" style="color: #2C2F2E;">Brand Kendaraan</label>
-          {{ form.vehicle }}
-        </div>
-
-        <!-- Tipe Issue -->
-        <div class="flex flex-col">
-          <label for="issue_type" class="mb-2 font-semibold" style="color: #2C2F2E;">Tipe Issue</label>
-          {{ form.issue_type }}
-        </div>
-
-        <!-- Deskripsi -->
-        <div class="flex flex-col">
-          <label for="description" class="mb-2 font-semibold" style="color: #2C2F2E;">Deskripsi</label>
-          {{ form.description }}
-        </div>
-
-        <!-- Submit Button -->
+        {% for field in form %}
+          <div class="flex flex-col">
+            <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-[#243642]">
+              {{ field.label }}
+            </label>
+            <div class="w-full bg-[#FAFAFA] border-none p-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#629584]">
+              {{ field }}
+            </div>
+            {% if field.help_text %}
+              <p class="mt-1 text-sm text-[#387478]">{{ field.help_text }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        
         <div class="flex justify-center mt-8">
-          <button type="submit" class="w-full py-3 rounded-lg font-semibold transition duration-300 ease-in-out shadow-md" style="background-color: #3D716D; color: white; border: none;">
-            Submit Report
+          <button type="submit" class="bg-[#629584] hover:bg-[#387478] text-white font-medium px-8 py-3 rounded-lg transition duration-300 ease-in-out w-full shadow-md">
+            Post New Report
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <footer class="mt-auto py-4" style="background-color: #2C2F2E;">
-    <div class="container mx-auto text-center text-white">
-      <p>&copy; 2024 Rentara+. All rights reserved.</p>
+  <footer class="mt-auto py-4 bg-[#243642] shadow-md relative z-10">
+    <div class="container mx-auto text-center text-[#FAFAFA]">
+      <p>&copy; 2024 Rentara. All rights reserved.</p>
     </div>
   </footer>
 </div>

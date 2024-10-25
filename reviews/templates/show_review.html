@@ -1,36 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-{% if not review_entries %}
-<p>Belum ada reviews.</p>
-{% else %}
-<table>
-  <tr>
-    <th>Title</th>
-    <th>User</th>
-    <th>Time</th>
-    <th>Rating</th>
-    <th>Description</th>
-    <th>Helpful</th>
-  </tr>
+{% include 'navbar.html' %}
 
-  {% for review_entry in review_entries %}
-  <tr>
-    <td>{{review_entry.title}}</td>
-    <td>{{review_entry.user}}</td>
-    <td>{{review_entry.time}}</td>
-    <td>{{review_entry.rating}}</td>
-    <td>{{review_entry.description}}</td>
-    <td>{{review_entry.helpful_votes}}</td>
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-4 min-h-screen bg-[#FAFAFA] flex flex-col">
+    {% for review_entry in review_entries %}
+    <div style="flex: 1 1 calc(33% - 1rem); margin: 1rem 0.5rem; position: relative;">
+        {% include 'card_review.html' with review_entry=review_entry %}
+    </div>
+    {% endfor %}
+    <a href="{% url 'reviews:create_reviews' %}"
+        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[#FAFAFA] bg-teal hover:bg-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]" style="width: 140px; text-align: center;">
+        Add Review
+    </a>
+</div>
 
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
 
-<br />
-
-<a href="{% url 'reviews:create_reviews' %}">
-  <button>Add New Mood Entry</button>
-</a>
 {% endblock content %}
