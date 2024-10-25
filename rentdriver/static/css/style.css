@@ -88,6 +88,12 @@ h1 {
     line-height: 1.4;
 }
 
+.driver-card:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 15px var(--shadow-color); /* Darker shadow */
+}
+
+
 /* Button styling */
 .add-driver-container {
     width: 100%; /* Full width */
@@ -124,6 +130,15 @@ h1 {
     z-index: 10;
 }
 
+.btn:focus {
+    outline: 2px solid var(--accent-color);
+}
+
+.btn:active {
+    background-color: #3f6e64; /* Darker shade on active */
+}
+
+
 .nav-button.left {
     left: 10px;
 }
@@ -131,3 +146,4 @@ h1 {
 .nav-button.right {
     right: 10px;
 }
+
