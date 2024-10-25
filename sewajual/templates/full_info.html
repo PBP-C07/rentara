@@ -1,29 +1,26 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Produk</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'dark-blue': '#243642',
-                        'teal': '#387478',
-                        'sage': '#629584',
-                        'light-sage': '#e2f1e7',
-                        'dark-gray': '#272828',
-                    }
+{% block meta %}
+<title>Detail Produk</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock meta %}
+
+{% block content %}
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'dark-blue': '#243642',
+                    'teal': '#387478',
+                    'sage': '#629584',
+                    'light-sage': '#e2f1e7',
+                    'dark-gray': '#272828',
                 }
             }
         }
-    </script>
-</head>
+    }
+</script>
 
 <body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
     <div
@@ -46,10 +43,11 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div
-                class="relative rounded-2xl overflow-hidden shadow-lg group transition-transform duration-300 hover:scale-[1.02] mx-auto md:mx-0 max-w-[600px] md:max-w-none w-full">
+                class="relative rounded-2xl overflow-hidden shadow-lg group transition-transform duration-300 hover:scale-[1.02] mx-auto md:mx-0 w-[500px] h-[400px]">
                 <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
-                    class="w-full h-[400px] object-cover">
+                    class="w-full h-full object-cover">
             </div>
+
 
             <div class="flex flex-col gap-4">
                 <div
@@ -93,13 +91,12 @@
                     📍 Lihat Lokasi Toko
                 </a>
 
-                <a href="{% url 'vehicle_list' %}"
+                <a href="{% url 'sewajual:vehicle_list' %}"
                     class="inline-flex items-center gap-2 bg-dark-gray text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center">
-                    ← Kembali ke Katalog
+                    ← Kembali
                 </a>
             </div>
         </div>
     </div>
 </body>
-
-</html>
+{% endblock content %}
