@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Partners</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        body, h2, p, a {
+            font-family: 'Poppins';
+        }
+
+        .header-bar {
+            background-color: #E2F1E7;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-bar h1 {
+            color: #355C59;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header-bar p {
+            color: #6B7280; /* Gray color for subtitle */
+            font-size: 16px;
+        }
+
+        .search-bar {
+            padding: 12px;
+            background-color: #FFFFFF;
+            border: 2px solid #E2F1E7;
+            border-radius: 30px;
+            color: #355C59;
+            width: 90%; /* Adjust width for larger screens */
+            max-width: 1000px; /* Set a max width for search bar */
+            margin: 20px auto; /* Center the input */
+            transition: all 0.3s;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #355C59;
+            box-shadow: 0 0 5px rgba(53, 92, 89, 0.5);
+        }
+
+        .partners-table {
+            width: 90%; /* Adjust table width for larger screens */
+            border-collapse: separate; /* Use separate borders to enable spacing */
+            border-spacing: 0 10px; /* Add space between rows */
+            margin: 20px auto; /* Center the table */
+        }
+
+        .partners-table th {
+            background-color: #355C59;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .partners-table td {
+            background-color: #E2F1E7;
+            padding: 10px;
+            text-align: left;
+            color: #355C59;
+            position: relative; /* Ensure spacing for icons */
+        }
+
+        .partners-table tr:nth-child(even) td {
+            background-color: #F4F9F9;
+        }
+
+        .partners-table tr td:last-child {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Icon styling */
+        .icon-button {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .icon-delete {
+            color: red;
+        }
+
+        /* Extra rounded corners for top and bottom rows */
+        .partners-table tr:first-child th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .partners-table tr:first-child th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .partners-table tr:last-child td:first-child {
+            border-bottom-left-radius: 8px;
+        }
+
+        .partners-table tr:last-child td:last-child {
+            border-bottom-right-radius: 8px;
+        }
+
+        /* Add rounded corners and shadow for a cleaner look */
+        .partners-table tr {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+{% endblock meta %}
+{% block content %}
+{% include 'navbar_admin.html' %}
+<body class="bg-[#FAFAFA] text-gray-800 pt-10 mt-6">
+    <!-- Header Section -->
+    <div class="header-bar">
+        <h1>List Partners</h1>
+        <p>View Your List of Partners</p>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="flex justify-center mt-6">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search partner" value="{{ query }}">
+    </div>
+
+    <!-- Table of Approved Partners -->
+    <div class="flex justify-center mt-4">
+        <div class="overflow-x-auto w-full max-w-6xl"> <!-- Set a max width for the table container -->
+            <table class="partners-table w-full"> <!-- Set table to full width -->
+                <thead>
+                    <tr>
+                        <th>Nama Toko</th>
+                        <th>Alamat</th>
+                        <th>Nomor Telepon</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="partner-list">
+                    {% for partner in approved_partners %}
+                    <tr class="draggable-partner" draggable="true" data-id="{{ partner.id }}">
+                        <td>{{ partner.toko }}</td>
+                        <td><a href="{{ partner.link_lokasi }}" target="_blank">{{ partner.link_lokasi }}</a></td>
+                        <td>{{ partner.notelp }}</td>
+                        <td>
+                            <!-- Icons for Delete -->
+                            <svg class="icon-button icon-delete" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to get CSRF cookie
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    
+        // CSRF Token
+        const csrfToken = getCookie('csrftoken');
+    
+        // Click Actions for Delete
+        document.querySelectorAll(".icon-delete").forEach(button => {
+            button.addEventListener("click", function() {
+                const id = this.closest(".draggable-partner").dataset.id;
+                fetch(`/delete_partner/${id}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrfToken,
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) location.reload();
+                }).catch(error => console.error("Error: ", error));
+            });
+        });
+    
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const query = this.value;
+            const tableBody = document.querySelector('#partner-list'); // Update to partner-list id
+    
+            // Show loading indicator
+            tableBody.innerHTML = '<tr><td colspan="4" class="text-center">Loading...</td></tr>';
+    
+            fetch(`/list_partner/?query=${query}`)
+                .then(response => response.text())
+                .then(data => {
+                    // Update the table body with the new data
+                    tableBody.innerHTML = new DOMParser().parseFromString(data, 'text/html').querySelector('#partner-list').innerHTML;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // Show an error message
+                    tableBody.innerHTML = '<tr><td colspan="4" class="text-center">Error loading data.</td></tr>';
+                });
+        });
+    </script>
+    
+</body>
+{% endblock content %}
