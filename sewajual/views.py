@@ -1,63 +1,62 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.admin.views.decorators import staff_member_required
 from .models import Vehicle
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.views.decorators.http import require_http_methods, require_POST
+from .forms import VehicleForm
 
 def vehicle_list(request):
     vehicles = Vehicle.objects.all()
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
-@login_required(login_url='login')
+@login_required(login_url='main:login')
 def full_info(request, pk):
     vehicle = get_object_or_404(Vehicle, pk=pk)
     return render(request, 'full_info.html', {'vehicle': vehicle})
 
-class AdminRequiredMixin(UserPassesTestMixin):
-    def test_func(self):
-        return self.request.user.is_superuser
+@staff_member_required
+def admin_vehicle_list(request):
+   vehicles = Vehicle.objects.all()
+   return render(request, 'card_admin.html', {'vehicles': vehicles})
 
-class AdminVehicleListView(AdminRequiredMixin, ListView):
-    model = Vehicle
-    template_name = 'admin/vehicle_list.html'
-    context_object_name = 'vehicles'
-    paginate_by = 10
+# @staff_member_required
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def add_vehicle(request):
+    if request.method == "POST":
+        form = VehicleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sewajual:admin_vehicle_list')
+    else:
+        form = VehicleForm()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['total_vehicles'] = Vehicle.objects.count()
-        return context
+    return render(request, 'vehicle_form.html', {'form': form})
 
-class AdminVehicleCreateView(AdminRequiredMixin, CreateView):
-    model = Vehicle
-    template_name = 'admin/vehicle_form.html'
-    fields = ['toko', 'merk', 'tipe', 'warna', 'jenis_kendaraan', 
-              'harga', 'status', 'bahan_bakar', 'link_lokasi', 'link_foto']
-    success_url = reverse_lazy('admin-vehicles')
+# @staff_member_required
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def edit_vehicle(request, pk):
+    vehicle = get_object_or_404(Vehicle, pk=pk)
+    if request.method == "POST":
+        form = VehicleForm(request.POST, instance=vehicle)
+        if form.is_valid():
+            form.save()
+            return redirect('sewajual:admin_vehicle_list')
+    else:
+        form = VehicleForm(instance=vehicle)
 
-    def form_valid(self, form):
-        messages.success(self.request, 'Kendaraan berhasil ditambahkan.')
-        return super().form_valid(form)
+    return render(request, 'vehicle_form.html', {'form': form, 'vehicle': vehicle})
 
-class AdminVehicleUpdateView(AdminRequiredMixin, UpdateView):
-    model = Vehicle
-    template_name = 'admin/vehicle_form.html'
-    fields = ['toko', 'merk', 'tipe', 'warna', 'jenis_kendaraan', 
-              'harga', 'status', 'bahan_bakar', 'link_lokasi', 'link_foto']
-    success_url = reverse_lazy('admin-vehicles')
-
-    def form_valid(self, form):
-        messages.success(self.request, 'Kendaraan berhasil diperbarui.')
-        return super().form_valid(form)
-
-class AdminVehicleDeleteView(AdminRequiredMixin, DeleteView):
-    model = Vehicle
-    template_name = 'admin/vehicle_confirm_delete.html'
-    success_url = reverse_lazy('admin-vehicles')
-
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, 'Kendaraan berhasil dihapus.')
-        return super().delete(request, *args, **kwargs)
+# @staff_member_required
+@csrf_exempt
+@require_POST
+def delete_vehicle(request, pk):
+    try:
+        vehicle = get_object_or_404(Vehicle, pk=pk)
+        vehicle.delete()
+        return HttpResponse(b"DELETED", status=200)
+    except:
+        return HttpResponse(b"ERROR", status=500)
