@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('bookmark.urls')),
     path('', include('joinpartner.urls')),
     path('', include('report.urls')),
-    path('', include('reviews.urls')),
+    path('reviews/', include('reviews.urls')),
     path('', include('main.urls')),
-    path('', include('sewajual.urls')),
+    # path('', include('sewajual.urls')),
 ] 
