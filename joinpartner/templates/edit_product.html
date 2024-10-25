@@ -9,86 +9,92 @@
 {% endblock %}
 
 {% block content %}
-<body class="bg-gray-100">
+{% include 'navbar.html' %}
+<body class="bg-[#E2F1E7] mt-4"> <!-- Background cerah -->
     <div class="flex h-screen overflow-y-auto">
-        <div class="w-full flex items-center justify-center bg-teal-700">
-            <div class="bg-white p-8 rounded-lg shadow-md w-11/12 md:w-3/4 lg:w-1/2 opacity-95 max-h-full overflow-y-auto">
-                <h2 class="text-2xl font-bold mb-6">Edit Kendaraan</h2>
+        <div class="w-full flex items-center justify-center bg-[#FAFAFA]">
+            <div class="bg-[#E2F1E7] p-8 rounded-lg shadow-md w-11/12 md:w-3/4 lg:w-1/2 opacity-95 max-h-full overflow-y-auto">
+                <h2 class="text-3xl md:text-4xl text-[#004D40] font-bold mb-6">Edit Kendaraan</h2>
                 <form method="POST">
                     {% csrf_token %}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Column 1 -->
                         <div>
                             <div class="mb-4">
-                                <label for="vehicle_image" class="block text-gray-700 font-bold mb-2">Gambar Kendaraan</label>
-                                <input type="text" id="vehicle_image" name="vehicle_image" 
-                                       class="w-full px-3 py-2 border rounded-lg bg-teal-50" 
-                                       value="{{ form.vehicle_image.value }}" 
+                                <label for="link_foto" class="block text-[#004D40] font-bold mb-2">Gambar Kendaraan</label>
+                                <input type="text" id="link_foto" name="link_foto" 
+                                       class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none max-wid" 
+                                       value="{{ form.link_foto.value }}" 
                                        required oninput="displayImage()">
                             </div>
                             <div class="mb-4">
-                                <label for="brand" class="block text-gray-700 font-bold mb-2">Merek Kendaraan</label>
-                                <input type="text" id="brand" name="brand" 
-                                       class="w-full px-3 py-2 border rounded-lg bg-teal-50" 
-                                       value="{{ form.brand.value }}" 
+                                <label for="merk" class="block text-[#004D40] font-bold mb-2">Merek Kendaraan</label>
+                                <input type="text" id="merk" name="merk" 
+                                       class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
+                                       value="{{ form.merk.value }}" 
                                        required>
-                                    {% if errors.brand %}
-                                       <p class="text-red-500">{{ errors.brand }}</p>
-                                   {% endif %}
+                                {% if errors.merk %}
+                                    <p class="text-red-500">{{ errors.merk }}</p>
+                                {% endif %}
                             </div>
                             <div class="mb-4">
-                                <label for="brand_type" class="block text-gray-700 font-bold mb-2">Tipe Kendaraan</label>
-                                <input type="text" id="brand_type" name="brand_type" 
-                                       class="w-full px-3 py-2 border rounded-lg bg-teal-50" 
-                                       value="{{ form.brand_type.value }}" 
+                                <label for="tipe" class="block text-[#004D40] font-bold mb-2">Tipe Kendaraan</label>
+                                <input type="text" id="tipe" name="tipe" 
+                                       class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
+                                       value="{{ form.tipe.value }}" 
                                        required>
-                                    {% if errors.brand_type %}
-                                       <p class="text-red-500">{{ errors.brand_type }}</p>
-                                   {% endif %}
+                                {% if errors.tipe %}
+                                    <p class="text-red-500">{{ errors.tipe }}</p>
+                                {% endif %}
                             </div>
-                            <img id="image_preview" src="" alt="Preview" class="mt-4 rounded-lg border" style="display:none; max-width: 100%;"/>
+                            <img id="image_preview" src="" alt="Preview" class="mt-4 rounded-lg border" style="display:none; max-width: 60%;"/>
                         </div>
 
                         <!-- Column 2 -->
                         <div>
                             <div class="mb-4">
-                                <label for="vehicle_type" class="block text-gray-700 font-bold mb-2">Jenis Kendaraan</label>
-                                <input type="text" id="vehicle_type" name="vehicle_type" 
-                                       class="w-full px-3 py-2 border rounded-lg bg-teal-50" 
-                                       value="{{ form.vehicle_type.value }}" 
+                                <label for="jenis_kendaraan" class="block text-[#004D40] font-bold mb-2">Jenis Kendaraan</label>
+                                <input type="text" id="jenis_kendaraan" name="jenis_kendaraan" 
+                                       class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
+                                       value="{{ form.jenis_kendaraan.value }}" 
                                        required>
-                                    {% if errors.vehicle_type %}
-                                       <p class="text-red-500">{{ errors.vehicle_type }}</p>
-                                   {% endif %}
+                                {% if errors.jenis_kendaraan %}
+                                    <p class="text-red-500">{{ errors.jenis_kendaraan }}</p>
+                                {% endif %}
                             </div>
                             <div class="mb-4">
-                                <label for="color" class="block text-gray-700 font-bold mb-2">Warna Kendaraan</label>
-                                <input type="text" id="color" name="color" 
-                                       class="w-full px-3 py-2 border rounded-lg bg-teal-50" 
-                                       value="{{ form.color.value }}" 
+                                <label for="warna" class="block text-[#004D40] font-bold mb-2">Warna Kendaraan</label>
+                                <input type="text" id="warna" name="warna" 
+                                       class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
+                                       value="{{ form.warna.value }}" 
                                        required>
-                                    {% if errors.color %}
-                                       <p class="text-red-500">{{ errors.color }}</p>
-                                   {% endif %}
+                                {% if errors.warna %}
+                                    <p class="text-red-500">{{ errors.warna }}</p>
+                                {% endif %}
                             </div>
                             <div class="mb-4">
-                                <label for="price_per_day" class="block text-gray-700 font-bold mb-2">Harga per Hari</label>
-                                <input type="number" id="price_per_day" name="price_per_day" 
-                                       class="w-full px-3 py-2 border rounded-lg bg-teal-50" 
-                                       value="{{ form.price_per_day.value }}" 
+                                <label for="harga" class="block text-[#004D40] font-bold mb-2">Harga per Hari</label>
+                                <input type="number" id="harga" name="harga" 
+                                       class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
+                                       value="{{ form.harga.value }}" 
                                        step="0.01" required>
                             </div>
                             <div class="mb-4">
-                                <label for="status" class="block text-gray-700 font-bold mb-2">Status Kendaraan</label>
-                                <select id="status" name="status" class="w-full px-3 py-2 border rounded-lg bg-teal-50" required>
-                                    <option value="available" {% if form.status.value == 'available' %}selected{% endif %}>Tersedia</option>
-                                    <option value="not_available" {% if form.status.value == 'not_available' %}selected{% endif %}>Tidak Tersedia</option>
+                                <label for="status" class="block text-[#004D40] font-bold mb-2">Status Kendaraan</label>
+                                <select id="status" name="status" class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" required>
+                                    <option value="Sewa" {% if form.status.value == 'Sewa' %}selected{% endif %}>Sewa</option>
+                                    <option value="Jual" {% if form.status.value == 'Jual' %}selected{% endif %}>Jual</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="mb-6 flex justify-end">
-                        <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded-lg font-bold">
+                        <a href="{% url 'joinpartner:show_vehicle' %}" 
+                           class="w-1/2 inline-block bg-[#fafafa] hover:bg-[#E2F1E7] text-[#387478] py-2 rounded-lg font-bold text-center mt-2 mr-2">
+                            Cancel
+                        </a>
+                        <button type="submit" 
+                                class="w-1/2 bg-[#FAFAFA] hover:bg-teal-50 text-[#387478] py-2 rounded-lg font-bold text-center mt-2 ml-2">
                             Edit Kendaraan
                         </button>
                     </div>
@@ -113,7 +119,7 @@
 
     <script>
         function displayImage() {
-            const imageInput = document.getElementById('vehicle_image');
+            const imageInput = document.getElementById('link_foto');
             const imagePreview = document.getElementById('image_preview');
             imagePreview.src = imageInput.value; // Menampilkan URL gambar sebagai preview
             imagePreview.style.display = 'block'; // Menampilkan gambar
