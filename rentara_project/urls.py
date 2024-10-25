@@ -23,6 +23,6 @@ urlpatterns = [
     # path('', include('joinpartner.urls')),
     # path('', include('report.urls')),
     # path('', include('reviews.urls')),
-    # path('', include('main.urls')),
+    path('', include('main.urls')),
     # path('', include('sewajual.urls')),
 ]
