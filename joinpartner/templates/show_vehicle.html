@@ -3,71 +3,148 @@
 {% load static %}
 
 {% block meta %}
-    <title>{{ partner.store_name }} - Vehicles</title>
+    <title>{{ partner.toko }} - Vehicles</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .dragging {
-            opacity: 0.5;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins';
+            background-color: #E2F1E7; /* Updated theme color */
+            color: #333;
+        }
+
+        .header-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .search-bar {
+            transition: background-color 0.3s;
+        }
+
+        .search-bar:focus {
+            background-color: #C1E8D8; /* Lighten on focus */
+        }
+
+        .logout-button {
+            background-color: #D04848; /* Red color */
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        .logout-button:hover {
+            background-color: #B04141; /* Darker red on hover */
+        }
+
+        .vehicle-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .delete-area {
+            border: 2px dashed #D04848;
+            padding: 20px;
+            text-align: center;
+            color: #D04848;
+            margin: 20px 0;
+            border-radius: 10px;
+            background-color: #FEE2E2; /* Light red background */
+        }
+
+        .delete-area:hover {
+            background-color: rgba(208, 72, 72, 0.1);
+        }
+
+        .vehicle-detail {
+            border-top: 1px solid #E0E0E0;
+            padding-top: 10px;
+            margin-top: 10px;
         }
     </style>
 {% endblock meta %}
 
 {% block content %}
-<body class="bg-teal-700 text-gray-800 pt-20">
+{% include 'navbar.html' %}
+<body class="bg-[#FAFAFA] pt-20">
     <div class="max-w-7xl mx-auto p-5">
         <!-- Header Section -->
-        <div class="flex justify-between items-center mb-8">
-            <!-- Search Bar -->
-            <div class="flex-grow">
-                <input 
-                    type="text" 
-                    placeholder="Search your product" 
-                    class="w-full p-3 rounded-full bg-gray-300 text-sm outline-none focus:ring-2 focus:ring-teal-400"
-                />
-            </div>
-            <!-- Action Buttons -->
-            <div class="flex gap-3 ml-4">
-                <button id="add-vehicle-btn" class="bg-gray-300 hover:bg-gray-400 text-sm px-4 py-2 rounded-full">
-                    Add
-                </button>
-                <button id="delete-area" class="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-full">
-                    Delete
-                </button>
-            </div>
-        </div>
-
-        <!-- Grid Layout for Vehicles -->
-        <div id="vehicle-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {% for vehicle in vehicles %}
-            <div 
-                class="vehicle-card bg-emerald-50 p-4 rounded-xl shadow-md text-center cursor-pointer"
-                draggable="true"
-                data-vehicle-id="{{ vehicle.id }}"
-            >
-                <p class="font-semibold">{{ vehicle.brand }} {{ vehicle.brand_type }} {{ vehicle.color }}</p>
-                <div class="text-center">
-                    <img src="{{ vehicle.vehicle_image }}" alt="{{ vehicle.brand }}" class="max-w-md h-40 object-cover rounded-lg mb-4 mx-auto">
+        <div class="header-section mb-8">
+            <div class="flex justify-between items-center mb-8">
+                <!-- Search Bar -->
+                <div class="flex-grow">
+                    <input 
+                        type="text" 
+                        placeholder="Search your product" 
+                        class="search-bar w-full p-3 rounded-full outline-none"
+                        oninput="searchVehicles(this.value)"
+                    />
                 </div>
-                <p>Rp{{ vehicle.price_per_day }},-</p>
-                <p>{{ vehicle.status }}</p>
-                
-                <!-- Edit Button -->
-                <div class="mt-4">
-                    <a href="{% url 'joinpartner:edit_product' vehicle.id %}" class="bg-teal-700 text-white font-bold py-2 px-4 rounded-full hover:bg-teal-600">
-                        Edit
+                <!-- Action Buttons -->
+                <div class="flex gap-3 ml-4">
+                    <button id="add-vehicle-btn" class="bg-[#2C8C8B] hover:bg-teal-600 text-[#FAFAFA] px-4 py-2 rounded-full">
+                        Add
+                    </button>
+                    <a href="{% url 'main:logout' %}" class="logout-button">
+                        Logout
                     </a>
                 </div>
             </div>
-            {% empty %}
-            <p class="text-white">No vehicles available.</p>
-            {% endfor %}
+
+            <!-- Grid Layout for Vehicles -->
+            <div id="vehicle-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {% for vehicle in vehicles %}
+                <div 
+                    class="vehicle-card p-4 cursor-pointer"
+                    draggable="true"
+                    data-vehicle-id="{{ vehicle.id }}"
+                >
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="text-left">
+                            <p class="text-sm text-gray-600">{{ vehicle.tipe }}</p>
+                            <p class="text-sm text-gray-600">{{ vehicle.warna }}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-[#2C8C8B]">{{ vehicle.merk }}</p>
+                        </div>
+                    </div>
+                    <div class="vehicle-detail">
+                        <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }}" class="max-w-full h-40 object-cover rounded-lg mb-4 mx-auto">
+                    </div>
+                    <div class="vehicle-detail">
+                        <p class="text-[#2C8C8B] font-bold">Rp{{ vehicle.harga }},-</p>
+                        <p class="text-sm text-gray-600">{{ vehicle.status }}</p>
+                    </div>
+                    
+                    <!-- Edit Button -->
+                    <div class="mt-4">
+                        <a href="{% url 'joinpartner:edit_product' vehicle.id %}" class="bg-[#2C8C8B] text-white font-bold py-2 px-6 rounded-full hover:bg-teal-600">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-gray-800">No vehicles available.</p>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    <div class="hidden md:flex items-center space-x-4">
-        <!-- Logout Button -->
-        <a href="{% url 'joinpartner:logout' %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
-          Logout
-        </a>
+
+        <!-- Delete Area -->
+        <div id="delete-area" class="delete-area">
+            Drag vehicles here to delete.
+        </div>
     </div>
 
     <script>
@@ -76,6 +153,22 @@
             // Redirect to the add vehicle page
             window.location.href = "{% url 'joinpartner:add_product' %}";
         });
+
+        // Search function
+        function searchVehicles(query) {
+            const vehicleCards = document.querySelectorAll('.vehicle-card');
+            vehicleCards.forEach(card => {
+                const merk = card.querySelector('.font-bold').innerText.toLowerCase();
+                const merkType = card.querySelector('.text-sm.text-gray-600').innerText.toLowerCase();
+                const color = card.querySelector('.text-sm.text-gray-600:nth-of-type(2)').innerText.toLowerCase();
+
+                if (merk.includes(query.toLowerCase()) || merkType.includes(query.toLowerCase()) || color.includes(query.toLowerCase())) {
+                    card.style.display = 'block'; // Show card if it matches
+                } else {
+                    card.style.display = 'none'; // Hide card if it doesn't match
+                }
+            });
+        }
 
         // Make vehicle cards draggable
         const vehicleCards = document.querySelectorAll('.vehicle-card');
@@ -95,7 +188,7 @@
         // Enable delete area to accept dragged elements
         deleteArea.addEventListener('dragover', (e) => {
             e.preventDefault();
-            deleteArea.classList.add('bg-red-700');  // Highlight the delete area when hovering
+            deleteArea.classList.add('bg-red-700');
         });
 
         deleteArea.addEventListener('dragleave', () => {
@@ -115,22 +208,19 @@
         function deleteVehicle(vehicleId) {
             const cardToDelete = document.querySelector(`[data-vehicle-id="${vehicleId}"]`);
             if (cardToDelete) {
-                // Hapus elemen dari DOM
                 cardToDelete.remove();
-
-                // Kirim permintaan penghapusan ke server
                 fetch(`/vehicles/${vehicleId}/delete/`, {
                     method: 'DELETE',
                     headers: {
-                        'X-CSRFToken': getCookie('csrftoken'),  // Ambil token CSRF
+                        'X-CSRFToken': getCookie('csrftoken'),
                         'Content-Type': 'application/json'
                     },
                 })
                 .then(response => {
                     if (response.ok) {
-                        console.log('Kendaraan berhasil dihapus');
+                        console.log('Vehicle deleted successfully');
                     } else {
-                        console.error('Gagal menghapus kendaraan');
+                        console.error('Failed to delete vehicle');
                     }
                 })
                 .catch(error => {
@@ -139,14 +229,13 @@
             }
         }
 
-        // Fungsi untuk mendapatkan cookie CSRF
+        // Function to get CSRF token
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
                 const cookies = document.cookie.split(';');
                 for (let i = 0; i < cookies.length; i++) {
                     const cookie = cookies[i].trim();
-                    // Periksa apakah cookie ini adalah cookie yang kita cari
                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                         break;
