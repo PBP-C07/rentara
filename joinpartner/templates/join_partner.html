@@ -8,52 +8,46 @@
 {% endblock meta %}
 
 {% block content %}
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Left Side: Image -->
-        <div class="w-3/5 bg-cover bg-center overflow-hidden">
-            <img src="{% static 'images/bg_join.jpeg' %}" alt="Sad face"/> 
-        </div>
-
-        <!-- Right Side: Form -->
-        <div class="w-2/5 flex items-center justify-center bg-teal-700">
-            <div class="bg-white p-8 rounded-lg shadow-md w-3/4">
-                <h2 class="text-2xl font-bold mb-6">Daftar Partner</h2>
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="mb-4">
-                        <label for="store_name" class="block text-gray-700 font-bold mb-2">Nama Toko</label>
-                        <input type="text" id="store_name" name="store_name" class="w-full px-3 py-2 border rounded-lg bg-teal-50" required/>
-                        {% if errors.store_name %}
-                            <p class="error">{{ errors.store_name }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="mb-4">
-                        <label for="gmaps_link" class="block text-gray-700 font-bold mb-2">Alamat Toko</label>
-                        <input type="text" id="gmaps_link" name="gmaps_link" class="w-full px-3 py-2 border rounded-lg bg-teal-50" required/>
-                        {% if errors.gmaps_link %}
-                            <p class="error">{{ errors.gmaps_link }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="mb-6">
-                        <label for="phone_number" class="block text-gray-700 font-bold mb-2">Nomor Telepon</label>
-                        <input type="text" id="phone_number" name="phone_number" class="w-full px-3 py-2 border rounded-lg bg-teal-50" required/>
-                        {% if errors.phone_number %}
-                            <p class="error">{{ errors.phone_number }}</p>
-                        {% endif %}
-                    </div>
-                    <div class="mb-6 flex justify-end">
-                        <a href="{% url 'joinpartner:login' %}" 
-                        class="w-1/2 inline-block bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg font-bold text-center">
-                         Cancel
-                     </a>
-                     <button type="submit" 
-                             class="w-1/2 bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-lg font-bold">
-                         Daftar
-                     </button>                     
+{% include 'navbar.html' %}
+<body class="bg-[#FAFAFA]">
+    <div class="flex h-screen items-center justify-center">
+        <!-- Form Container with Expanded Width -->
+        <div class="bg-[#E2F1E7] p-8 rounded-lg shadow-lg w-4/5 md:w-1/2">
+            <h2 class="text-2xl font-bold mb-6 text-[#355C59] text-center">Daftar Partner</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="toko" class="block text-gray-700 font-semibold mb-2">Nama Toko</label>
+                    <input type="text" id="toko" name="toko" class="w-full bg-[#E2F1E7] border-b border-[#355C59] py-2 focus:outline-none focus:border-[#387478]" required/>
+                    {% if errors.toko %}
+                        <p class="text-red-500">{{ errors.toko }}</p>
+                    {% endif %}
                 </div>
-                </form>
-            </div>
+                <div class="mb-4">
+                    <label for="link_lokasi" class="block text-gray-700 font-semibold mb-2">Alamat Toko</label>
+                    <input type="text" id="link_lokasi" name="link_lokasi" class="w-full bg-[#E2F1E7] border-b border-[#355C59] py-2 focus:outline-none focus:border-[#387478]" required/>
+                    {% if errors.link_lokasi %}
+                        <p class="text-red-500">{{ errors.link_lokasi }}</p>
+                    {% endif %}
+                </div>
+                <div class="mb-6">
+                    <label for="notelp" class="block text-gray-700 font-semibold mb-2">Nomor Telepon</label>
+                    <input type="text" id="notelp" name="notelp" class="w-full bg-[#E2F1E7] border-b border-[#355C59] py-2 focus:outline-none focus:border-[#387478]" required/>
+                    {% if errors.notelp %}
+                        <p class="text-red-500">{{ errors.notelp }}</p>
+                    {% endif %}
+                </div>
+                <div class="mb-6 flex justify-between text-gray-700">
+                    <a href="{% url 'main:login' %}" 
+                       class="inline-block bg-transparent hover:bg-[#E2F1E7] text-[#387478] py-2 px-4 rounded-lg border border-[#355C59] font-bold text-center">
+                       Cancel
+                    </a>
+                    <button type="submit" 
+                            class="bg-[#355C59] hover:bg-[#387478] text-white py-2 px-6 rounded-lg font-bold">
+                        Daftar
+                    </button>                     
+                </div>
+            </form>
         </div>
     </div>
 </body>

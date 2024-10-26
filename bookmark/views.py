@@ -1,6 +1,4 @@
-from django.shortcuts import render
-
-# Create your views here.
+# views.py
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -34,4 +32,3 @@ def remove_bookmark(request, vehicle_id):
     messages.success(request, "Bookmark removed successfully.")
     
     return redirect('vehicle_detail', vehicle_id=vehicle.id)
-
