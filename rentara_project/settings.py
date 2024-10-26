@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'report',
     'reviews',
     'sewajual',
+    'rentdriver'
 ]
 
 MIDDLEWARE = [

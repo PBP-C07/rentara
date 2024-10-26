@@ -1,0 +1,75 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Drivers</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<h1>Rentara+ Drivers </h1>
+
+<div class="card-container">
+  <div class="driver-row" id="driverRow">
+    {% if not driver_entries %}
+      <p style="text-align:center; font-size: 1.2rem; color: var(--text-color);">No drivers available at the moment.</p>
+    {% else %}
+      {% for driver in driver_entries %}
+      <div class="driver-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ driver.name }}</h5>
+          <p class="card-text">
+            <strong>Phone:</strong> {{ driver.phone_number }}<br>
+            <strong>Vehicle Type:</strong> {{ driver.vehicle_type }}<br>
+            <strong>Experience:</strong> {{ driver.experience_years }} years
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  <button class="nav-button left" onclick="slideLeft()">&#10094;</button>
+  <button class="nav-button right" onclick="slideRight()">&#10095;</button>
+</div>
+
+<div class="add-driver-container">
+  <a href="{% url 'rentdriver:add_driver_view' %}">
+    <button class="btn">Add Driver</button>
+  </a>
+</div>
+
+<script>
+  let currentIndex = 0;
+
+  function slideLeft() {
+    const driverRow = document.getElementById('driverRow');
+    const cards = driverRow.children;
+    const totalCards = cards.length;
+    const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
+
+    if (currentIndex > 0) {
+      currentIndex--;
+      driverRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+  }
+
+  function slideRight() {
+    const driverRow = document.getElementById('driverRow');
+    const cards = driverRow.children;
+    const totalCards = cards.length;
+    const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
+
+    if (currentIndex < totalCards - 1) {
+      currentIndex++;
+      driverRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -9,14 +9,23 @@
     <title>Proses Persetujuan</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        body, h2, p, a {
+            font-family: 'Poppins';
+        }
+    </style>
 </head>
 {% endblock meta %}
 {% block content %}
-<body class="bg-[#387478] text-gray-800 flex items-center justify-center min-h-screen">
-    <div class="text-center p-8 bg-[#fafafa] rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-4">Oops! Akun Anda belum disetujui oleh admin.</h2>
-        <p class="mb-6">Jangan khawatir! Silakan coba lagi untuk mendaftar. Kami siap menyambut Anda!</p>
-        <a href="{% url 'joinpartner:join_partner' %}" class="bg-[#387478] text-white px-4 py-2 rounded hover:bg-teal-600">Mendaftar Kembali</a>
+{% include 'navbar.html' %}
+<body class="bg-[#fafafa] text-gray-800 min-h-screen flex flex-col">
+    <div class="flex-grow flex items-center justify-center">
+        <div class="text-center p-8 bg-[#387478] rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-4 text-[#fafafa]">Oops! Akun Anda belum disetujui oleh admin.</h2>
+            <p class="mb-6 text-[#fafafa]">Jangan khawatir! Silakan coba lagi untuk mendaftar. Kami siap menyambut Anda!</p>
+            <a href="{% url 'joinpartner:join_partner' %}" class="bg-[#fafafa] text-[#387478] px-4 py-2 rounded hover:bg-teal-600">Mendaftar Kembali</a>
+        </div>
     </div>
 </body>
 {% endblock content %}
