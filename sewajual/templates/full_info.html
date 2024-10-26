@@ -32,8 +32,24 @@
             <div class="inline-flex gap-2 md:absolute md:right-10 md:top-0 mt-4 md:mt-0">
                 <button
                     class="bg-teal hover:bg-dark-blue text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
+                    <a href="{% url 'bookmark:add_bookmark' vehicle.id %}" class="bookmark-button">
                     <i class="fa-solid fa-bookmark"></i>
                 </button>
+                {% if request.user.is_authenticated %}
+                    {% if vehicle.bookmarks.filter(user=request.user).exists %}
+                        <a href="{% url 'bookmarks:remove_bookmark' vehicle.id %}" class="bookmark-button">
+                            <button class="bg-teal text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'bookmarks:add_bookmark' vehicle.id %}" class="bookmark-button">
+                            <button class="bg-teal hover:bg-dark-blue text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
+                                <i class="fa-solid fa-bookmark"></i>
+                            </button>
+                        </a>
+                    {% endif %}
+                {% endif %}
                 <span
                     class="bg-sage text-white px-6 py-2 rounded-full text-lg font-semibold shadow-md flex items-center">
                     {{ vehicle.status }}
