@@ -11,7 +11,7 @@ def show_main(request):
     bookmarks = Bookmark.objects.filter(user=request.user).select_related('vehicle')
     
     # Pass the bookmarked vehicles to the template
-    return render(request, 'bookmarks/bookmarked_vehicles.html', {'bookmarks': bookmarks})
+    return render(request, 'bookmark.html', {'bookmarks': bookmarks})
 
 @login_required
 def add_bookmark(request, vehicle_id):
@@ -32,3 +32,11 @@ def remove_bookmark(request, vehicle_id):
     messages.success(request, "Bookmark removed successfully.")
     
     return redirect('vehicle_detail', vehicle_id=vehicle.id)
+
+@login_required
+def toggle_bookmark(request, vehicle_id):
+    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+    bookmark, created = Bookmark.objects.get_or_create(user=request.user, vehicle=vehicle)
+    if not created:  # If bookmark already exists, remove it
+        bookmark.delete()
+    return redirect('vehicle_detail', vehicle_id=vehicle_id)
