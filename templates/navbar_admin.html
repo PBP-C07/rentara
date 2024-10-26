@@ -25,7 +25,8 @@
                 </div>
 
                 <div class="flex space-x-8">
-                    <a href="#" class="text-dark-gray hover:text-teal">Manage Partner</a>
+                    <a href="{% url 'joinpartner:manage_partners' %}" class="text-dark-gray hover:text-teal">Manage Partner</a>
+                    <a href="{% url 'joinpartner:list_partner' %}" class="text-dark-gray hover:text-teal">List partner</a>
                     <a href="#" class="text-dark-gray hover:text-teal">Manage Product</a>
                     <a href="#" class="text-dark-gray hover:text-teal">Report</a>
                 </div>
