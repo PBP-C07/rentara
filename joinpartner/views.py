@@ -31,6 +31,7 @@ def show_vehicle(request):
     
     from sewajual.models import Katalog
     katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
+    #dummy
     main_vehicles = [katalog.vehicle for katalog in katalogs]  
 
     vehicles = list(main_vehicles) + list(partner_vehicles)
