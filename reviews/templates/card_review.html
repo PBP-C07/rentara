@@ -24,7 +24,7 @@
         <span>{{ review_entry.user }} • {{ review_entry.time|date:"d/m/y" }}</span>
         
         <div class="flex space-x-3">
-            <a href="{% url 'reviews:delete_review' review_entries.0.pk %}" class="bg-transparent border border-[#832424] hover:bg-[#832424] text-[#832424] hover:text-white font-bold py-2 px-4 rounded-lg">
+            <a href="{% url 'reviews:delete_review' review.id %}" class="bg-transparent border border-[#C96868] hover:bg-[#C96868] text-[#C96868] hover:text-white font-bold py-2 px-4 rounded-lg">
                 Delete
             </a>
             <a href="{% url 'reviews:edit_review' review_entries.0.pk %}" class="bg-[#629584] hover:bg-[#387478] text-white font-bold py-2 px-4 rounded-lg">
