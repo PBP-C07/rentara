@@ -9,7 +9,23 @@
 {% include 'navbar.html' %}
 
 <div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-8 min-h-screen bg-[#FAFAFA] flex flex-col">
-    <div id="review_entry_cards"></div>
+  <div class="flex flex-row flex-wrap gap-5 justify-center">
+    {% for review_entry in review_entries %}
+    <div class="flex mb-4" style="flex-basis: calc(33.333% - 1rem);">
+        {% include 'card_review.html' with review_entry=review_entry %}
+    </div>
+    {% endfor %}
+  </div>
+    <div class="flex justify-center space-x-3 mt-10">
+      <a href="{% url 'reviews:create_reviews' %}"
+      class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 140px; text-align: center;">
+          Add Review
+      </a>
+      <button data-modal-target="crudModal" data-modal-toggle="crudModal"
+      class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 200px; text-align: center;">
+          Add Review by AJAX
+      </button>
+    </div>
     <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
       <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
         <!-- Modal header -->
@@ -48,77 +64,22 @@
         </div>
       </div>
     </div>    
-    <div class="flex justify-center space-x-3 mt-10">
-        <a href="{% url 'reviews:create_reviews' %}"
-        class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 140px; text-align: center;">
-            Add Review
-        </a>
-        <button data-modal-target="crudModal" data-modal-toggle="crudModal"
-        class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 200px; text-align: center;">
-            Add Review by AJAX
-        </button>
-    </div>
 </div>
 
 <script>
-  async function getReviewEntries(){
-      return fetch("{% url 'reviews:show_json' %}").then((res) => res.json())
-  }
-  async function refreshReviewEntries() {
-    document.getElementById("review_entry_cards").innerHTML = "";
-    document.getElementById("review_entry_cards").className = "";
-    const reviewEntries = await getReviewEntries();
-    let htmlString = "";
-    let classNameString = "";
-
-    if (reviewEntries.length === 0) {
-        classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
-        htmlString = `
-            <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
-                <img src="{% static 'image/no-reviews.png' %}" alt="No reviews" class="w-32 h-32 mb-4"/>
-                <p class="text-center text-gray-600 mt-4">Belum ada review pada halaman ini.</p>
-            </div>
-        `;
-    } else {
-        classNameString = "columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full";
-        reviewEntries.forEach((item) => {
-            const title = DOMPurify.sanitize(item.fields.title);
-            const description = DOMPurify.sanitize(item.fields.description);
-            htmlString += `
-            <div class="relative break-inside-avoid bg-white shadow-lg rounded-lg p-6 font-[Poppins]" style="width: 445px; height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 style="color: #243642; font-size: 20px; font-style: normal; font-weight: 600; line-height: normal;">
-                            ${title}
-                        </h3>
-                        <div class="text-xl">
-                            ${'★'.repeat(item.fields.rating)}${'☆'.repeat(5 - item.fields.rating)}
-                        </div>        
-                    </div>
-                    <p style="color: #243642; font-size: 18px; font-style: normal; font-weight: 400; line-height: normal; margin-bottom: 16px; overflow: hidden; max-height: 3.5em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
-                        ${description}
-                    </p>
-                </div>
-                <div class="flex justify-between items-center" style="color: #243642; font-size: 16px; font-style: normal; font-weight: 400; line-height: normal;">
-                    <span>${item.fields.user} • ${item.fields.time}</span>
-                    <div class="flex space-x-3">
-                        <a href="/delete-review/${item.pk}" class="bg-transparent border border-[#C96868] hover:bg-[#C96868] text-[#C96868] hover:text-white font-bold py-2 px-4 rounded-lg">
-                            Delete
-                        </a>
-                        <a href="/edit-review/${item.pk}" class="bg-[#629584] hover:bg-[#387478] text-white font-bold py-2 px-4 rounded-lg">
-                            Edit
-                        </a>
-                    </div>
-                </div>
-            </div>
-            `;
-        });
-    }
-    document.getElementById("review_entry_cards").className = classNameString;
-    document.getElementById("review_entry_cards").innerHTML = htmlString;
+  function addMoodEntry() {
+    fetch("{% url 'reviews:create_reviews_ajax' %}", {
+      method: "POST",
+      body: new FormData(document.querySelector('#reviewEntryForm')),
+    })
+    .then(response => window.location.reload())
+    
+    document.getElementById("reviewEntryForm").reset(); 
+    hideReviewModal(); 
+    return false;
   }
 
-  refreshReviewEntries();
+  document.getElementById("submitReviewEntry").addEventListener("click", addMoodEntry);
 
   const modal = document.getElementById('crudModal');
   const modalContent = document.getElementById('crudModalContent');
