@@ -10,17 +10,33 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.http import Http404
 
+def format_price(value):
+    try:
+        formatted = str(int(float(value)))
+        result = ""
+        while len(formatted) > 3:
+            result = "." + formatted[-3:] + result
+            formatted = formatted[:-3]
+        return formatted + result
+    except (ValueError, TypeError):
+        return value
+    
 def vehicle_list(request):
     vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
+    for vehicle in vehicles:
+        vehicle.harga = format_price(vehicle.harga)
+    
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
 @login_required(login_url='main:login')
 def full_info(request, pk):
     try:
         vehicle = Vehicle.objects.get(pk=pk)
+        vehicle.harga = format_price(vehicle.harga)
     except Vehicle.DoesNotExist:
         try:
             vehicle = Vehicles.objects.get(pk=pk)
+            vehicle.harga = format_price(vehicle.harga)
         except Vehicles.DoesNotExist:
             raise Http404("Kendaraan tidak ditemukan")
     
