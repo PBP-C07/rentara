@@ -9,29 +9,26 @@
             <img src="{% static 'image/car2.png' %}" alt="Register Image" class="w-full h-full object-cover">
         </div>
 
-        <!-- Form Section -->
-        <div class="w-full md:w-1/2 flex items-center justify-center h-full bg-[#FAFAFA]">
-            <div class="w-full max-w-md mx-auto flex items-center justify-center h-full bg-[#FAFAFA]">
-                <div class="w-full">
-                    <h1 class="mt-6 text-3xl font-extrabold text-[#243642]" style="margin-bottom: 0;">
-                        Sign In Here
-                    </h1>
-                    <p class="text-[#243642]" style="margin-top: 0;">
-                        Enter your account details
-                    </p>
-
-                    <form class="mt-8 space-y-6 bg-[#FAFAFA]" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="remember" value="true">
-                        <div class="space-y-4">
-                            {% for field in form %}
-                            <div class="{% if not forloop.first %}mt-4{% endif %}">
-                                <label for="{{ field.id_for_label }}" class="sr-only">{{ field.label }}</label>
-                                <input id="{{ field.id_for_label }}" name="{{ field.name }}"
-                                    type="{{ field.field.widget.input_type }}" required
-                                    class="appearance-none w-full px-3 py-2 border-b-2 border-gray-400 placeholder-gray-500 text-gray-900 bg-[#FAFAFA] focus:outline-none focus:ring-0 focus:border-[#387478] sm:text-sm"
-                                    placeholder="{{ field.label }}">
-                                {% if field.errors %}
+    <!-- Form Section -->
+    <div class="w-full md:w-1/2 flex items-center justify-center h-full bg-[#FAFAFA]">
+        <div class="w-full max-w-md mx-auto flex items-center justify-center h-full bg-[#FAFAFA]">
+          <div class="w-full">
+            <h1 class="mt-6 text-3xl font-extrabold text-[#243642]" style="margin-bottom: 0;">
+                Sign In Here
+            </h1>
+            <p class="text-[#243642]" style="margin-top: 0;">
+                Enter your account details
+            </p>            
+      
+            <form class="mt-8 space-y-6 bg-[#FAFAFA]" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="remember" value="true">
+                <div class="space-y-4">
+                    {% for field in form %}
+                        <div class="{% if not forloop.first %}mt-4{% endif %}">
+                            <label for="{{ field.id_for_label }}" class="sr-only">{{ field.label }}</label>
+                            <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" required class="appearance-none w-full px-3 py-2 border-b-2 border-gray-400 placeholder-gray-500 text-gray-900 bg-[#FAFAFA] focus:outline-none focus:ring-0 focus:border-[#387478] sm:text-sm" placeholder="{{ field.label }}">
+                            {% if field.errors %}
                                 {% for error in field.errors %}
                                 <p class="mt-1 text-sm text-red-600">{{ error }}</p>
                                 {% endfor %}
