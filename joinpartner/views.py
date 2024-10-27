@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Partner, Vehicles
+from main.models import Vehicle
 from django.contrib.auth.decorators import login_required
 from .forms import PartnerForm, VehicleForm
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -142,19 +143,19 @@ def edit_product(request, product_id):
     # Memastikan pengguna adalah pemilik produk
     if product.partner != partner:
         return HttpResponseForbidden("Anda tidak diizinkan untuk mengedit produk ini.")
-    
+
     # Mengisi form dengan data produk saat ini
     form = VehicleForm(request.POST or None, instance=product)
     errors = {}
+    
     if request.method == "POST":
-        link_foto = request.POST.get("link_foto") or product.link_foto  # Menggunakan gambar lama jika tidak ada gambar baru
+        link_foto = request.POST.get("link_foto") or product.link_foto
         merk = strip_tags(request.POST.get("merk"))
         tipe = strip_tags(request.POST.get("tipe"))
         jenis_kendaraan = strip_tags(request.POST.get("jenis_kendaraan"))
         warna = strip_tags(request.POST.get("warna"))
         harga = request.POST.get("harga")
         status = request.POST.get("status")
-
 
         # Validasi input
         if not merk:
@@ -168,25 +169,32 @@ def edit_product(request, product_id):
 
         # Jika tidak ada error, simpan perubahan
         if not errors:
-            product.link_foto = link_foto  # Mengupdate gambar jika ada
+            # Update Vehicles instance
+            product.link_foto = link_foto
             product.merk = merk
             product.tipe = tipe
             product.jenis_kendaraan = jenis_kendaraan
             product.warna = warna
             product.harga = harga
-            product.status=status
+            product.status = status
             product.save()
+
             return redirect('joinpartner:show_vehicle')
 
     return render(request, "edit_product.html", {'form': form, 'errors': errors})
+
 
 
 @login_required(login_url='/login')
 def delete_product(request, product_id):
     product = get_object_or_404(Vehicles, id=product_id)
 
+
     product.delete()
+    print("Deletion successful")  # This will print if the deletion is successful
+
     return redirect('joinpartner:show_vehicle')
+
 
 @login_required(login_url='/login')
 def edit_profile(request):
