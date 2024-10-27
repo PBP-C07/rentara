@@ -56,10 +56,3 @@ def logout_user(request):
     return response
 
 from joinpartner.models import Partner
-
-def some_view(request):
-    is_store_owner = Partner.objects.filter(user=request.user).exists() if request.user.is_authenticated else False
-    context = {
-        'is_store_owner': is_store_owner,
-    }
-    return render(request, 'your_template.html', context)
