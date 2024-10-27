@@ -60,3 +60,38 @@ def review_list(request):
         formatted_reviews.append(formatted_review)
 
     return render(request, 'card_review.html', {'reviews': formatted_reviews})
+
+def show_xml(request):
+    data = Reviews.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = Reviews.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_xml_by_id(request, id):
+    data = Reviews.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json_by_id(request, id):
+    data = Reviews.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+@require_POST
+@login_required(login_url='/login')
+def create_reviews_ajax(request):
+    title = strip_tags(request.POST.get("title"))
+    title = request.POST.get("title")
+    rating = request.POST.get("rating")
+    description = strip_tags(request.POST.get("description"))
+    user = request.user
+
+    new_review = Reviews(
+        title=title, rating=rating,
+        description=description,
+        user=user
+    )
+    new_review.save()
+
+    return HttpResponse(b"CREATED", status=201)
