@@ -2,76 +2,148 @@
 {% load static %}
 
 {% block meta %}
-<title>Daftar Laporan</title>
+<title>Report</title>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
 {% endblock meta %}
 
 {% block content %}
-<!--{% include 'navbar.html' %} -->
-<div class="relative overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gradient-to-b from-[#2b5e2b] via-yellow-200 to-[#8c5722] flex flex-col">
+{% include 'navbar.html' %}
 
-  <div class="flex justify-end mb-6">
-    <button data-modal-target="reportModal" data-modal-toggle="reportModal" class="btn bg-gradient-to-r from-[#456e4d] via-gray-500 to-black text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-      Tambah Laporan Baru
+<div class="relative px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gradient-to-r from-[#E2F1E7] via-[#FADFA1] to-[#E2F1E7] flex flex-col">
+
+  <!-- Header with Action Buttons -->
+  <div class="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
+    <a href="{% url 'report:add_report' %}" class="bg-[#629584] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#387478] transition duration-300 text-sm sm:text-base">
+      Post New Report
+    </a>
+    <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="bg-[#629584] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#387478] transition duration-300 text-sm sm:text-base" onclick="showModal();">
+      Post New Report by AJAX
     </button>
   </div>
 
-  <!-- Display List of Reports -->
-  <div id="report_list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-    {% for report in reports %}
-      <div class="bg-white p-4 rounded-lg shadow-md border-4 border-[#964B00]">
-        <h2 class="font-bold text-lg">{{ report.title }}</h2>
-        <p>{{ report.description }}</p>
-        <p>Status: {{ report.status }}</p>
-        <p>Submitted: {{ report.date_submitted }}</p>
-      </div>
-    {% empty %}
-      <p>No reports available.</p>
-    {% endfor %}
-  </div>
+  <!-- Display Report List or Empty State -->
+  <div id="report_cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"></div>
 
-  <!-- Modal for Report Form -->
-  <div id="reportModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
-    <div id="reportModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
-      <!-- Modal header -->
-      <div class="flex items-center justify-between p-4 border-b rounded-t">
-        <h3 class="text-xl font-semibold text-gray-900">Tambah Laporan</h3>
-        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" onclick="hideModal();">
-          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-          </svg>
+  <!-- Modal Structure -->
+  <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div id="crudModalContent" class="bg-[#FAFAFA] rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 p-6 border border-[#D9D9D9] transition-transform duration-300 ease-out">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-semibold text-[#243642]">Add New Report</h3>
+        <button class="text-gray-400" onclick="hideModal();">
+          <span class="sr-only">Close modal</span>
+          &times;
         </button>
       </div>
-      <!-- Modal body -->
-      <div class="px-6 py-4">
-        <form id="reportForm" method="POST" action="{% url 'main:create_report_entry' %}">
-          {% csrf_token %}
-          <div class="mb-4">
-            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-            <input type="text" id="title" name="title" class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Enter report title" required>
-          </div>
-          <div class="mb-4">
-            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-            <textarea id="description" name="description" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Enter report description" required></textarea>
-          </div>
-        </form>
-      </div>
-      <!-- Modal footer -->
-      <div class="flex justify-end p-4 border-t border-gray-200 rounded-b">
-        <button type="button" onclick="hideModal();" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg">Cancel</button>
-        <button type="submit" form="reportForm" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg ml-2">Submit</button>
-      </div>
+      <form id="reportEntryForm">
+        <!-- Form Fields -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-[#243642]">Vehicle</label>
+          <input type="text" name="vehicle_name" class="block w-full border border-[#D9D9D9] rounded-md p-2" placeholder="Enter vehicle name" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-[#243642]">Description</label>
+          <textarea name="description" class="block w-full border border-[#D9D9D9] rounded-md p-2" rows="4" placeholder="Enter description" required></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-[#243642]">Issue Type</label>
+          <input type="text" name="issue_type" class="block w-full border border-[#D9D9D9] rounded-md p-2" placeholder="Enter issue type" required>
+        </div>
+        <!-- Submit and Cancel Buttons -->
+        <div class="flex justify-end space-x-2">
+          <button type="button" class="bg-gray-400 text-white py-2 px-4 rounded-lg" onclick="hideModal();">Cancel</button>
+          <button type="submit" class="bg-[#629584] text-white py-2 px-4 rounded-lg hover:bg-[#387478]">Add</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
 <script>
-  function hideModal() {
-    const modal = document.getElementById('reportModal');
-    const modalContent = document.getElementById('reportModalContent');
-    modalContent.classList.remove('opacity-100', 'scale-100');
-    modalContent.classList.add('opacity-0', 'scale-95');
-    setTimeout(() => modal.classList.add('hidden'), 150);
+  async function getReportEntries() {
+    return fetch("{% url 'report:show_json' %}").then((res) => res.json());
   }
+
+  async function refreshReportEntries() {
+    const reportEntries = await getReportEntries();
+    const reportCards = document.getElementById("report_cards");
+    reportCards.innerHTML = "";
+
+    if (reportEntries.length === 0) {
+      reportCards.innerHTML = `
+        <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+          <img src="{% static 'image/Report.png' %}" alt="Empty" class="w-64 h-64 mb-4 opacity-80 hover:opacity-100 transition-opacity duration-300"/>
+          <p class="text-center text-black mt-4 font-semibold text-xl">No reports found</p>
+        </div>
+      `;
+    } else {
+      reportEntries.forEach(item => {
+        const sanitizedVehicle = DOMPurify.sanitize(item.fields.vehicle);
+        const sanitizedDescription = DOMPurify.sanitize(item.fields.description);
+        const sanitizedIssueType = item.fields.issue_type ? DOMPurify.sanitize(item.fields.issue_type) : null;
+
+        reportCards.innerHTML += `
+          <div class="relative break-inside-avoid">
+            <div class="relative top-5 bg-[#832424] shadow-lg mb-6 flex flex-col border-4 border-[#629584] p-6 rounded-lg">
+              <div class="bg-[#E2F1E7] text-[#243642] p-5 rounded-t-lg border-b-2 border-[#D9D9D9]">
+                <h3 class="font-bold text-2xl mb-1">${sanitizedVehicle ? sanitizedVehicle : 'No Vehicle Name Provided'}</h3>
+                <p class="text-[#387478]">${item.fields.time}</p>
+              </div>
+              <div class="p-5 bg-[#FADFA1] rounded-b-lg">
+                <p class="font-semibold text-lg mb-3 text-[#629584]">Description</p>
+                <p class="text-gray-700 mb-4">
+                  <span class="text-sm inline-block py-2 px-3 rounded-full bg-[#E2F1E7] text-center">
+                    ${sanitizedDescription}
+                  </span>
+                </p>
+                <div class="mt-4">
+                  <p class="text-gray-800 font-semibold mb-2 text-[#243642]">Issue Type</p>
+                  <span class="text-sm font-semibold inline-block py-2 px-3 uppercase rounded-full text-[#243642] bg-[#D9D9D9] shadow-md">
+                    ${sanitizedIssueType}
+                  </span>
+                </div>
+              </div>
+              <div class="absolute bottom-4 right-4 flex space-x-2">
+                    <a href="/edit-report/${item.pk}" class="bg-[#387478] hover:bg-[#E2F1E7] text-[#E2F1E7] rounded-full p-3 transition-all duration-300 ease-in-out shadow-lg transform hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                        </svg>
+                    </a>
+                    <a href="/delete/${item.pk}" class="bg-red-400 hover:bg-[#D04848] text-[#E2F1E7] rounded-full p-3 transition-all duration-300 ease-in-out shadow-lg transform hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+  }
+
+  refreshReportEntries();
+
+  function showModal() {
+    document.getElementById('crudModal').classList.remove('hidden');
+  }
+
+  function hideModal() {
+    document.getElementById('crudModal').classList.add('hidden');
+  }
+
+  async function addReportEntry() {
+    await fetch("{% url 'report:report_entry_ajax' %}", {
+      method: "POST",
+      body: new FormData(document.getElementById("reportEntryForm")),
+    });
+    document.getElementById("reportEntryForm").reset();
+    hideModal();
+    refreshReportEntries();
+  }
+
+  document.getElementById("reportEntryForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    addReportEntry();
+  });
 </script>
 {% endblock content %}
