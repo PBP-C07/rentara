@@ -6,16 +6,17 @@
     <meta charset="UTF-8">
     <title>Edit Kendaraan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery -->
 {% endblock %}
 
 {% block content %}
 {% include 'navbar.html' %}
-<body class="bg-[#E2F1E7]">
+<body class="bg-[#FAFAFA]">
     <div class="flex h-screen overflow-y-auto">
         <div class="w-full flex items-center justify-center bg-[#FAFAFA]">
             <div class="bg-[#E2F1E7] p-8 rounded-lg shadow-md w-11/12 md:w-3/4 lg:w-1/2 opacity-95 max-h-full overflow-y-auto">
                 <h2 class="text-3xl md:text-4xl text-[#004D40] font-bold mb-6">Edit Kendaraan</h2>
-                <form method="POST">
+                <form id="edit-vehicle-form" method="POST">
                     {% csrf_token %}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Column 1 -->
@@ -32,7 +33,7 @@
                                 <input type="text" id="merk" name="merk" 
                                        class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
                                        value="{{ form.merk.value }}" 
-                                       required>
+                                       >
                                 {% if errors.merk %}
                                     <p class="text-red-500">{{ errors.merk }}</p>
                                 {% endif %}
@@ -42,7 +43,7 @@
                                 <input type="text" id="tipe" name="tipe" 
                                        class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
                                        value="{{ form.tipe.value }}" 
-                                       required>
+                                       >
                                 {% if errors.tipe %}
                                     <p class="text-red-500">{{ errors.tipe }}</p>
                                 {% endif %}
@@ -57,7 +58,7 @@
                                 <input type="text" id="jenis_kendaraan" name="jenis_kendaraan" 
                                        class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
                                        value="{{ form.jenis_kendaraan.value }}" 
-                                       required>
+                                       >
                                 {% if errors.jenis_kendaraan %}
                                     <p class="text-red-500">{{ errors.jenis_kendaraan }}</p>
                                 {% endif %}
@@ -67,7 +68,7 @@
                                 <input type="text" id="warna" name="warna" 
                                        class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
                                        value="{{ form.warna.value }}" 
-                                       required>
+                                       >
                                 {% if errors.warna %}
                                     <p class="text-red-500">{{ errors.warna }}</p>
                                 {% endif %}
@@ -78,14 +79,14 @@
                                        class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
                                        value="{{ form.bahan_bakar.value }}" 
                                        placeholder="Misal: Bensin, Diesel, Listrik" 
-                                       required>
+                                       >
                             </div>
                             <div class="mb-4">
                                 <label for="harga" class="block text-[#004D40] font-bold mb-2">Harga per Hari</label>
                                 <input type="number" id="harga" name="harga" 
                                        class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
                                        value="{{ form.harga.value }}" 
-                                       step="0.01" required>
+                                       step="0.01">
                             </div>
                             <div class="mb-4">
                                 <label for="status" class="block text-[#004D40] font-bold mb-2">Status Kendaraan</label>
@@ -132,6 +133,39 @@
             imagePreview.src = imageInput.value; 
             imagePreview.style.display = 'block'; 
         }
+
+        $(document).ready(function() {
+            $('#edit-vehicle-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'joinpartner:edit_product' product_id=product.id %}", // Adjust this URL as needed
+                    data: $(this).serialize(), // Serialize form data
+                    success: function(response) {
+                        // Redirect or show success message
+                        window.location.href = "{% url 'joinpartner:show_vehicle' %}"; // Redirect on success
+                    },
+                    error: function(xhr) {
+                        const errors = xhr.responseJSON.errors; // Fetch errors from JSON response
+                        // Clear previous errors
+                        $('ul').empty();
+                        
+                        // Iterate through the errors and display them
+                        for (const [field, messages] of Object.entries(errors)) {
+                            const fieldElement = $(`#${field}`); // Select the field element
+                            fieldElement.addClass('border-red-500'); // Highlight the field with error
+                            for (const message of messages) {
+                                // Append error message to the list
+                                $('ul').append(`<li class="text-red-500">${message}</li>`);
+                                // Display error below the corresponding field
+                                fieldElement.after(`<p class="text-red-500">${message}</p>`);
+                            }
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </body>
 {% endblock %}
