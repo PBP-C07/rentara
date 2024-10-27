@@ -43,21 +43,27 @@ Rentara+ berkomitmen untuk menjadi solusi transportasi dan pembelian motor terde
 
 ## **🗂️ Katalog Modul _Website_ 🗂️**
 ### 🚏 Bookmark Transportation 🚏
+#### 👩‍💻 Dikerjakan oleh Agus Tini Sridewi ####
 Fitur Bookmark memungkinkan pengguna untuk menyimpan kendaraan favorit mereka agar dapat ditinjau kembali di kemudian hari. Pengguna dapat membuat daftar pribadi dari opsi transportasi yang disukai, sehingga memudahkan perbandingan sebelum memutuskan untuk menyewa atau membeli.
 
 ### 📃 Community Forum and Feedback 📃
+#### 👩‍💻 Dikerjakan oleh Meisya Najla Aqilah ####
 Fitur ini memungkinkan pengguna memberikan ulasan dan penilaian bintang untuk kendaraan yang telah mereka sewa atau beli. Pengguna dapat membagikan pengalaman mereka secara rinci, membantu orang lain membuat keputusan berdasarkan ulasan dari pengalaman nyata.
 
 ### 🚗 Transportation Rentals and Sales 🚗
+#### 👩‍💻 Dikerjakan oleh Freia Arianti Zulaika ####
 Fitur utama ini menghubungkan pengguna dengan agen rental atau penjual lokal untuk menyewa atau membeli kendaraan. Pengguna dapat melihat berbagai opsi yang tersedia dan membandingkan harga melalui situs web.
 
 ### 👥 Join Our Partnership 👥
+#### 👩‍💻 Dikerjakan oleh Raisa Sakila ####
 Fitur ini ditujukan untuk bisnis atau individu yang ingin bermitra dengan platform untuk mendaftarkan kendaraan mereka. Mitra dapat menambahkan, mengedit, atau menghapus daftar kendaraan, memberikan alat yang mudah digunakan untuk mengelola armada mereka dan memastikan informasi tetap terbaru.
 
 ### 🚨 Report Transportation 🚨
+#### 👩‍💻 Dikerjakan oleh Felita Zahra Diyanti ####
 Pengguna dapat melaporkan masalah yang ditemukan pada kendaraan yang mereka sewa atau beli melalui fitur ini. Fitur ini memastikan kendaraan bermasalah dapat diidentifikasi untuk perbaikan, ditinjau, atau dihapus, sehingga menjaga kualitas dan keamanan armada yang tersedia.
 
 ### 🚖 Request a Driver 🚖
+#### 👩‍💻 Dikerjakan oleh Agus Tini Sridewi ####
 Untuk pengguna yang lebih memilih tidak mengemudi sendiri, fitur ini memungkinkan mereka untuk menyewa pengemudi dari perusahaan. Pengemudi profesional ini dapat disewa bersama dengan kendaraan yang dipilih, memberikan kenyamanan bagi pengguna yang ingin bepergian tanpa harus menyetir sendiri.
 
 ## **📊 Sumber Dataset Transportasi 📊**
@@ -85,7 +91,6 @@ Partner Transportasi merupakan pemilik transportasi yang terdaftar dalam aplikas
 * Menambah Kendaraan: Owner bisa menambahkan kendaraan baru ke dalam daftar kendaraan mereka dengan mengisi detail seperti: Jenis kendaraan (mobil, motor, dll), Kapasitas, Deskripsi kendaraan, Foto kendaraan.
 * Mengatur Harga: Owner dapat menentukan harga sewa atau jual kendaraan, serta mengatur perubahan harga sesuai dengan kondisi atau penawaran khusus.
 * Mengelola Kendaraan: Owner bisa memperbarui informasi kendaraan yang sudah terdaftar, seperti mengubah harga, menonaktifkan kendaraan sementara, atau menghapus kendaraan yang tidak tersedia lagi.
-* Berinteraksi dengan Customer: Owner bisa memberikan respon terhadap customer, seperti menjawab pertanyaan terkait kendaraan.
 
 ### 🕵️‍♂️ Guest 🕵️‍♂️
 Guest merupakan pengguna yang mengakses website tanpa melakukan login, sehingga hanya bisa melihat informasi-informasi umum yang ada di website seperti halaman home.

@@ -3,6 +3,7 @@ import uuid
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from joinpartner.models import Partner, Vehicles
+from main.models import Vehicle
 
 class Command(BaseCommand):
     help = 'Load data from JSON file into the database'
@@ -51,5 +52,6 @@ class Command(BaseCommand):
                     bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
                     status=item['fields'].get('status', Vehicles.Sewa)  # Default ke 'Sewa' jika tidak disediakan
                 )
+
 
         self.stdout.write(self.style.SUCCESS('Data loaded successfully'))

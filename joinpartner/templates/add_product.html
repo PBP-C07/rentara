@@ -1,31 +1,21 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
+
 {% block meta %}
     <title>Daftarkan Produk</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        function displayImage() {
-            const imageUrl = document.getElementById('link_foto').value;
-            const imagePreview = document.getElementById('image_preview');
-            if (imageUrl) {
-                imagePreview.src = imageUrl;
-                imagePreview.style.display = 'block'; // Show image
-            } else {
-                imagePreview.style.display = 'none'; // Hide if no URL
-            }
-        }
-    </script>
 {% endblock meta %}
+
 {% block content %}
 {% include 'navbar.html' %}
 <body class="bg-[#FAFAFA] mt-2">
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col max-h-full">
         <!-- Right Side: Form -->
         <div class="w-full flex items-center justify-center p-6 md:h-screen max-h-full overflow-y-auto">
             <div class="bg-[#E2F1E7] p-8 rounded-lg shadow-md w-full md:w-3/4">
                 <h2 class="text-2xl text-[#387478] font-bold mb-6">Daftar Kendaraan</h2>
-                <form method="POST">
+                <form method="POST" id="vehicleForm">
                     {% csrf_token %}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Column 1 -->
@@ -33,50 +23,42 @@
                             <div class="mb-4">
                                 <label for="link_foto" class="block text-[#387478] font-bold mb-2">Gambar Kendaraan</label>
                                 <input type="text" id="link_foto" name="link_foto" class="w-full px-3 py-2 border-b border-[#2c3e50] bg-transparent text-[#387478]" placeholder="Masukan URL gambar produk anda" oninput="displayImage()">
+                                <p class="error text-red-500 mt-1">{% if errors.link_foto %}{{ errors.link_foto }}{% endif %}</p>
                             </div>
                             <div class="mb-4">
                                 <label for="merk" class="block text-[#387478] font-bold mb-2">Merek Kendaraan</label>
                                 <input type="text" id="merk" name="merk" class="w-full px-3 py-2 border-b border-[#2c3e50] bg-transparent text-[#387478]" placeholder="Misal : Honda" required>
-                                {% if errors.merk %}
-                                    <p class="error text-red-500">{{ errors.merk }}</p>
-                                {% endif %}
+                                <p class="error text-red-500 mt-1">{% if errors.merk %}{{ errors.merk }}{% endif %}</p>
                             </div>
                             <div class="mb-4">
                                 <label for="tipe" class="block text-[#387478] font-bold mb-2">Tipe Kendaraan</label>
                                 <input type="text" id="tipe" name="tipe" class="w-full px-3 py-2 border-b border-[#2c3e50] bg-transparent text-[#387478]" placeholder="Misal : Vario 150" required>
-                                {% if errors.tipe %}
-                                    <p class="error text-red-500">{{ errors.tipe }}</p>
-                                {% endif %}
+                                <p class="error text-red-500 mt-1">{% if errors.tipe %}{{ errors.tipe }}{% endif %}</p>
                             </div>
                             <img id="image_preview" src="" alt="Preview" class="mt-4 rounded-lg border" style="display:none; max-width: 60%; text-align: center;"/>
                         </div>
-
+                    
                         <!-- Column 2 -->
                         <div>
                             <div class="mb-4">
                                 <label for="jenis_kendaraan" class="block text-[#387478] font-bold mb-2">Jenis Kendaraan</label>
                                 <input type="text" id="jenis_kendaraan" name="jenis_kendaraan" class="w-full px-3 py-2 border-b border-[#2c3e50] bg-transparent text-[#387478]" placeholder="Misal : Motor" required>
-                                {% if errors.jenis_kendaraan %}
-                                    <p class="error text-red-500">{{ errors.jenis_kendaraan }}</p>
-                                {% endif %}
+                                <p class="error text-red-500 mt-1">{% if errors.jenis_kendaraan %}{{ errors.jenis_kendaraan }}{% endif %}</p>
                             </div>
                             <div class="mb-4">
                                 <label for="warna" class="block text-[#387478] font-bold mb-2">Warna Kendaraan</label>
                                 <input type="text" id="warna" name="warna" class="w-full px-3 py-2 border-b border-[#2c3e50] bg-transparent text-[#387478]" placeholder="Misal : Merah" required>
-                                {% if errors.warna %}
-                                    <p class="error text-red-500">{{ errors.warna }}</p>
-                                {% endif %}
+                                <p class="error text-red-500 mt-1">{% if errors.warna %}{{ errors.warna }}{% endif %}</p>
                             </div>
                             <div class="mb-4">
                                 <label for="harga" class="block text-[#387478] font-bold mb-2">Harga per Hari</label>
                                 <input type="number" id="harga" name="harga" class="w-full px-3 py-2 border-b border-[#2c3e50] bg-transparent text-[#387478]" step="0.01" required>
+                                <p class="error text-red-500 mt-1">{% if errors.harga %}{{ errors.harga }}{% endif %}</p>
                             </div>
                             <div class="mb-4">
                                 <label for="bahan_bakar" class="block text-[#387478] font-bold mb-2">Bahan Bakar</label>
                                 <input type="text" id="bahan_bakar" name="bahan_bakar" class="w-full px-3 py-2 border-b border-[#2c3e50] bg-transparent text-[#387478]" placeholder="Misal : Bensin" required>
-                                {% if errors.bahan_bakar %}
-                                    <p class="error text-red-500">{{ errors.bahan_bakar }}</p>
-                                {% endif %}
+                                <p class="error text-red-500 mt-1">{% if errors.bahan_bakar %}{{ errors.bahan_bakar }}{% endif %}</p>
                             </div>
                             <div class="mb-4">
                                 <label for="status" class="block text-[#387478] font-bold mb-2">Status Kendaraan</label>
@@ -84,6 +66,7 @@
                                     <option class="text-[#387478]" value="Sewa" {% if form.status.value == 'Sewa' %}selected{% endif %}>Sewa</option>
                                     <option class="text-[#387478]" value="Jual" {% if form.status.value == 'Jual' %}selected{% endif %}>Jual</option>
                                 </select>
+                                <p class="error text-red-500 mt-1">{% if errors.status %}{{ errors.status }}{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -97,20 +80,59 @@
                         </button>
                     </div>
                 </form>
-                {% if form.errors %}
-                    <ul>
-                        {% for field in form %}
-                            {% for error in field.errors %}
-                                <li class="text-red-500">{{ error }}</li>
-                            {% endfor %}
-                        {% endfor %}
-                        {% for error in form.non_field_errors %}
-                            <li class="text-red-500">{{ error }}</li>
+                {% if errors %}
+                    <ul class="mt-4">
+                        {% for field, messages in errors.items %}
+                            <li class="text-red-500">{{ field }}: {{ messages }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
             </div>
         </div>
     </div>
+
+    <script>
+        function displayImage() {
+            const imageUrl = document.getElementById('link_foto').value;
+            const imagePreview = document.getElementById('image_preview');
+            if (imageUrl) {
+                imagePreview.src = imageUrl;
+                imagePreview.style.display = 'block'; // Show image
+            } else {
+                imagePreview.style.display = 'none'; // Hide if no URL
+            }
+        }
+
+        // AJAX form submission
+        document.getElementById('vehicleForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}', // Add CSRF token
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '{% url "joinpartner:show_vehicle" %}'; // Redirect on success
+                } else {
+                    // Handle errors
+                    for (const field in data.errors) {
+                        const errorMessages = data.errors[field];
+                        const errorElement = document.querySelector(`#${field} + .error`);
+                        if (errorElement) {
+                            errorElement.textContent = errorMessages.join(', '); // Join error messages
+                        }
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 {% endblock content %}
