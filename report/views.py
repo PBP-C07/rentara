@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
+from django.contrib.auth import authenticate, login, logout
 from report.forms import ReportForm  
 from report.models import Report, Vehicle
 from django.utils import timezone
@@ -9,6 +10,9 @@ from django.core import serializers
 from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+import datetime
 
 
 @login_required(login_url='/login')  # Redirect to login page if not logged in
@@ -41,6 +45,25 @@ def show_reports(request):
     }
 
     return render(request, "report_list.html", context)
+
+def login_user(request):
+   if request.method == 'POST':
+      form = AuthenticationForm(data=request.POST)
+
+      if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main"))
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
+      else:
+        messages.error(request, "Invalid username or password. Please try again.")
+
+   else:
+      form = AuthenticationForm(request)
+
+   context = {'form': form}
+   return render(request, 'login.html', context)
 
 def show_xml(request):
     data = Report.objects.filter(user=request.user)
