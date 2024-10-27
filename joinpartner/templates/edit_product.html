@@ -10,7 +10,7 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-<body class="bg-[#E2F1E7] mt-4"> <!-- Background cerah -->
+<body class="bg-[#E2F1E7]">
     <div class="flex h-screen overflow-y-auto">
         <div class="w-full flex items-center justify-center bg-[#FAFAFA]">
             <div class="bg-[#E2F1E7] p-8 rounded-lg shadow-md w-11/12 md:w-3/4 lg:w-1/2 opacity-95 max-h-full overflow-y-auto">
@@ -73,6 +73,14 @@
                                 {% endif %}
                             </div>
                             <div class="mb-4">
+                                <label for="bahan_bakar" class="block text-[#004D40] font-bold mb-2">Bahan Bakar</label>
+                                <input type="text" id="bahan_bakar" name="bahan_bakar" 
+                                       class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
+                                       value="{{ form.bahan_bakar.value }}" 
+                                       placeholder="Misal: Bensin, Diesel, Listrik" 
+                                       required>
+                            </div>
+                            <div class="mb-4">
                                 <label for="harga" class="block text-[#004D40] font-bold mb-2">Harga per Hari</label>
                                 <input type="number" id="harga" name="harga" 
                                        class="w-full border-b border-[#B2EBF2] bg-transparent py-2 outline-none" 
@@ -121,8 +129,8 @@
         function displayImage() {
             const imageInput = document.getElementById('link_foto');
             const imagePreview = document.getElementById('image_preview');
-            imagePreview.src = imageInput.value; // Menampilkan URL gambar sebagai preview
-            imagePreview.style.display = 'block'; // Menampilkan gambar
+            imagePreview.src = imageInput.value; 
+            imagePreview.style.display = 'block'; 
         }
     </script>
 </body>

@@ -5,10 +5,9 @@ app_name = 'joinpartner'
 
 urlpatterns = [path('vehicles/', show_vehicle, name='show_vehicle'),
     path('vehicles/add/', add_product, name='add_product'),
-    path('', join_partner, name='join_partner'),
+    path('join_partner', join_partner, name='join_partner'),
     path('vehicles/<uuid:product_id>/edit/', edit_product, name='edit_product'),
     path('vehicles/<uuid:product_id>/delete/', delete_product, name='delete_product'),
-    path('profile/edit/', edit_profile, name='edit_profile'),
     path('manage_partners/', manage_partners, name='manage_partners'),
     path('approve_partner/<uuid:partner_id>/', approve_partner, name='approve_partner'),
     path('reject_partner/<uuid:partner_id>/', reject_partner, name='reject_partner'),

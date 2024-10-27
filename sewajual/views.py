@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Vehicle, Katalog
-from joinpartner.models import Partner
+from joinpartner.models import Vehicles, Partner  # Pastikan Vehicles diimpor
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods, require_POST
@@ -10,18 +10,22 @@ from django.contrib import messages
 from django.http import JsonResponse
 
 def vehicle_list(request):
-    vehicles = Vehicle.objects.all()
+    # Menggabungkan data dari model Vehicle dan Vehicles
+    vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
 @login_required(login_url='main:login')
 def full_info(request, pk):
+    # Mencoba mendapatkan kendaraan dari model Vehicle atau Vehicles
     vehicle = get_object_or_404(Vehicle, pk=pk)
-    return render(request, 'full_info.html', {'vehicle': vehicle})
+    vehicles = get_object_or_404(Vehicles, pk=pk)  # Jika ada, sesuaikan logika ini
+    return render(request, 'full_info.html', {'vehicle': vehicle, 'vehicles': vehicles})
 
 @staff_member_required
 def admin_vehicle_list(request):
-   vehicles = Vehicle.objects.all()
-   return render(request, 'card_admin.html', {'vehicles': vehicles})
+    # Menggabungkan data dari model Vehicle dan Vehicles
+    vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
+    return render(request, 'card_admin.html', {'vehicles': vehicles})
 
 @staff_member_required
 @csrf_exempt
@@ -36,7 +40,7 @@ def add_vehicle(request):
                 partner = get_object_or_404(Partner, toko=toko)
                 vehicle.toko = toko
                 vehicle.save()
-                
+
                 Katalog.objects.create(vehicle=vehicle, owner=partner)
 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -47,7 +51,7 @@ def add_vehicle(request):
                         'merk': vehicle.merk,
                         'tipe': vehicle.tipe
                     })
-                
+
                 messages.success(request, "Kendaraan berhasil ditambahkan.")
                 return redirect('sewajual:admin_vehicle_list')
             except Exception as e:
@@ -67,7 +71,7 @@ def add_vehicle(request):
             messages.error(request, "Form tidak valid.")
     else:
         form = VehicleForm()
-        
+
     return render(request, 'add_vehicle.html', {'form': form})
 
 @staff_member_required
@@ -94,7 +98,7 @@ def delete_vehicle(request, pk):
         vehicle = get_object_or_404(Vehicle, pk=pk)
         Katalog.objects.filter(vehicle=vehicle).delete()
         vehicle.delete()
-        
+
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'status': 'success',
