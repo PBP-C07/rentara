@@ -105,20 +105,17 @@ def add_product(request):
 
 @login_required(login_url='/login')
 def join_partner(request):
-    # Periksa apakah pengguna sudah terdaftar sebagai partner
     partner_exists = Partner.objects.filter(user=request.user).exists()
     
     if partner_exists:
-        # Jika sudah terdaftar, arahkan ke halaman kendaraan
         return redirect('joinpartner:show_vehicle')
     
-    errors = {}
-    
     if request.method == 'POST':
-        # Ambil data dari form
         toko = strip_tags(request.POST.get("toko"))
         link_lokasi = strip_tags(request.POST.get("link_lokasi"))
         notelp = strip_tags(request.POST.get("notelp"))
+        
+        errors = {}
         
         # Validasi input
         if not toko:
@@ -128,64 +125,37 @@ def join_partner(request):
         if not notelp:
             errors['notelp'] = "Nomor telepon tidak boleh kosong."
         
-        # Jika tidak ada kesalahan, simpan partner baru
-        if not errors:
-            new_partner = Partner(user=request.user, toko=toko, link_lokasi=link_lokasi, notelp=notelp)
-            new_partner.save()
-            return redirect('joinpartner:show_vehicle')
-    return render(request, 'join_partner.html', {'errors': errors})
+        if errors:
+            return JsonResponse(errors, status=400)  # Return errors in JSON format
 
+        # Simpan partner baru jika tidak ada kesalahan
+        new_partner = Partner(user=request.user, toko=toko, link_lokasi=link_lokasi, notelp=notelp)
+        new_partner.save()
+        return JsonResponse({'success': True})  # Return success response in JSON format
 
+    return render(request, 'join_partner.html')
 
-from django.http import JsonResponse
 
 @login_required(login_url='/login')
 def edit_product(request, product_id):
     product = get_object_or_404(Vehicles, id=product_id)
     partner = get_object_or_404(Partner, user=request.user)
 
-    # Memastikan pengguna adalah pemilik produk
-    if product.partner != partner:
-        return HttpResponseForbidden("Anda tidak diizinkan untuk mengedit produk ini.")
+    if request.method == 'POST':
+        form = VehicleForm(request.POST, instance=product)
 
-    # Mengisi form dengan data produk saat ini
-    form = VehicleForm(request.POST or None, instance=product)
-    errors = {}
-    
-    if request.method == "POST":
-        link_foto = request.POST.get("link_foto") or product.link_foto
-        merk = strip_tags(request.POST.get("merk"))
-        tipe = strip_tags(request.POST.get("tipe"))
-        jenis_kendaraan = strip_tags(request.POST.get("jenis_kendaraan"))
-        warna = strip_tags(request.POST.get("warna"))
-        harga = request.POST.get("harga")
-        status = request.POST.get("status")
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True}, status=200)  # Success response
 
-        # Validasi input
-        if not merk:
-            errors['merk'] = "Nama merk tidak boleh kosong."
-        if not tipe:
-            errors['tipe'] = "Tipe merk tidak boleh kosong."
-        if not jenis_kendaraan:
-            errors['jenis_kendaraan'] = "Tipe kendaraan tidak boleh kosong."
-        if not warna:
-            errors['warna'] = "Warna kendaraan tidak boleh kosong."
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
 
-        # Jika tidak ada error, simpan perubahan
-        if not errors:
-            # Update Vehicles instance
-            product.link_foto = link_foto
-            product.merk = merk
-            product.tipe = tipe
-            product.jenis_kendaraan = jenis_kendaraan
-            product.warna = warna
-            product.harga = harga
-            product.status = status
-            product.save()
+    else:
+        form = VehicleForm(instance=product)
 
-            return redirect('joinpartner:show_vehicle')
+    return render(request, 'edit_product.html', {'form': form, 'product': product})
 
-    return render(request, "edit_product.html", {'form': form, 'errors': errors})
 
 @login_required(login_url='/login')
 def delete_product(request, product_id):
@@ -269,10 +239,13 @@ def list_partner(request):
         'query': query,
     })
 
+
+
 def delete_partner(request, partner_id):
-    partner = get_object_or_404(Partner, id=partner_id)
-    partner.delete()
-    return redirect('joinpartner:list_partner')
-
-
-
+    if request.method == 'POST':
+        partner = get_object_or_404(Partner, id=partner_id)
+        partner.delete()
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False}, status=400)
+#ini test
+#dummy
