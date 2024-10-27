@@ -8,95 +8,228 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Partners</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .dragging {
-            opacity: 0.5;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        body, h2, p, a {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .header {
+            background-color: #E2F1E7;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #355C59;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #6B7280; /* Gray color for subtitle */
+            font-size: 16px;
+        }
+
+        .search-bar {
+            padding: 12px;
+            background-color: #FFFFFF;
+            border: 2px solid #E2F1E7;
+            border-radius: 30px;
+            color: #355C59;
+            max-width: 1000px;
+            width: 90%; /* Adjusted width */
+            margin: 20px auto; /* Centered the search bar */
+            transition: all 0.3s;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: #355C59;
+            box-shadow: 0 0 5px rgba(53, 92, 89, 0.5);
+        }
+
+        .partners-table {
+            width: 90%; /* Table width */
+            border-collapse: separate; /* Use separate borders to enable spacing */
+            border-spacing: 0 10px; /* Add space between rows */
+            margin: 20px auto; /* Center the table */
+        }
+
+        .partners-table th {
+            background-color: #355C59;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .partners-table td {
+            background-color: #E2F1E7;
+            padding: 10px;
+            text-align: left;
+            color: #355C59;
+            position: relative; /* Ensure spacing for icons */
+        }
+
+        .partners-table tr:nth-child(even) td {
+            background-color: #F4F9F9;
+        }
+
+        .partners-table tr td:last-child {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Icon styling */
+        .icon-button {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .icon-accept {
+            color: green;
+        }
+
+        .icon-delete {
+            color: red;
+        }
+
+        /* Add rounded corners and shadow for a cleaner look */
+        .partners-table tr:first-child th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .partners-table tr:first-child th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .partners-table tr:last-child td:first-child {
+            border-bottom-left-radius: 8px;
+        }
+
+        .partners-table tr:last-child td:last-child {
+            border-bottom-right-radius: 8px;
+        }
+
+        /* Add rounded corners and shadow for a cleaner look */
+        .partners-table tr {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 {% endblock meta %}
 {% block content %}
-<body class="bg-[#629584] text-gray-800 pt-20">
-    <h1 class="text-3xl font-bold mb-6 text-center text-white">Manage Partners</h1>
+{% include 'navbar_admin.html' %}
+<body class="bg-[#FAFAFA] text-gray-800">
+    <!-- Header Section -->
+    <div class="header">
 
-    <!-- Area Accept dan Reject -->
-    <div class="flex justify-center mb-6">
-        <div class="accept-zone p-4 bg-green-200 rounded-lg m-2 text-center w-1/4">Accept</div>
-        <div class="reject-zone p-4 bg-red-200 rounded-lg m-2 text-center w-1/4">Reject</div>
+        <h1>Manage Partners</h1>
+        <p>View, approve, or reject partner requests.</p>
     </div>
 
-    <!-- List Pending Partners -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {% for partner in pending_partners %}
-            <div class="draggable-partner p-4 bg-[#fafafa] rounded-lg shadow cursor-pointer text-center" draggable="true" data-id="{{ partner.id }}">
-                <h3 class="font-bold">{{ partner.store_name }}</h3>
-                <p><a href="{{ partner.gmaps_link }}" target="_blank">{{ partner.gmaps_link }}</a></p>
-                <p>{{ partner.phone_number }}</p>
-            </div>
-        {% endfor %}
+        <!-- Search Bar -->
+    <div class="flex justify-center mt-6">
+        <input type="text" class="search-bar" placeholder="Search partner" id="search-partner">
+    </div>
+    <!-- Table of Partners -->
+    <div class="flex justify-center mt-2">
+        <table class="partners-table" id="partners-table">
+            <thead>
+                <tr>
+                    <th>Nama Toko</th>
+                    <th>Alamat</th>
+                    <th>Nomor Telepon</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="partners-tbody">
+                {% for partner in pending_partners %}
+                <tr class="draggable-partner" draggable="true" data-id="{{ partner.id }}">
+                    <td>{{ partner.toko }}</td>
+                    <td><a href="{{ partner.link_lokasi }}" target="_blank">{{ partner.link_lokasi }}</a></td>
+                    <td>{{ partner.notelp }}</td>
+                    <td>
+                        <!-- Icons for Accept and Delete -->
+                        <div class="icon-button icon-accept" title="Accept">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <div class="icon-button icon-delete" title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
     <script>
         // CSRF Token
         const csrfToken = getCookie('csrftoken');
 
-        // Draggable Partners
-        const draggablePartners = document.querySelectorAll(".draggable-partner");
-        const acceptZone = document.querySelector(".accept-zone");
-        const rejectZone = document.querySelector(".reject-zone");
+        // Fetch partners dynamically based on search input
+        document.getElementById('search-partner').addEventListener('input', function() {
+            const query = this.value;
+            fetch(`/manage_partners/?query=${query}`)
+                .then(response => response.text())
+                .then(data => {
+                    // Update the table body with the new data
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const newTableBody = doc.getElementById('partners-tbody');
+                    document.getElementById('partners-tbody').innerHTML = newTableBody.innerHTML;
 
-        draggablePartners.forEach(partner => {
-            partner.addEventListener("dragstart", e => {
-                e.target.classList.add("dragging"); // Add class while dragging
-                const id = e.target.dataset.id;
-                e.dataTransfer.setData("id", id);
+                    // Reattach event listeners to the new buttons
+                    attachEventListeners();
+                });
+        });
+
+        // Function to attach event listeners to accept and delete buttons
+        function attachEventListeners() {
+            document.querySelectorAll(".icon-accept").forEach(button => {
+                button.addEventListener("click", function() {
+                    const id = this.closest(".draggable-partner").dataset.id;
+                    fetch(`/approve_partner/${id}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': csrfToken,
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) location.reload();
+                    }).catch(error => console.error("Error: ", error));
+                });
             });
 
-            partner.addEventListener("dragend", e => {
-                e.target.classList.remove("dragging"); // Remove class when done dragging
+            document.querySelectorAll(".icon-delete").forEach(button => {
+                button.addEventListener("click", function() {
+                    const id = this.closest(".draggable-partner").dataset.id;
+                    fetch(`/reject_partner/${id}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': csrfToken,
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
+                        if (response.ok) location.reload();
+                    }).catch(error => console.error("Error: ", error));
+                });
             });
-        });
+        }
 
-        acceptZone.addEventListener("dragover", e => {
-            e.preventDefault();
-        });
-
-        rejectZone.addEventListener("dragover", e => {
-            e.preventDefault();
-        });
-
-        acceptZone.addEventListener("drop", e => {
-            e.preventDefault();
-            const id = e.dataTransfer.getData("id");
-            fetch(`/approve_partner/${id}/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    location.reload(); // Reload page after accept
-                }
-            }).catch(error => console.error("Error: ", error));
-        });
-
-        rejectZone.addEventListener("drop", e => {
-            e.preventDefault();
-            const id = e.dataTransfer.getData("id");
-            fetch(`/reject_partner/${id}/`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    location.reload(); // Reload page after reject
-                }
-            }).catch(error => console.error("Error: ", error));
-        });
+        // Initial attachment of event listeners
+        attachEventListeners();
 
         // Function to get CSRF cookie
         function getCookie(name) {
