@@ -35,25 +35,28 @@
         </button>
       </div>
       <form id="reportEntryForm">
-        <!-- Form Fields -->
+        <!-- Vehicle Field -->
         <div class="mb-4">
-          <label class="block text-sm font-medium text-[#243642]">Vehicle</label>
-          <input type="text" name="vehicle_name" class="block w-full border border-[#D9D9D9] rounded-md p-2" placeholder="Enter vehicle name" required>
+          <label for="vehicle" class="block text-sm font-medium text-gray-700">Vehicle</label>
+          <input type="text" id="vehicle" name="vehicle" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter vehicle name" required>
         </div>
+        <!-- Issue Type Field -->
         <div class="mb-4">
-          <label class="block text-sm font-medium text-[#243642]">Description</label>
-          <textarea name="description" class="block w-full border border-[#D9D9D9] rounded-md p-2" rows="4" placeholder="Enter description" required></textarea>
+          <label for="issue_type" class="block text-sm font-medium text-gray-700">Issue Type</label>
+          <input type="text" id="issue_type" name="issue_type" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter issue type" required>
         </div>
+        <!-- Description Field -->
         <div class="mb-4">
-          <label class="block text-sm font-medium text-[#243642]">Issue Type</label>
-          <input type="text" name="issue_type" class="block w-full border border-[#D9D9D9] rounded-md p-2" placeholder="Enter issue type" required>
+          <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea id="description" name="description" rows="3" class="mt-1 block w-full h-52 resize-none border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product description" required></textarea>
         </div>
-        <!-- Submit and Cancel Buttons -->
-        <div class="flex justify-end space-x-2">
-          <button type="button" class="bg-gray-400 text-white py-2 px-4 rounded-lg" onclick="hideModal();">Cancel</button>
-          <button type="submit" class="bg-[#629584] text-white py-2 px-4 rounded-lg hover:bg-[#387478]">Add</button>
-        </div>
-      </form>
+        
+      <!-- Submit and Cancel Buttons -->
+      <div class="flex justify-end space-x-2">
+        <button type="button" class="bg-gray-400 text-white py-2 px-4 rounded-lg" onclick="hideModal();">Cancel</button>
+        <button type="submit" class="bg-[#629584] text-white py-2 px-4 rounded-lg hover:bg-[#387478]">Post</button>
+      </div>
+    </form>
     </div>
   </div>
 </div>
