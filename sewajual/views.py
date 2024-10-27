@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
-from .models import Vehicle, Katalog
-from joinpartner.models import Vehicles, Partner
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods, require_POST
-from .forms import VehicleForm
-from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib import messages
+from .models import Vehicle, Katalog
+from joinpartner.models import Vehicles, Partner
+from bookmark.models import Bookmark
+from .forms import VehicleForm
 
 def format_price(value):
     try:
@@ -19,7 +20,7 @@ def format_price(value):
         return formatted + result
     except (ValueError, TypeError):
         return value
-    
+
 def vehicle_list(request):
     vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
     for vehicle in vehicles:
@@ -37,31 +38,46 @@ def full_info(request, pk):
         html_file = 'full_info_joinpartner.html'
 
     vehicle.harga = format_price(vehicle.harga)
+    
+    is_bookmarked = False
+    if request.user.is_authenticated:
+        is_bookmarked = Bookmark.objects.filter(user=request.user, vehicle=vehicle).exists()
 
-    return render(request, html_file, {'vehicle': vehicle})
+    next_page = request.GET.get('next', 'vehicle_list')
+
+    return render(request, html_file, {
+        'vehicle': vehicle,
+        'is_bookmarked': is_bookmarked,
+        'next_page': next_page
+    })
 
 @staff_member_required
 def admin_vehicle_list(request):
-   vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
-   return render(request, 'card_admin.html', {'vehicles': vehicles})
+    vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
+    return render(request, 'card_admin.html', {'vehicles': vehicles})
 
 @staff_member_required
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
 def add_vehicle(request):
+    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+    
     if request.method == "POST":
         form = VehicleForm(request.POST)
         if form.is_valid():
             try:
                 vehicle = form.save(commit=False)
-                toko = form.cleaned_data['toko']
-                partner = get_object_or_404(Partner, toko=toko)
-                vehicle.toko = toko
+                vehicle.toko = form.cleaned_data['toko']
                 vehicle.save()
-
-                Katalog.objects.create(vehicle=vehicle, owner=partner)
-
-                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                
+                Katalog.objects.create(
+                    vehicle=vehicle, 
+                    owner=get_object_or_404(Partner, toko=vehicle.toko)
+                )
+                
+                if is_ajax:
                     return JsonResponse({
                         'status': 'success',
                         'message': 'Kendaraan berhasil ditambahkan',
@@ -69,28 +85,17 @@ def add_vehicle(request):
                         'merk': vehicle.merk,
                         'tipe': vehicle.tipe
                     })
-
-                messages.success(request, "Kendaraan berhasil ditambahkan.")
+                
                 return redirect('sewajual:admin_vehicle_list')
+                
             except Exception as e:
-                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                    return JsonResponse({
-                        'status': 'error',
-                        'message': str(e)
-                    }, status=400)
-                messages.error(request, f"Error: {str(e)}")
-        else:
-            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Form tidak valid',
-                    'errors': form.errors
-                }, status=400)
-            messages.error(request, "Form tidak valid.")
-    else:
-        form = VehicleForm()
-
-    return render(request, 'add_vehicle.html', {'form': form})
+                return JsonResponse({'status': 'error', 'message': str(e)}, status=400) if is_ajax else messages.error(request, str(e))
+        
+        if is_ajax:
+            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+        messages.error(request, "Form tidak valid.")
+            
+    return render(request, 'add_vehicle.html', {'form': VehicleForm()})
 
 @staff_member_required
 @csrf_exempt
@@ -106,7 +111,7 @@ def edit_vehicle(request, pk):
     else:
         form = VehicleForm(instance=vehicle)
 
-    return render(request, 'edit_vehicle.html', {'form': form})
+    return render(request, 'edit_vehicle.html', {'form': form, 'vehicle': vehicle})
 
 @staff_member_required
 @csrf_exempt
@@ -118,15 +123,21 @@ def delete_vehicle(request, pk):
     try:
         Katalog.objects.filter(vehicle=vehicle).delete()
         vehicle.delete()
-        response = {'status': 'success', 'message': 'Data kendaraan berhasil dihapus'}
-        if is_ajax:
-            return JsonResponse(response)
         
-        messages.success(request, response['message'])
-    except Exception as e:
-        response = {'status': 'error', 'message': str(e)}
         if is_ajax:
-            return JsonResponse(response, status=400)
-        messages.error(request, f"Error: {response['message']}")
-    
-    return redirect('sewajual:admin_vehicle_list')
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Data kendaraan berhasil dihapus'
+            })
+        
+        messages.success(request, 'Data kendaraan berhasil dihapus')
+        return redirect('sewajual:admin_vehicle_list')
+    except Exception as e:
+        if is_ajax:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=400)
+        
+        messages.error(request, f"Error: {str(e)}")
+        return redirect('sewajual:admin_vehicle_list')
