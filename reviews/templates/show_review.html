@@ -5,19 +5,18 @@
 {% include 'navbar.html' %}
 
 <div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-8 min-h-screen bg-[#FAFAFA] flex flex-col">
-    <div class="flex flex-row flex-wrap gap-5 justify-center">
-        {% for review_entry in review_entries %}
-        <div class="flex mb-4" style="flex-basis: calc(33.333% - 1rem);">
-            {% include 'card_review.html' with review_entry=review_entry %}
-        </div>
-        {% endfor %}
-    </div>
-    <div class="flex justify-center space-x-3 mt-10">
-        <a href="{% url 'reviews:create_reviews' %}"
-        class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 140px; text-align: center;">
-            Add Review
-        </a>
-    </div>
+  <div class="flex flex-row flex-wrap gap-5 justify-center">
+      {% for review_entry in review_entries %}
+      <div class="flex mb-4" style="flex-basis: calc(33.333% - 1rem);">
+          {% include 'card_review.html' with review_entry=review_entry %}
+      </div>
+      {% endfor %}
+  </div>
+  <div class="flex justify-center space-x-3 mt-10">
+      <a href="{% url 'reviews:create_reviews' %}"
+      class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 140px; text-align: center;">
+          Add Review
+      </a>
+  </div>
 </div>
-
 {% endblock content %}
