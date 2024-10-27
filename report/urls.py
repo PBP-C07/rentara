@@ -3,6 +3,7 @@ from report.views import create_report_entry, show_reports, show_json, show_xml,
 
 app_name = 'report'
 
+
 urlpatterns = [
     path('', show_reports, name='report_list'),
     path('login/', login_user, name='login'),
