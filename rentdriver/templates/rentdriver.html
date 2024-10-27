@@ -21,12 +21,12 @@
 <style>
     /* Main colors */
     :root {
-        --primary-color: #5A9A8E; /* Button color */
-        --secondary-color: #F4F9F6; /* Background color */
-        --card-background-color: #243642; /* Card background color */
-        --text-color: #FFFFFF; /* Text color */
-        --accent-color: #D1EAE2; /* Accent for borders */
-        --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow for cards */
+        --primary-color: #5A9A8E;
+        --secondary-color: #F4F9F6;
+        --card-background-color: #243642;
+        --text-color: #FFFFFF;
+        --accent-color: #D1EAE2;
+        --shadow-color: rgba(0, 0, 0, 0.2);
     }
 
     body {
@@ -48,52 +48,46 @@
         letter-spacing: 2px;
     }
 
-    /* Box container for the driver cards */
     .card-container {
         width: 90%;
         margin: 0 auto;
-        overflow: hidden; /* To contain sliding elements */
-        position: relative; /* For positioning of buttons */
+        overflow: hidden;
+        position: relative;
     }
 
-    /* Driver row styling */
     .driver-row {
         margin-top: 50px;
         display: flex;
-        transition: transform 0.5s ease; /* Smooth sliding effect */
-        width: 100%; /* Full width */
+        transition: transform 0.5s ease;
+        width: 100%;
     }
 
-    /* Driver card styling */
     .driver-card {
         background-color: var(--card-background-color);
         border-radius: 12px;
         box-shadow: 0 4px 10px var(--shadow-color);
-        width: 250px; /* Fixed width for cards */
-        height: 350px;
-        margin: 20px; /* Space around cards */
-        flex-shrink: 0; /* Prevent cards from shrinking */
+        width: 250px;
+        height: 400px;
+        margin: 20px;
+        flex-shrink: 0;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         padding: 20px;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Center align content */
+        align-items: center;
     }
 
-    /* Add a decorative icon at the top of the card */
     .driver-card::before {
-        content: '👤'; /* Decorative icon for decoration */
-        font-size: 3rem; /* Larger icon */
+        content: '👤';
+        font-size: 3rem;
         margin-top: 60px;
-        margin-bottom: 10px; /* Space between icon and title */
+        margin-bottom: 10px;
     }
 
-    /* Card body */
     .card-body {
         text-align: center;
     }
 
-    /* Card title (driver name) */
     .card-title {
         font-size: 1.5rem;
         color: var(--text-color);
@@ -101,7 +95,6 @@
         font-weight: bold;
     }
 
-    /* Card content */
     .card-text {
         font-size: 1rem;
         color: var(--text-color);
@@ -110,15 +103,8 @@
     }
 
     .driver-card:hover {
-        transform: scale(1.05); /* Slightly enlarge on hover */
-        box-shadow: 0 6px 15px var(--shadow-color); /* Darker shadow */
-    }
-
-    /* Button styling */
-    .add-driver-container {
-        width: 100%; /* Full width */
-        text-align: center; /* Center the content horizontally */
-        margin-top: 20px; /* Optional: Add some spacing above the button */
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px var(--shadow-color);
     }
 
     .btn {
@@ -136,7 +122,6 @@
         background-color: #497d71;
     }
 
-    /* Navigation buttons */
     .nav-button {
         position: absolute;
         top: 50%;
@@ -155,7 +140,7 @@
     }
 
     .btn:active {
-        background-color: #3f6e64; /* Darker shade on active */
+        background-color: #3f6e64;
     }
 
     .nav-button.left {
@@ -165,11 +150,25 @@
     .nav-button.right {
         right: 10px;
     }
+
+    /* Modal styling */
+    .modal.hidden { display: none; }
+    .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure modal is above other content but navbar is below */
+}
+    .modal-content { background: white; padding: 20px; border-radius: 8px; width: 400px; max-width: 90%; }
+    .close-modal { cursor: pointer; font-size: 1.5rem; font-weight: bold; color: #f00; float: right; }
 </style>
 {% endblock meta %}
 
 {% block content %}
-<div class="overflow-hidden">  <!-- Wrapper to handle overflow -->
+<div class="overflow-hidden">
   {% include 'navbar.html' %}
 </div>
 
@@ -182,16 +181,17 @@
             <p class="text-center text-lg text-gray-600">No drivers available at the moment.</p>
         {% else %}
             {% for driver in driver_entries %}
-                <div class="driver-card">
-                    <div class="card-body">
-                        <h5 class="card-title text-xl font-semibold text-text-color">{{ driver.name }}</h5>
-                        <p class="card-text text-gray-300">
-                            <strong>Phone:</strong> {{ driver.phone_number }}<br>
-                            <strong>Vehicle Type:</strong> {{ driver.vehicle_type }}<br>
-                            <strong>Experience:</strong> {{ driver.experience_years }} years
-                        </p>
-                    </div>
+            <div class="driver-card" id="driver-{{ driver.id }}">
+                <div class="card-body mt-2">
+                    <h5 class="card-title">{{ driver.name }}</h5>
+                    <p class="card-text">
+                        <strong>Phone:</strong> {{ driver.phone_number }}<br>
+                        <strong>Vehicle Type:</strong> {{ driver.vehicle_type }}<br>
+                        <strong>Experience:</strong> {{ driver.experience_years }} years
+                    </p>
+                    <button onclick="editDriver('{{ driver.id }}')" class="btn">Edit</button>
                 </div>
+            </div>
             {% endfor %}
         {% endif %}
     </div>
@@ -199,6 +199,15 @@
     <button class="nav-button right" onclick="slideRight()">&#10095;</button>
 </div>
 
+<!-- Edit Modal -->
+<div id="editModal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="editFormContainer"></div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     let currentIndex = 0;
 
@@ -206,7 +215,7 @@
         const driverRow = document.getElementById('driverRow');
         const cards = driverRow.children;
         const totalCards = cards.length;
-        const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
+        const cardWidth = cards[0].offsetWidth + 40;
 
         if (currentIndex > 0) {
             currentIndex--;
@@ -218,13 +227,52 @@
         const driverRow = document.getElementById('driverRow');
         const cards = driverRow.children;
         const totalCards = cards.length;
-        const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
+        const cardWidth = cards[0].offsetWidth + 40;
 
         if (currentIndex < totalCards - 1) {
             currentIndex++;
             driverRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
         }
     }
+
+    function editDriver(driverId) {
+        document.getElementById('editModal').classList.remove('hidden');
+
+        $.ajax({
+            url: `/edit_driver/${driverId}/`,
+            type: 'GET',
+            success: function(response) {
+                $('#editFormContainer').html(response);
+            }
+        });
+    }
+
+    $(document).on('submit', '#editDriverForm', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const url = form.attr('action');
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: form.serialize(),
+            success: function(response) {
+                if (response.success) {
+                    const driverCard = $(`#driver-${response.driver_id}`);
+                    driverCard.find('.card-title').text(response.name);
+                    driverCard.find('.card-text').html(`
+                        <strong>Phone:</strong> ${response.phone_number}<br>
+                        <strong>Vehicle Type:</strong> ${response.vehicle_type}<br>
+                        <strong>Experience:</strong> ${response.experience_years} years
+                    `);
+                    closeModal();
+                }
+            }
+        });
+    });
+
+    function closeModal() {
+        $('#editModal').addClass('hidden');
+    }
 </script>
 {% endblock content %}
-
