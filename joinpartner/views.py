@@ -54,50 +54,50 @@ def show_vehicle(request):
 @login_required(login_url='/login')
 def add_product(request):
     partner = get_object_or_404(Partner, user=request.user)
+    errors = {}
 
     if request.method == "POST":
-        link_foto = request.POST.get("link_foto")  # Menggunakan request.FILES untuk mengakses gambar
+        link_foto = request.POST.get("link_foto")
         merk = strip_tags(request.POST.get("merk"))
         tipe = strip_tags(request.POST.get("tipe"))
-        jenis_kendaraan = strip_tags(request.POST.get("jenis_kendaraan"))  # seperti mobil, motor, dll.
-        warna = strip_tags(request.POST.get("warna")) 
+        jenis_kendaraan = strip_tags(request.POST.get("jenis_kendaraan"))
+        warna = strip_tags(request.POST.get("warna"))
         harga = request.POST.get("harga")
         status = request.POST.get("status")
+        bahan_bakar = strip_tags(request.POST.get("bahan_bakar"))  # Make sure to get this value
 
-        errors = {}
-
-        # Validasi input
+        # Validate input
         if not merk:
-            errors['merk'] = "Nama merk tidak boleh kosong."
+            errors['merk'] = ["Nama merk tidak boleh kosong."]
         if not tipe:
-            errors['tipe'] = "Tipe merk tidak boleh kosong."
+            errors['tipe'] = ["Tipe tidak boleh kosong."]
         if not jenis_kendaraan:
-            errors['jenis_kendaraan'] = "Tipe kendaraan tidak boleh kosong."
+            errors['jenis_kendaraan'] = ["Jenis kendaraan tidak boleh kosong."]
         if not warna:
-            errors['warna'] = "Warna kendaraan tidak boleh kosong."
+            errors['warna'] = ["Warna kendaraan tidak boleh kosong."]
         if not harga or not harga.isdigit():
-            errors['harga'] = "Harga per hari harus diisi dan berupa angka."
+            errors['harga'] = ["Harga per hari harus diisi dan berupa angka."]
+        if not bahan_bakar:
+            errors['bahan_bakar'] = ["Bahan bakar tidak boleh kosong."]
 
-        # Jika tidak ada error, simpan kendaraan baru
-        if not errors:
-            new_vehicle = Vehicles(
-                partner=partner,
-                link_foto=link_foto,
-                merk=merk,
-                tipe=tipe,
-                jenis_kendaraan=jenis_kendaraan,
-                warna=warna,
-                harga=harga,
-                status=status
-            )
-            new_vehicle.save()
-            return redirect('joinpartner:show_vehicle')
-        
-    else:
-        # Jika metode bukan POST, tidak perlu mengisi 'errors'
-        errors = {}
+        if errors:
+            return JsonResponse({'errors': errors}, status=400)
 
-    # Pastikan ada respons yang dikembalikan
+        # If there are no errors, save the new vehicle
+        new_vehicle = Vehicles(
+            partner=partner,
+            link_foto=link_foto,
+            merk=merk,
+            tipe=tipe,
+            jenis_kendaraan=jenis_kendaraan,
+            warna=warna,
+            harga=harga,
+            status=status,
+            bahan_bakar=bahan_bakar  # Make sure to include this field
+        )
+        new_vehicle.save()
+        return JsonResponse({'success': True})
+
     return render(request, "add_product.html", {'errors': errors})
 
 
@@ -134,6 +134,8 @@ def join_partner(request):
     return render(request, 'join_partner.html', {'errors': errors})
 
 
+
+from django.http import JsonResponse
 
 @login_required(login_url='/login')
 def edit_product(request, product_id):
@@ -183,15 +185,13 @@ def edit_product(request, product_id):
 
     return render(request, "edit_product.html", {'form': form, 'errors': errors})
 
-
-
 @login_required(login_url='/login')
 def delete_product(request, product_id):
     product = get_object_or_404(Vehicles, id=product_id)
 
 
     product.delete()
-    print("Deletion successful")  # This will print if the deletion is successful
+    print("Deletion successful") 
 
     return redirect('joinpartner:show_vehicle')
 
