@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if not review_entries %}
+<p>Belum ada reviews.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Title</th>
+    <th>User</th>
+    <th>Time</th>
+    <th>Rating</th>
+    <th>Description</th>
+    <th>Helpful</th>
+  </tr>
+
+  {% for review_entry in review_entries %}
+  <tr>
+    <td>{{review_entry.title}}</td>
+    <td>{{review_entry.user}}</td>
+    <td>{{review_entry.time}}</td>
+    <td>{{review_entry.rating}}</td>
+    <td>{{review_entry.description}}</td>
+    <td>{{review_entry.helpful_votes}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'reviews:create_reviews' %}">
+  <button>Add New Mood Entry</button>
+</a>
+{% endblock content %}

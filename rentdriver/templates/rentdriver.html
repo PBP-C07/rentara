@@ -1,80 +1,235 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Available Drivers</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+{% extends 'base.html' %}
+{% load static %} 
 
-<body>
-{% block navbar %}
-  {% include 'navbar.html' %}  <!-- Include your navbar -->
-{% endblock %}
+{% block meta %}
+<title>Rentara+ Drivers</title>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'dark-blue': '#243642',
+                    'teal': '#387478',
+                    'sage': '#629584',
+                    'light-sage': '#e2f1e7',
+                    'dark-gray': '#272828',
+                }
+            }
+        }
+    }
+</script>
+<style>
+    /* Main colors */
+    :root {
+        --primary-color: #5A9A8E; /* Button color */
+        --secondary-color: #F4F9F6; /* Background color */
+        --card-background-color: #243642; /* Card background color */
+        --text-color: #FFFFFF; /* Text color */
+        --accent-color: #D1EAE2; /* Accent for borders */
+        --shadow-color: rgba(0, 0, 0, 0.2); /* Shadow for cards */
+    }
+
+    body {
+        background-color: var(--secondary-color);
+        font-family: 'Roboto', sans-serif;
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--card-background-color);
+        margin-bottom: 30px;
+        font-size: 2.2rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* Box container for the driver cards */
+    .card-container {
+        width: 90%;
+        margin: 0 auto;
+        overflow: hidden; /* To contain sliding elements */
+        position: relative; /* For positioning of buttons */
+    }
+
+    /* Driver row styling */
+    .driver-row {
+        margin-top: 50px;
+        display: flex;
+        transition: transform 0.5s ease; /* Smooth sliding effect */
+        width: 100%; /* Full width */
+    }
+
+    /* Driver card styling */
+    .driver-card {
+        background-color: var(--card-background-color);
+        border-radius: 12px;
+        box-shadow: 0 4px 10px var(--shadow-color);
+        width: 250px; /* Fixed width for cards */
+        height: 350px;
+        margin: 20px; /* Space around cards */
+        flex-shrink: 0; /* Prevent cards from shrinking */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align content */
+    }
+
+    /* Add a decorative icon at the top of the card */
+    .driver-card::before {
+        content: '👤'; /* Decorative icon for decoration */
+        font-size: 3rem; /* Larger icon */
+        margin-top: 60px;
+        margin-bottom: 10px; /* Space between icon and title */
+    }
+
+    /* Card body */
+    .card-body {
+        text-align: center;
+    }
+
+    /* Card title (driver name) */
+    .card-title {
+        font-size: 1.5rem;
+        color: var(--text-color);
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    /* Card content */
+    .card-text {
+        font-size: 1rem;
+        color: var(--text-color);
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+
+    .driver-card:hover {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+        box-shadow: 0 6px 15px var(--shadow-color); /* Darker shadow */
+    }
+
+    /* Button styling */
+    .add-driver-container {
+        width: 100%; /* Full width */
+        text-align: center; /* Center the content horizontally */
+        margin-top: 20px; /* Optional: Add some spacing above the button */
+    }
+
+    .btn {
+        background-color: var(--primary-color);
+        border: none;
+        padding: 12px 20px;
+        color: white;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #497d71;
+    }
+
+    /* Navigation buttons */
+    .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        z-index: 10;
+    }
+
+    .btn:focus {
+        outline: 2px solid var(--accent-color);
+    }
+
+    .btn:active {
+        background-color: #3f6e64; /* Darker shade on active */
+    }
+
+    .nav-button.left {
+        left: 10px;
+    }
+
+    .nav-button.right {
+        right: 10px;
+    }
+</style>
+{% endblock meta %}
 
 {% block content %}
+<div class="overflow-hidden">  <!-- Wrapper to handle overflow -->
+  {% include 'navbar.html' %}
+</div>
+
 <h1 class="text-center text-3xl font-bold mt-8 text-card-background-color">Rentara+ Drivers</h1>
 <p class="text-center text-lg text-gray-600 mt-2">Ride the Beautiful Roads of Mataram with Our Trusted Drivers!</p>
 
 <div class="card-container mt-6">
-  <div class="driver-row" id="driverRow">
-    {% if not driver_entries %}
-      <p class="text-center text-lg text-gray-600">No drivers available at the moment.</p>
-    {% else %}
-      {% for driver in driver_entries %}
-      <div class="driver-card">
-        <div class="card-body">
-          <h5 class="card-title text-xl font-semibold text-text-color">{{ driver.name }}</h5>
-          <p class="card-text text-gray-300">
-            <strong>Phone:</strong> {{ driver.phone_number }}<br>
-            <strong>Vehicle Type:</strong> {{ driver.vehicle_type }}<br>
-            <strong>Experience:</strong> {{ driver.experience_years }} years
-          </p>
-        </div>
-      </div>
-      {% endfor %}
-    {% endif %}
-  </div>
-  <button class="nav-button left" onclick="slideLeft()">&#10094;</button>
-  <button class="nav-button right" onclick="slideRight()">&#10095;</button>
+    <div class="driver-row" id="driverRow">
+        {% if not driver_entries %}
+            <p class="text-center text-lg text-gray-600">No drivers available at the moment.</p>
+        {% else %}
+            {% for driver in driver_entries %}
+                <div class="driver-card">
+                    <div class="card-body">
+                        <h5 class="card-title text-xl font-semibold text-text-color">{{ driver.name }}</h5>
+                        <p class="card-text text-gray-300">
+                            <strong>Phone:</strong> {{ driver.phone_number }}<br>
+                            <strong>Vehicle Type:</strong> {{ driver.vehicle_type }}<br>
+                            <strong>Experience:</strong> {{ driver.experience_years }} years
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <button class="nav-button left" onclick="slideLeft()">&#10094;</button>
+    <button class="nav-button right" onclick="slideRight()">&#10095;</button>
 </div>
 
 <div class="add-driver-container text-center mt-6">
-  <a href="{% url 'rentdriver:add_driver_view' %}">
-    <button class="btn">Add Driver</button>
-  </a>
+    <a href="{% url 'rentdriver:add_driver_view' %}">
+        <button class="btn">Add Driver</button>
+    </a>
 </div>
 
 <script>
-  let currentIndex = 0;
+    let currentIndex = 0;
 
-  function slideLeft() {
-    const driverRow = document.getElementById('driverRow');
-    const cards = driverRow.children;
-    const totalCards = cards.length;
-    const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
+    function slideLeft() {
+        const driverRow = document.getElementById('driverRow');
+        const cards = driverRow.children;
+        const totalCards = cards.length;
+        const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
 
-    if (currentIndex > 0) {
-      currentIndex--;
-      driverRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        if (currentIndex > 0) {
+            currentIndex--;
+            driverRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
     }
-  }
 
-  function slideRight() {
-    const driverRow = document.getElementById('driverRow');
-    const cards = driverRow.children;
-    const totalCards = cards.length;
-    const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
+    function slideRight() {
+        const driverRow = document.getElementById('driverRow');
+        const cards = driverRow.children;
+        const totalCards = cards.length;
+        const cardWidth = cards[0].offsetWidth + 40; // Card width plus margin
 
-    if (currentIndex < totalCards - 1) {
-      currentIndex++;
-      driverRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        if (currentIndex < totalCards - 1) {
+            currentIndex++;
+            driverRow.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
     }
-  }
-  
 </script>
 {% endblock content %}
-</body>
-</html>

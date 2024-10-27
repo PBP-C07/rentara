@@ -172,3 +172,5 @@ h1 {
     position: relative; /* Ensure the card container positions its children correctly */
     overflow: hidden; /* Hide overflow to prevent scroll bars */
   }
+
+  

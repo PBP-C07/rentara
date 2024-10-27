@@ -1,12 +1,12 @@
 {% load static %}
 
-<nav class="bg-white shadow-sm">
+<nav class="bg-transparent shadow-sm fixed w-full z-10">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'dark-blue': '#243642',
+                        'dark-blue': '#2E3A59',
                         'teal': '#387478',
                         'sage': '#629584',
                         'light-sage': '#e2f1e7',
@@ -25,7 +25,8 @@
                 </div>
 
                 <div class="flex space-x-8">
-                    <a href="#" class="text-dark-gray hover:text-teal">Manage Partner</a>
+                    <a href="{% url 'joinpartner:manage_partners' %}" class="text-dark-gray hover:text-teal">Manage Partner</a>
+                    <a href="{% url 'joinpartner:list_partner' %}" class="text-dark-gray hover:text-teal">List partner</a>
                     <a href="#" class="text-dark-gray hover:text-teal">Manage Product</a>
                     <a href="#" class="text-dark-gray hover:text-teal">Report</a>
                 </div>
@@ -34,7 +35,6 @@
             <div class="flex items-center space-x-6">
                 {% if user.is_authenticated %}
                 <span class="text-dark-gray">Welcome, Admin!</span>
-                {% endif %}
 
                 <div class="relative">
                     <button id="profileButton" class="flex items-center text-dark-gray hover:text-teal">
@@ -50,11 +50,19 @@
                     <div id="profileDropdown"
                         class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div class="py-1">
-                            <a href="{% url 'main:logout' %}"
+                            <a href="{% url 'main:show_main' %}"
                                 class="block px-4 py-2 text-sm text-dark-gray hover:bg-light-sage hover:text-teal">Logout</a>
                         </div>
                     </div>
                 </div>
+                {% else %}
+                <a href="{% url 'main:login' %}" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[#FAFAFA] bg-[#629584] hover:bg-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]" style="width: 100px; text-align: center;">
+                    Sign In
+                </a>
+                <a href="{% url 'main:register' %}" class="group relative w-full flex justify-center py-2 px-4 border border-[#629584] text-sm font-medium rounded-md text-[#387478] bg-transparent hover:bg-light-sage focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]" style="width: 100px; text-align: center;">
+                    Register
+                </a>
+                {% endif %}
             </div>
         </div>
     </div>
