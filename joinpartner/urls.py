@@ -1,5 +1,5 @@
 from django.urls import path,include
-from joinpartner.views import show_vehicle, join_partner, add_product, delete_product, edit_product, edit_profile, manage_partners, approve_partner, reject_partner, pending_approval,rejected, list_partner, delete_partner
+from joinpartner.views import show_vehicle, join_partner, add_product, delete_product, edit_product, manage_partners, approve_partner, reject_partner, pending_approval,rejected, list_partner, delete_partner
 
 app_name = 'joinpartner'
 
