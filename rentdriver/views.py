@@ -1,6 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from rentdriver.forms import DriverForm
 from rentdriver.models import Driver
@@ -21,7 +19,7 @@ def load_drivers_from_json(file_path = 'rentdriver/data/drivers.json'):
             )
 
 @login_required(login_url='main:login')
-def show_main(request):
+def show_drivers(request):
     load_drivers_from_json()
 
     drivers = Driver.objects.all()
@@ -32,14 +30,5 @@ def show_main(request):
 
     return render(request, "rentdriver.html", context)
 
-def add_driver_view(request):
-    if request.method == 'POST':
-        form = DriverForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('rentdriver:show_main')  
-    else:
-        form = DriverForm()
-    
-    return render(request, 'add_driver.html', {'form': form})
+
 
