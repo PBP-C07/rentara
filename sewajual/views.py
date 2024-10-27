@@ -12,11 +12,6 @@ def vehicle_list(request):
     vehicles = Vehicle.objects.all()
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
-@login_required(login_url='main:login')
-def full_info(request, pk):
-    vehicle = get_object_or_404(Vehicle, pk=pk)
-    return render(request, 'full_info.html', {'vehicle': vehicle})
-
 @staff_member_required
 def admin_vehicle_list(request):
    vehicles = Vehicle.objects.all()
@@ -61,14 +56,18 @@ def delete_vehicle(request, pk):
         return HttpResponse(b"DELETED", status=200)
     except:
         return HttpResponse(b"ERROR", status=500)
-    
+
+@login_required(login_url='main:login')
 def full_info(request, pk):
     vehicle = get_object_or_404(Vehicle, pk=pk)
     is_bookmarked = False
     if request.user.is_authenticated:
         is_bookmarked = Bookmark.objects.filter(user=request.user, vehicle=vehicle).exists()
 
+    next_page = request.GET.get('next', 'vehicle_list')  # Default to vehicle list if 'next' is not provided
+
     return render(request, 'full_info.html', {
         'vehicle': vehicle,
-        'is_bookmarked': is_bookmarked
+        'is_bookmarked': is_bookmarked,
+        'next_page': next_page
     })
