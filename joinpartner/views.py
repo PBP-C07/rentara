@@ -26,7 +26,6 @@ def show_vehicle(request):
         return redirect('joinpartner:rejected')
     
     partner_vehicles = Vehicle.objects.filter(partner=partner)
-
     from sewajual.models import Katalog
     katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
     main_vehicles = [katalog.vehicle for katalog in katalogs]  
