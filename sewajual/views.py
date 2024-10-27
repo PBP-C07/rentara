@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Vehicle, Katalog
-from joinpartner.models import Vehicles, Partner
+from joinpartner.models import Vehicles, Partner  # Pastikan Vehicles diimpor
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods, require_POST
@@ -10,19 +10,22 @@ from django.contrib import messages
 from django.http import JsonResponse
 
 def vehicle_list(request):
+    # Menggabungkan data dari model Vehicle dan Vehicles
     vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
 @login_required(login_url='main:login')
 def full_info(request, pk):
+    # Mencoba mendapatkan kendaraan dari model Vehicle atau Vehicles
     vehicle = get_object_or_404(Vehicle, pk=pk)
-    vehicles = get_object_or_404(Vehicles, pk=pk)
+    vehicles = get_object_or_404(Vehicles, pk=pk)  # Jika ada, sesuaikan logika ini
     return render(request, 'full_info.html', {'vehicle': vehicle, 'vehicles': vehicles})
 
 @staff_member_required
 def admin_vehicle_list(request):
-   vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
-   return render(request, 'card_admin.html', {'vehicles': vehicles})
+    # Menggabungkan data dari model Vehicle dan Vehicles
+    vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
+    return render(request, 'card_admin.html', {'vehicles': vehicles})
 
 @staff_member_required
 @csrf_exempt
@@ -91,21 +94,26 @@ def edit_vehicle(request, pk):
 @csrf_exempt
 @require_POST
 def delete_vehicle(request, pk):
-    vehicle = get_object_or_404(Vehicle, pk=pk)
-    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-
     try:
+        vehicle = get_object_or_404(Vehicle, pk=pk)
         Katalog.objects.filter(vehicle=vehicle).delete()
         vehicle.delete()
-        response = {'status': 'success', 'message': 'Data kendaraan berhasil dihapus'}
-        if is_ajax:
-            return JsonResponse(response)
-        
-        messages.success(request, response['message'])
+
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Data kendaraan berhasil dihapus'
+            })
+        else:
+            messages.success(request, "Data kendaraan berhasil dihapus!")
+            return redirect('sewajual:admin_vehicle_list')
+
     except Exception as e:
-        response = {'status': 'error', 'message': str(e)}
-        if is_ajax:
-            return JsonResponse(response, status=400)
-        messages.error(request, f"Error: {response['message']}")
-    
-    return redirect('sewajual:admin_vehicle_list')
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=400)
+        else:
+            messages.error(request, f"Error: {str(e)}")
+            return redirect('sewajual:admin_vehicle_list')

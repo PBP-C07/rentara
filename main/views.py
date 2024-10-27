@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse
-from joinpartner.models import Partner
 
 def show_main(request):
     context = {
@@ -54,12 +53,3 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:show_main'))
     response.delete_cookie('user_logged_in')
     return response
-
-from joinpartner.models import Partner
-
-def some_view(request):
-    is_store_owner = Partner.objects.filter(user=request.user).exists() if request.user.is_authenticated else False
-    context = {
-        'is_store_owner': is_store_owner,
-    }
-    return render(request, 'your_template.html', context)
