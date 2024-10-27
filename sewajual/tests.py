@@ -2,8 +2,9 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Vehicle, Katalog
-from joinpartner.models import Partner
+from joinpartner.models import Partner, Vehicles
 from .forms import VehicleForm
+from django.contrib.messages import get_messages
 
 class VehicleViewTests(TestCase):
     def setUp(self):
@@ -140,5 +141,142 @@ class VehicleViewTests(TestCase):
         self.client.login(username='staff', password='staffpass')
         response = self.client.post(
             reverse('sewajual:delete_vehicle', args=[999]), HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
+        self.assertEqual(response.status_code, 404)
+    
+    def test_delete_vehicle_with_exception(self):
+        """Test delete vehicle with exception handling"""
+        self.client.login(username='staff', password='staffpass')
+        
+        # Buat vehicle dan katalog untuk dihapus
+        vehicle = Vehicle.objects.create(**self.vehicle_data)
+        Katalog.objects.create(vehicle=vehicle, owner=self.partner)
+        
+        # Test non-AJAX request dengan invalid PK untuk trigger exception
+        response = self.client.post(reverse('sewajual:delete_vehicle', args=[99999]))
+        self.assertRedirects(response, reverse('sewajual:admin_vehicle_list'))
+        
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(any("Error" in str(m) for m in messages))
+
+    def test_delete_vehicle_ajax_with_exception(self):
+        """Test delete vehicle with AJAX exception handling"""
+        self.client.login(username='staff', password='staffpass')
+        
+        # Test AJAX request dengan invalid PK untuk trigger exception
+        response = self.client.post(
+            reverse('sewajual:delete_vehicle', args=[99999]),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
+        
+        self.assertEqual(response.status_code, 404)
+        data = response.json()
+        self.assertEqual(data['status'], 'error')
+
+    def test_full_info_vehicles_model(self):
+        """Test full info view when vehicle found in Vehicles model"""
+        self.client.login(username='user', password='testpass')
+        
+        # Create vehicle in Vehicles model
+        vehicle_data = {
+            'toko': 'Test Shop',
+            'merk': 'Honda',
+            'tipe': 'Jazz'
+        }
+        vehicles_obj = Vehicles.objects.create(**vehicle_data)
+        
+        response = self.client.get(reverse('sewajual:full_info', args=[vehicles_obj.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'full_info.html')
+        self.assertEqual(response.context['vehicle'], vehicles_obj)
+
+    def test_edit_vehicle_post_invalid_form(self):
+        """Test edit vehicle with invalid form data"""
+        self.client.login(username='staff', password='staffpass')
+        vehicle = Vehicle.objects.create(**self.vehicle_data)
+        
+        invalid_data = self.vehicle_data.copy()
+        invalid_data['harga'] = 'invalid_price'
+        
+        response = self.client.post(
+            reverse('sewajual:edit_vehicle', args=[vehicle.pk]),
+            invalid_data
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'edit_vehicle.html')
+        self.assertTrue(response.context['form'].errors)
+        
+        # Verify vehicle data remains unchanged
+        vehicle.refresh_from_db()
+        self.assertEqual(vehicle.harga, self.vehicle_data['harga'])
+
+    def test_delete_vehicle_error_messages(self):
+        """Test error messages in delete vehicle view"""
+        self.client.login(username='staff', password='staffpass')
+        
+        # Create vehicle and catalog
+        vehicle = Vehicle.objects.create(**self.vehicle_data)
+        Katalog.objects.create(vehicle=vehicle, owner=self.partner)
+        
+        # Test with non-AJAX request
+        response = self.client.post(reverse('sewajual:delete_vehicle', args=[vehicle.pk]))
+        messages = list(get_messages(response.wsgi_request))
+        
+        # Verify success message
+        self.assertEqual(len(messages), 1)
+        self.assertTrue('berhasil dihapus' in str(messages[0]))
+        
+        # Verify redirect
+        self.assertRedirects(response, reverse('sewajual:admin_vehicle_list'))
+
+    def test_add_vehicle_error_messages(self):
+        """Test specific error messages in add vehicle"""
+        self.client.login(username='staff', password='staffpass')
+        
+        # Test invalid form tanpa AJAX
+        invalid_data = self.vehicle_data.copy()
+        invalid_data['harga'] = 'invalid'
+        response = self.client.post(reverse('sewajual:add_vehicle'), invalid_data)
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(any("Form tidak valid" in str(m) for m in messages))
+
+    def test_edit_vehicle_post_invalid(self):
+        """Test edit vehicle dengan form tidak valid"""
+        self.client.login(username='staff', password='staffpass')
+        vehicle = Vehicle.objects.create(**self.vehicle_data)
+        
+        # Test invalid form
+        invalid_data = self.vehicle_data.copy()
+        invalid_data['harga'] = 'bukan angka'
+        response = self.client.post(
+            reverse('sewajual:edit_vehicle', args=[vehicle.pk]),
+            invalid_data
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'edit_vehicle.html')
+        self.assertFalse(response.context['form'].is_valid())
+        
+        # Verify data tidak berubah
+        vehicle.refresh_from_db()
+        self.assertEqual(vehicle.harga, self.vehicle_data['harga'])
+
+    def test_delete_vehicle_non_ajax_error(self):
+        """Test delete vehicle non-ajax dengan error"""
+        self.client.login(username='staff', password='staffpass')
+        
+        # Test dengan invalid pk
+        response = self.client.post(reverse('sewajual:delete_vehicle', args=[99999]))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(any("Error" in str(m) for m in messages))
+        self.assertRedirects(response, reverse('sewajual:admin_vehicle_list'))
+
+    def test_delete_vehicle_ajax_not_found(self):
+        """Test delete vehicle ajax dengan vehicle tidak ditemukan"""
+        self.client.login(username='staff', password='staffpass')
+        
+        # Test AJAX request dengan invalid pk
+        response = self.client.post(
+            reverse('sewajual:delete_vehicle', args=[99999]),
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )
         self.assertEqual(response.status_code, 404)
