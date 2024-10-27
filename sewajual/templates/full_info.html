@@ -31,7 +31,7 @@
 
             <div class="inline-flex gap-2 md:absolute md:right-10 md:top-0 mt-4 md:mt-0">
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'bookmark:toggle_bookmark' vehicle.id %}" class="bookmark-button">
+                    <a href="{% url 'bookmark:toggle_bookmark' vehicle.id %}?next={{ next_page }}" class="bookmark-button">
                         <button class="bg-teal text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
                             {% if is_bookmarked %}
                                 <i class="fa-solid fa-bookmark"></i>
@@ -100,8 +100,8 @@
                     📍 Lihat Lokasi Toko
                 </a>
 
-                <a href="{% url 'sewajual:vehicle_list' %}"
-                    class="inline-flex items-center gap-2 bg-dark-gray text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center">
+                <a href="{% if next_page == 'bookmark' %}{% url 'bookmark:bookmarked_vehicles' %}{% else %}{% url 'sewajual:vehicle_list' %}{% endif %}"
+                class="inline-flex items-center gap-2 bg-dark-gray text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center">
                     ← Kembali
                 </a>
             </div>
