@@ -1,31 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Report List</title>
+{% endblock meta %}
 
 {% block content %}
-  <h2>Daftar Laporan Saya</h2>
-  {% if reports %}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nama Kendaraan</th>
-          <th>Jenis Masalah</th>
-          <th>Deskripsi</th>
-          <th>Tanggal Laporan</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for report in reports %}
-          <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ report.vehicle_name }}</td>
-            <td>{{ report.get_issue_type_display }}</td>
-            <td>{{ report.description|default:"-" }}</td>
-            <td>{{ report.created_at|date:"d M Y H:i" }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>Belum ada laporan yang diajukan.</p>
-  {% endif %}
+{% include 'navbar_admin.html' %}
+
+<div class="container mx-auto py-10">
+  <h2 class="text-3xl font-semibold text-center mb-8" style="color: #8FA69E;">Daftar Laporan Saya</h2>
+  
+  <div class="flex justify-end mb-4">
+    <a href="{% url 'main:create_report_entry' %}" class="bg-[#3D716D] text-white py-2 px-4 rounded-lg font-semibold transition duration-300 ease-in-out hover:bg-opacity-90">
+      Tambah Laporan Baru
+    </a>
+  </div>
+  
+  <div class="bg-white shadow-md rounded-lg p-6 border border-gray-300" style="background-color: #f8f9fa;">
+    {% if reports %}
+      <table class="w-full border-collapse text-left">
+        <!-- Kolom Header dan Isi Tabel -->
+      </table>
+    {% else %}
+      <p class="text-center text-lg mt-4" style="color: #233E4D;">Belum ada laporan yang diajukan.</p>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

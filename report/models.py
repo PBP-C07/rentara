@@ -26,4 +26,5 @@ class Report(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reports')
 
     def __str__(self):
-        return f"{self.issue_type()} - {self.vehicle.type}"
+        return f"{self.get_issue_type_display()} - {self.vehicle.type}"
+
