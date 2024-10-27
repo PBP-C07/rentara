@@ -31,9 +31,11 @@ def show_vehicle(request):
     
     from sewajual.models import Katalog
     katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
-    main_vehicles = [katalog.vehicle for katalog in katalogs]  
-
-    vehicles = list(main_vehicles) + list(partner_vehicles)
+    try:
+        main_vehicles = [katalog.vehicle for katalog in katalogs]  
+        vehicles = list(main_vehicles) + list(partner_vehicles)
+    except:
+        vehicles = list(partner_vehicles)
 
     query = request.GET.get('query', '')  # Get search query
     if query:
@@ -246,6 +248,4 @@ def delete_partner(request, partner_id):
         return JsonResponse({'success': True})
     return JsonResponse({'success': False}, status=400)
 #ini test
-
-
-
+#dummy

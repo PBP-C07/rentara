@@ -27,3 +27,5 @@ urlpatterns = [
     path('', include('reviews.urls')),
     path('', include('sewajual.urls')),
 ] 
+
+
