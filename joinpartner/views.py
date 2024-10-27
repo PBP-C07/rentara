@@ -159,10 +159,14 @@ def edit_product(request, product_id):
 
 @login_required(login_url='/login')
 def delete_product(request, product_id):
-    product = get_object_or_404(Vehicles, id=product_id)
-
-
-    product.delete()
+    try: 
+        product = get_object_or_404(Vehicles, id=product_id)
+        product_vehicle = get_object_or_404(Vehicle, id=product_id)
+        product.delete()
+        product_vehicle.delete()
+    except:
+        product = get_object_or_404(Vehicles, id=product_id)
+        product.delete()
     print("Deletion successful") 
 
     return redirect('joinpartner:show_vehicle')
