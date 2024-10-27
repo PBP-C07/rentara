@@ -6,7 +6,7 @@ from django.utils.html import strip_tags
 class VehicleForm(ModelForm):
     class Meta :
         model = Vehicles
-        fields = ['link_foto', 'merk', 'tipe', 'jenis_kendaraan', 'warna', 'harga', 'status']
+        fields = ['link_foto', 'merk', 'tipe', 'jenis_kendaraan', 'warna', 'harga', 'status', 'bahan_bakar']
     def clean_merk(self):
         merk = self.cleaned_data["merk"]
         return strip_tags(merk)
@@ -20,9 +20,12 @@ class VehicleForm(ModelForm):
         return strip_tags(jenis_kendaraan)
 
     def clean_color(self):
-        color = self.cleaned_data["color"]
+        color = self.cleaned_data["warna"]
         return strip_tags(color)
 
+    def clean_fuel(self):
+        bahan_bakar = self.cleaned_data["bahan_bakar"]
+        return strip_tags(bahan_bakar)
     
 
 class PartnerForm(ModelForm):
