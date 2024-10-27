@@ -1,83 +1,88 @@
-
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
-<div class="flex justify-center items-center h-screen bg-[#FAFAFA] font-[Poppins]">
-    <div class="flex w-full h-full">
-        <div class="flex-1 flex flex-col justify-center pl-[145px]">
-            <p style="color: #243642; font-size: 19px; font-weight: 500; line-height: normal; margin-bottom: 12px;">
+<div class="flex justify-center items-center min-h-screen bg-[#FAFAFA] font-[Poppins] px-4 py-8 md:py-0">
+    <div class="flex w-full h-full flex-col md:flex-row">
+        <div class="flex-1 flex flex-col justify-center md:pl-[145px] px-4 text-center md:text-left">
+            <p class="text-[#243642] text-base md:text-lg font-medium mb-3">
                 10,000+ Satisfied Renters in Mataram, Lombok
             </p>
-            <h2 style="color: #243642; font-size: 42px; font-weight: 700; line-height: normal; margin-bottom: 12px;">
-                Top Choice for Secure, <br>
+            <h2 class="text-[#243642] text-3xl md:text-4xl font-bold mb-3">
+                Top Choice for Secure, <br class="hidden md:block">
                 Affordable Car Rentals
             </h2>
-            <p style="color: #243642; font-size: 16px; font-weight: 400; line-height: normal; width: 559px; margin-bottom: 12px;">
-                Discover the joy of exploring the city of Mataram with Rentara+, designed to meet all your travel needs. With a commitment to transparency, we make your journey smooth, safe, and enjoyable every step of the way.
-            </p>            
-            <div class="flex gap-[10px]">
-                <button class="group relative flex justify-center border border-transparent text-sm font-medium rounded-md text-[#FAFAFA] bg-[#629584] hover:bg-[#629584] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]" style="margin-top: 12px; width: 160px; height: 48px; padding: 14px 32px;">
+            <p class="text-[#243642] text-sm md:text-base font-normal mb-3 max-w-[559px] mx-auto md:mx-0">
+                Discover the joy of exploring the city of Mataram with Rentara+, designed to meet all your travel needs.
+                With a commitment to transparency, we make your journey smooth, safe, and enjoyable every step of the
+                way.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                <button
+                    class="group relative flex justify-center border border-transparent text-sm font-medium rounded-md text-[#FAFAFA] bg-[#629584] hover:bg-[#629584] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584] px-8 py-3">
                     Booking Now
-                </button>                
-                <button class="bg-transparent text-[#243642] border-transparent rounded-[5px] cursor-pointer" style="margin-top: 12px; width: 240px; height: 48px; padding: 14px 32px; font-size: 16px;">
+                </button>
+                <button class="bg-transparent text-[#243642] border-transparent rounded-md text-sm px-8 py-3">
                     View Available Cars
                 </button>
             </div>
-        </div>        
-        <div class="flex-1 flex justify-end items-end">
-            <img src="{% static 'image/lombok.png' %}" alt="Scenic view of Mataram" class="object-cover" style="width: 800px; height: auto; border-radius: 35px 0 0 0;">
+        </div>
+        <div class="flex-1 mt-8 md:mt-0">
+            <img src="{% static 'image/lombok.png' %}" alt="Scenic view of Mataram"
+                class="w-full h-auto object-cover rounded-t-3xl md:rounded-tl-3xl md:rounded-tr-none">
         </div>
     </div>
 </div>
-<div class="flex justify-center" style="margin: -78px 0 0 0;">
-    <div style="width: 1100px; height: 158px; flex-shrink: 0; border-radius: 25px; background: #E2F1E7;"></div>
+
+<div class="px-4 -mt-20 md:-mt-[78px] mb-8">
+    <div class="w-full max-w-[1100px] h-[158px] mx-auto rounded-3xl bg-[#E2F1E7]"></div>
 </div>
 
-<div class="flex justify-center items-center" style="margin-top: 72px; margin-bottom: 72px;">
-    <div class="flex w-full">
-        <div class="flex" style="margin-left: 72px;">
-            <img src="{% static 'image/mataram.png' %}" alt="Scenic mountain view in Mataram" class="object-cover" style="width: 600px; height: auto; border-radius: 0 35px 0 35px;">
+<div class="px-4 py-8 md:py-[72px]">
+    <div class="flex flex-col md:flex-row max-w-[1440px] mx-auto">
+        <div class="w-full md:w-1/2 px-4 md:pl-[72px]">
+            <img src="{% static 'image/mataram.png' %}" alt="Scenic mountain view in Mataram"
+                class="w-full h-auto object-cover rounded-3xl md:rounded-tr-3xl md:rounded-bl-3xl">
         </div>
-        <div class="flex-1 flex flex-col justify-center">
-            <h2 class="text-center" style="color: #243642; font-size: 42px; font-weight: 700; line-height: normal; margin-bottom: 8px;">
+        <div class="flex-1 mt-8 md:mt-0">
+            <h2 class="text-[#243642] text-3xl md:text-4xl font-bold text-center mb-2">
                 Why Rentara+ Should <br>
                 Be Your Go-To Store
             </h2>
-            <div class="space-y-4 mt-6" style="margin-left: 165px;">
+            <div class="space-y-4 mt-6 px-4 md:pl-[165px]">
                 <div class="flex items-start space-x-3">
-                    <div class="w-[50px] h-[50px] rounded-[12px] bg-[#E2F1E7] flex items-center justify-center">
-                        <i class="fas fa-phone-alt" style="color: #243642; font-size: 17px;"></i>
+                    <div
+                        class="w-[50px] h-[50px] rounded-xl bg-[#E2F1E7] flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-phone-alt text-[#243642] text-lg"></i>
                     </div>
                     <div>
-                        <p style="color: #243642; font-size: 22px; font-weight: 550; line-height: normal;">
-                            Responsive Customer Service</p>
-                        <p style="color: #243642; font-size: 18px; font-weight: 400; line-height: normal; width: 425px; margin-bottom: 12px;">
-                            Our team provides prompt assistance to effectively meet your needs.</p>
+                        <p class="text-[#243642] text-xl md:text-2xl font-medium">Responsive Customer Service</p>
+                        <p class="text-[#243642] text-base md:text-lg font-normal max-w-[425px]">Our team provides
+                            prompt assistance to effectively meet your needs.</p>
                     </div>
                 </div>
                 <div class="flex items-start space-x-3">
-                    <div class="w-[50px] h-[50px] rounded-[12px] bg-[#E2F1E7] flex items-center justify-center">
-                        <i class="fas fa-tag" style="color: #243642; font-size: 17px;"></i>
+                    <div
+                        class="w-[50px] h-[50px] rounded-xl bg-[#E2F1E7] flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-tag text-[#243642] text-lg"></i>
                     </div>
                     <div>
-                        <p style="color: #243642; font-size: 22px; font-weight: 550; line-height: normal;">
-                            Guaranteed Competitive Pricing</p>
-                        <p style="color: #243642; font-size: 18px; font-weight: 400; line-height: normal; width: 425px; margin-bottom: 12px;">
-                            We proudly offer exceptional services at truly unbeatable rates.</p>
+                        <p class="text-[#243642] text-xl md:text-2xl font-medium">Guaranteed Competitive Pricing</p>
+                        <p class="text-[#243642] text-base md:text-lg font-normal max-w-[425px]">We proudly offer
+                            exceptional services at truly unbeatable rates.</p>
                     </div>
                 </div>
                 <div class="flex items-start space-x-3">
-                    <div class="w-[50px] h-[50px] rounded-[12px] bg-[#E2F1E7] flex items-center justify-center">
-                        <i class="fas fa-map-marker-alt" style="color: #243642; font-size: 17px;"></i>
+                    <div
+                        class="w-[50px] h-[50px] rounded-xl bg-[#E2F1E7] flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-map-marker-alt text-[#243642] text-lg"></i>
                     </div>
                     <div>
-                        <p style="color: #243642; font-size: 22px; font-weight: 550; line-height: normal;">
-                            Multiple Convenient Locations</p>
-                        <p style="color: #243642; font-size: 18px; font-weight: 400; line-height: normal; width: 425px; margin-bottom: 12px;">
-                            With many locations across Mataram, our services are easily accessible.</p>
+                        <p class="text-[#243642] text-xl md:text-2xl font-medium">Multiple Convenient Locations</p>
+                        <p class="text-[#243642] text-base md:text-lg font-normal max-w-[425px]">With many locations
+                            across Mataram, our services are easily accessible.</p>
                     </div>
                 </div>
             </div>
