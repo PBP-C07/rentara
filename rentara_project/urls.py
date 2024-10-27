@@ -28,4 +28,4 @@ urlpatterns = [
     path('', include('sewajual.urls')),
 ] 
 
-] 
+
