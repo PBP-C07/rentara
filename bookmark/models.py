@@ -1,4 +1,4 @@
-from sewajual.models import Vehicle
+from main.models import Vehicle
 from django.db import models
 import uuid
 
