@@ -32,9 +32,9 @@ def add_vehicle(request):
         if form.is_valid():
             try:
                 vehicle = form.save(commit=False)
-                store_name = form.cleaned_data['store_name']
-                partner = get_object_or_404(Partner, store_name=store_name)
-                vehicle.toko = store_name
+                toko = form.cleaned_data['toko']
+                partner = get_object_or_404(Partner, toko=toko)
+                vehicle.toko = toko
                 vehicle.save()
                 
                 Katalog.objects.create(vehicle=vehicle, owner=partner)
