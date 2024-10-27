@@ -43,6 +43,7 @@ class Command(BaseCommand):
                 # Kemudian, buat kendaraan yang terkait dengan partner
                 Vehicles.objects.create(
                     partner=partner,
+                    id = item['pk'],
                     link_foto=item['fields']['link_foto'],
                     merk=item['fields']['merk'],
                     tipe=item['fields']['tipe'],
@@ -52,6 +53,5 @@ class Command(BaseCommand):
                     bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
                     status=item['fields'].get('status', Vehicles.Sewa)  # Default ke 'Sewa' jika tidak disediakan
                 )
-
 
         self.stdout.write(self.style.SUCCESS('Data loaded successfully'))
