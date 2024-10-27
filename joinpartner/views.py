@@ -18,15 +18,22 @@ from django.utils.html import strip_tags
 def show_vehicle(request):
     partner = get_object_or_404(Partner, user=request.user)
 
-    # Check if the partner is approved
     if partner.status=='Pending':
         return redirect('joinpartner:pending_approval')
     
     if partner.status=='Rejected':
         partner.delete()
         return redirect('joinpartner:rejected')
+    
+    partner_vehicles = Vehicle.objects.filter(partner=partner)  # Vehicle dari partner
 
-    vehicles = Vehicle.objects.filter(partner=partner)
+    from sewajual.models import Katalog
+    katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
+    main_vehicles = [katalog.vehicle for katalog in katalogs]  
+
+    # Gabung kedua querysets
+    vehicles = list(main_vehicles) + list(partner_vehicles)
+
     return render(request, 'show_vehicle.html', {
         'partner': partner,
         'vehicles': vehicles, 
