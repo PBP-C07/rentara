@@ -17,14 +17,15 @@ def vehicle_list(request):
 @login_required(login_url='main:login')
 def full_info(request, pk):
     try:
-        vehicle = Vehicle.objects.get(pk=pk)
-    except Vehicle.DoesNotExist:
-        try:
-            vehicle = Vehicles.objects.get(pk=pk)
-        except Vehicles.DoesNotExist:
-            raise Http404("Kendaraan tidak ditemukan")
-    
-    return render(request, 'full_info.html', {'vehicle': vehicle})
+        # Coba dapatkan dari model Vehicle
+        vehicle = get_object_or_404(Vehicle, pk=pk)
+        html_file = 'full_info.html'
+    except:
+        # Jika tidak ditemukan, coba dapatkan dari model Vehicles
+        vehicle = get_object_or_404(Vehicles, pk=pk)
+        html_file = 'full_info_joinpartner.html'
+
+    return render(request, html_file, {'vehicle': vehicle})
 
 @staff_member_required
 def admin_vehicle_list(request):

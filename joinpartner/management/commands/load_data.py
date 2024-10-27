@@ -53,18 +53,5 @@ class Command(BaseCommand):
                     status=item['fields'].get('status', Vehicles.Sewa)  # Default ke 'Sewa' jika tidak disediakan
                 )
 
-                Vehicle.objects.create(
-                    link_foto=item['fields']['link_foto'],
-                    merk=item['fields']['merk'],
-                    tipe=item['fields']['tipe'],
-                    jenis_kendaraan=item['fields']['jenis_kendaraan'],
-                    warna=item['fields']['warna'],
-                    harga=item['fields']['harga'],
-                    bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
-                    status=item['fields'].get('status'),  # Default ke 'Sewa' jika tidak disediakan
-                    toko=item['fields'].get('toko'),
-                    link_lokasi=item['fields'].get('link_lokasi'),
-                    notelp=item['fields'].get('notelp'),
-                )
 
         self.stdout.write(self.style.SUCCESS('Data loaded successfully'))
