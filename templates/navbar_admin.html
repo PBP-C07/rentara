@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="bg-transparent shadow-sm fixed w-full z-10">
+<nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-10">
     <script>
         tailwind.config = {
             theme: {
@@ -17,25 +17,27 @@
         }
     </script>
 
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-7xl mx-auto px-4 font-poppins">
         <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <img src="{% static 'image/logo.png' %}" alt="Logo"
-                        class="h-16 w-24 md:h-22 md:w-32 object-contain">
+                        class="h-16 w-24 sm:h-22 sm:w-32 object-contain">
                 </div>
 
                 <div class="flex space-x-8">
                     <a href="{% url 'joinpartner:manage_partners' %}" class="text-dark-gray hover:text-teal">Manage
                         Partner</a>
                     <a href="{% url 'joinpartner:list_partner' %}" class="text-dark-gray hover:text-teal">List
-                        partner</a>
-                    <a href="#" class="text-dark-gray hover:text-teal">Manage Product</a>
+                        Partner</a>
+                    <a href="{% url 'sewajual:admin_vehicle_list' %}" class="text-dark-gray hover:text-teal">Manage
+                        Product</a>
                     <a href="#" class="text-dark-gray hover:text-teal">Report</a>
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center space-x-6">
+            <div class="flex items-center space-x-6">
                 {% if user.is_authenticated %}
                 <span class="text-dark-gray">Welcome, Admin!</span>
 
@@ -53,7 +55,7 @@
                     <div id="profileDropdown"
                         class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div class="py-1">
-                            <a href="{% url 'main:show_main' %}"
+                            <a href="{% url 'main:logout' %}"
                                 class="block px-4 py-2 text-sm text-dark-gray hover:bg-light-sage hover:text-teal">Logout</a>
                         </div>
                     </div>
@@ -71,89 +73,25 @@
                 </a>
                 {% endif %}
             </div>
-
-            <div class="md:hidden">
-                <button id="mobileMenuButton" class="text-dark-gray hover:text-teal p-2">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-
-            <div class="md:hidden">
-                <button id="mobileMenuButton" class="text-dark-gray hover:text-teal p-2">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile menu -->
-        <div id="mobileMenu" class="hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage rounded-md">Manage
-                    Partner</a>
-                <a href="{% url 'sewajual:admin_vehicle_list' %}"
-                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage rounded-md">Manage
-                    Product</a>
-                <a href="#"
-                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage rounded-md">Report</a>
-            </div>
-            {% if user.is_authenticated %}
-            <div class="pt-4 pb-3 border-t border-gray-200">
-                <div class="px-4 py-2">
-                    <p class="text-dark-gray">Welcome, Admin!</p>
-                </div>
-                <a href="{% url 'main:logout' %}"
-                    class="block px-4 py-2 text-dark-gray hover:bg-light-sage hover:text-teal">Logout</a>
-            </div>
-            {% endif %}
-        </div>
-
-        <!-- Mobile menu -->
-        <div id="mobileMenu" class="hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#" class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage rounded-md">Manage
-                    Partner</a>
-                <a href="{% url 'sewajual:admin_vehicle_list' %}"
-                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage rounded-md">Manage
-                    Product</a>
-                <a href="#"
-                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage rounded-md">Report</a>
-            </div>
-            {% if user.is_authenticated %}
-            <div class="pt-4 pb-3 border-t border-gray-200">
-                <div class="px-4 py-2">
-                    <p class="text-dark-gray">Welcome, Admin!</p>
-                </div>
-                <a href="{% url 'main:logout' %}"
-                    class="block px-4 py-2 text-dark-gray hover:bg-light-sage hover:text-teal">Logout</a>
-            </div>
-            {% endif %}
         </div>
     </div>
 </nav>
 
+<div class="pt-16"></div>
+{% block content %}{% endblock %}
+</div>
+
 <script>
     const profileButton = document.getElementById('profileButton');
     const profileDropdown = document.getElementById('profileDropdown');
-    const mobileMenuButton = document.getElementById('mobileMenuButton');
-    const mobileMenu = document.getElementById('mobileMenu');
 
-    profileButton?.addEventListener('click', () => {
+    profileButton.addEventListener('click', () => {
         profileDropdown.classList.toggle('hidden');
     });
 
-    mobileMenuButton?.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
-
     window.addEventListener('click', (event) => {
-        if (!profileButton?.contains(event.target)) {
-            profileDropdown?.classList.add('hidden');
+        if (!profileButton.contains(event.target)) {
+            profileDropdown.classList.add('hidden');
         }
     });
 </script>
