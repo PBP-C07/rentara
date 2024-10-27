@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Vehicle, Katalog
-from joinpartner.models import Vehicles, Partner
+from joinpartner.models import Vehicles, Partner # check
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods, require_POST
 from .forms import VehicleForm
 from django.contrib import messages
 from django.http import JsonResponse
+from django.http import Http404
 
 def vehicle_list(request):
     vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
@@ -15,9 +16,15 @@ def vehicle_list(request):
 
 @login_required(login_url='main:login')
 def full_info(request, pk):
-    vehicle = get_object_or_404(Vehicle, pk=pk)
-    vehicles = get_object_or_404(Vehicles, pk=pk)
-    return render(request, 'full_info.html', {'vehicle': vehicle, 'vehicles': vehicles})
+    try:
+        vehicle = Vehicle.objects.get(pk=pk)
+    except Vehicle.DoesNotExist:
+        try:
+            vehicle = Vehicles.objects.get(pk=pk)
+        except Vehicles.DoesNotExist:
+            raise Http404("Kendaraan tidak ditemukan")
+    
+    return render(request, 'full_info.html', {'vehicle': vehicle})
 
 @staff_member_required
 def admin_vehicle_list(request):
