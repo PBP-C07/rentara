@@ -1,46 +1,46 @@
 from django import forms
 from django.forms import ModelForm
-from joinpartner.models import Vehicle, Partner
+from joinpartner.models import Vehicles, Partner
 from django.utils.html import strip_tags
 
 class VehicleForm(ModelForm):
     class Meta :
-        model = Vehicle
-        fields = ['vehicle_image', 'brand', 'brand_type', 'vehicle_type', 'color', 'price_per_day', 'status']
-    def clean_brand(self):
-        brand = self.cleaned_data["brand"]
-        return strip_tags(brand)
+        model = Vehicles
+        fields = ['link_foto', 'merk', 'tipe', 'jenis_kendaraan', 'warna', 'harga', 'status', 'bahan_bakar']
+    def clean_merk(self):
+        merk = self.cleaned_data["merk"]
+        return strip_tags(merk)
 
-    def clean_brand_type(self):
-        brand_type = self.cleaned_data["brand_type"]
-        return strip_tags(brand_type)
+    def clean_tipe(self):
+        tipe = self.cleaned_data["tipe"]
+        return strip_tags(tipe)
 
-    def clean_vehicle_type(self):
-        vehicle_type = self.cleaned_data["vehicle_type"]
-        return strip_tags(vehicle_type)
+    def clean_jenis_kendaraan(self):
+        jenis_kendaraan = self.cleaned_data["jenis_kendaraan"]
+        return strip_tags(jenis_kendaraan)
 
     def clean_color(self):
-        color = self.cleaned_data["color"]
+        color = self.cleaned_data["warna"]
         return strip_tags(color)
 
+    def clean_fuel(self):
+        bahan_bakar = self.cleaned_data["bahan_bakar"]
+        return strip_tags(bahan_bakar)
     
 
 class PartnerForm(ModelForm):
     class Meta : 
         model = Partner
-        fields = ['store_name', 'gmaps_link', 'phone_number']
+        fields = ['toko', 'link_lokasi', 'notelp']
     def clean_store(self):
-        store_name = self.cleaned_data["store_name"]
-        return strip_tags(store_name)
+        toko = self.cleaned_data["toko"]
+        return strip_tags(toko)
 
     def clean_gmaps(self):
-        gmaps_link = self.cleaned_data["gmaps_link"]
-        return strip_tags(gmaps_link)
+        link_lokasi = self.cleaned_data["link_lokasi"]
+        return strip_tags(link_lokasi)
 
     def clean_number(self):
-        phone_number= self.cleaned_data["phone_number"]
-        return strip_tags(phone_number)
+        notelp= self.cleaned_data["notelp"]
+        return strip_tags(notelp)
 
-class vehicleFilter(forms.Form):
-    brand_type_filter = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Jenis Brand misal : vario'}))
-    brand_filter = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Merek kendaraan misal : honda'}))

@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Edit Kendaraan</title>
+{% endblock meta %}
+
+{% block content %}
+{% include 'navbar_admin.html' %}
+
+<div class="bg-gray-50 min-h-screen p-5">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-8">
+            <h1 class="text-2xl font-bold text-dark-blue mb-8">Edit Kendaraan</h1>
+
+            {% if messages %}
+            <div class="mb-4">
+                {% for message in messages %}
+                <div class="p-4 mb-4 text-sm rounded-lg {% if message.tags == 'error' %}bg-red-100 text-red-700{% elif message.tags == 'success' %}bg-green-100 text-green-700{% endif %}"
+                    role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_merk" class="block text-sm font-medium text-gray-700 mb-1">
+                        Merk
+                    </label>
+                    <input type="text" name="merk" id="id_merk" required value="{{ form.merk.value|default:'' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_tipe" class="block text-sm font-medium text-gray-700 mb-1">
+                        Tipe
+                    </label>
+                    <input type="text" name="tipe" id="id_tipe" required value="{{ form.tipe.value|default:'' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_jenis_kendaraan" class="block text-sm font-medium text-gray-700 mb-1">
+                        Jenis Kendaraan
+                    </label>
+                    <select name="jenis_kendaraan" id="id_jenis_kendaraan" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal">
+                        <option value="">Pilih Jenis</option>
+                        <option value="mobil" {% if "mobil" in form.jenis_kendaraan.value|lower %}selected{% endif %}>
+                            Mobil</option>
+                        <option value="motor" {% if "motor" in form.jenis_kendaraan.value|lower %}selected{% endif %}>
+                            Motor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_status" class="block text-sm font-medium text-gray-700 mb-1">
+                        Status
+                    </label>
+                    <select name="status" id="id_status" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal">
+                        <option value="">Pilih Jenis</option>
+                        <option value="sewa" {% if "sewa" in form.status.value|lower %}selected{% endif %}>Sewa
+                        </option>
+                        <option value="jual" {% if "jual" in form.status.value|lower %}selected{% endif %}>Jual
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_warna" class="block text-sm font-medium text-gray-700 mb-1">
+                        Warna
+                    </label>
+                    <input type="text" name="warna" id="id_warna" value="{{ form.warna.value|default:'' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_bahan_bakar" class="block text-sm font-medium text-gray-700 mb-1">
+                        Bahan Bakar
+                    </label>
+                    <select name="bahan_bakar" id="id_bahan_bakar" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal">
+                        <option value="">Pilih Jenis</option>
+                        <option value="bensin" {% if "bensin" in form.bahan_bakar.value|lower %}selected{% endif %}>
+                            Bensin</option>
+                        </option>
+                        <option value="diesel" {% if "diesel" in form.bahan_bakar.value|lower %}selected{% endif %}>
+                            Diesel
+                        </option>
+                        <option value="listrik" {% if "listrik" in form.bahan_bakar.value|lower %}selected{% endif %}>
+                            Listrik
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_harga" class="block text-sm font-medium text-gray-700 mb-1">
+                        Harga (Rp)
+                    </label>
+                    <input type="number" name="harga" id="id_harga" required value="{{ form.harga.value|default:'' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal">
+                </div>
+
+                <div class="form-group">
+                    <label for="toko">Pilih Toko:</label>
+                    {{ form.toko }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_notelp" class="block text-sm font-medium text-gray-700 mb-1">
+                        Nomor Telepon
+                    </label>
+                    <input type="tel" name="notelp" id="id_notelp" required value="{{ form.notelp.value|default:'' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal"
+                        placeholder="08123456789">
+                    <p class="mt-1 text-sm text-gray-500">Format: 08xx atau 628xx (10-13 digit)</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_link_foto" class="block text-sm font-medium text-gray-700 mb-1">
+                        Link Foto
+                    </label>
+                    <input type="url" name="link_foto" id="id_link_foto" required
+                        value="{{ form.link_foto.value|default:'' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal"
+                        placeholder="https://example.com/foto.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_link_lokasi" class="block text-sm font-medium text-gray-700 mb-1">
+                        Link Lokasi
+                    </label>
+                    <input type="url" name="link_lokasi" id="id_link_lokasi" required
+                        value="{{ form.link_lokasi.value|default:'' }}"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal focus:border-teal"
+                        placeholder="https://maps.google.com/...">
+                </div>
+
+                <div class="flex justify-end space-x-4 pt-6 mt-6 border-t">
+                    <a href="{% url 'sewajual:admin_vehicle_list' %}"
+                        class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors duration-200">
+                        Batal
+                    </a>
+                    <button type="submit"
+                        class="px-6 py-2 bg-teal text-white rounded-lg hover:bg-sage transition-colors duration-200">
+                        Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
