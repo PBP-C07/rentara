@@ -32,6 +32,7 @@ class PartnerForm(ModelForm):
     class Meta : 
         model = Partner
         fields = ['toko', 'link_lokasi', 'notelp']
+        
     def clean_store(self):
         toko = self.cleaned_data["toko"]
         return strip_tags(toko)
