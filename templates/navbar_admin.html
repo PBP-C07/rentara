@@ -19,14 +19,10 @@
 
     <div class="max-w-7xl mx-auto px-4 font-poppins">
         <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <img src="https://raw.githubusercontent.com/PBP-C07/Rentara/main/staticfiles/image/logo.png" alt="Logo"
-                        class="h-16 w-24 sm:h-22 sm:w-32 object-contain">
-                </div>
+            <div class="flex items-center space-x-4">
+                <img src="https://raw.githubusercontent.com/PBP-C07/Rentara/main/staticfiles/image/logo.png" alt="Logo" class="h-12 w-24 sm:h-16 sm:w-32 object-contain">
 
-                <div class="flex space-x-8">
+                <div class="hidden sm:flex sm:space-x-4 items-center">
                     <a href="{% url 'joinpartner:manage_partners' %}" class="text-dark-gray hover:text-teal">Manage
                         Partner</a>
                     <a href="{% url 'joinpartner:list_partner' %}" class="text-dark-gray hover:text-teal">List
@@ -37,10 +33,9 @@
                 </div>
             </div>
 
-            <div class="flex items-center space-x-6">
+            <div class="hidden sm:flex items-center space-x-6">
                 {% if user.is_authenticated %}
                 <span class="text-dark-gray">Welcome, Admin!</span>
-
                 <div class="relative">
                     <button id="profileButton" class="flex items-center text-dark-gray hover:text-teal">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -51,7 +46,6 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-
                     <div id="profileDropdown"
                         class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div class="py-1">
@@ -62,15 +56,41 @@
                 </div>
                 {% else %}
                 <a href="{% url 'main:login' %}"
-                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[#FAFAFA] bg-[#629584] hover:bg-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]"
-                    style="width: 100px; text-align: center;">
-                    Sign In
-                </a>
+                    class="py-2 px-4 border text-sm font-medium rounded-md text-white bg-[#629584] hover:bg-teal">Sign
+                    In</a>
                 <a href="{% url 'main:register' %}"
-                    class="group relative w-full flex justify-center py-2 px-4 border border-[#629584] text-sm font-medium rounded-md text-[#387478] bg-transparent hover:bg-light-sage focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]"
-                    style="width: 100px; text-align: center;">
-                    Register
-                </a>
+                    class="py-2 px-4 border text-sm font-medium rounded-md text-[#387478] bg-transparent hover:bg-light-sage">Register</a>
+                {% endif %}
+            </div>
+
+            <div class="flex sm:hidden">
+                <button id="menuButton" class="text-dark-gray hover:text-teal">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden sm:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="{% url 'joinpartner:manage_partners' %}"
+                    class="block px-3 py-2 text-dark-gray hover:text-teal">Manage Partner</a>
+                <a href="{% url 'joinpartner:list_partner' %}"
+                    class="block px-3 py-2 text-dark-gray hover:text-teal">List Partner</a>
+                <a href="{% url 'sewajual:admin_vehicle_list' %}"
+                    class="block px-3 py-2 text-dark-gray hover:text-teal">Manage Product</a>
+                <a href="#" class="block px-3 py-2 text-dark-gray hover:text-teal">Report</a>
+
+                {% if user.is_authenticated %}
+                <a href="{% url 'main:logout' %}"
+                    class="block px-3 py-2 text-dark-gray hover:bg-light-sage hover:text-teal">Logout</a>
+                {% else %}
+                <a href="{% url 'main:login' %}"
+                    class="block px-3 py-2 text-dark-gray hover:bg-light-sage hover:text-teal">Sign In</a>
+                <a href="{% url 'main:register' %}"
+                    class="block px-3 py-2 text-dark-gray hover:bg-light-sage hover:text-teal">Register</a>
                 {% endif %}
             </div>
         </div>
@@ -79,11 +99,12 @@
 
 <div class="pt-16"></div>
 {% block content %}{% endblock %}
-</div>
 
 <script>
     const profileButton = document.getElementById('profileButton');
     const profileDropdown = document.getElementById('profileDropdown');
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
 
     profileButton.addEventListener('click', () => {
         profileDropdown.classList.toggle('hidden');
@@ -92,6 +113,16 @@
     window.addEventListener('click', (event) => {
         if (!profileButton.contains(event.target)) {
             profileDropdown.classList.add('hidden');
+        }
+    });
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    window.addEventListener('click', (event) => {
+        if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
         }
     });
 </script>
