@@ -1,7 +1,7 @@
 from django.urls import path
 from bookmark.views import show_main, add_bookmark, remove_bookmark
 
-app_name = 'main'
+app_name = 'bookmark'
 
 urlpatterns = [
     path('bookmarked/', show_main, name='show_main'),

@@ -36,17 +36,16 @@ def show_vehicle(request):
 
     query = request.GET.get('query', '')  # Get search query
     if query:
-        vehicles = Vehicles.objects.filter(
-            partner=partner
-        ).filter(
-            Q(merk__icontains=query) | Q(tipe__icontains=query) | Q(jenis_kendaraan__icontains=query) | Q(warna__icontains=query)
-        )
-    else:
-        vehicles = Vehicles.objects.filter(partner=partner)
+        vehicles = [v for v in vehicles if (
+            query.lower() in v.merk.lower() or
+            query.lower() in v.tipe.lower() or
+            query.lower() in v.jenis_kendaraan.lower() or
+            query.lower() in v.warna.lower()
+        )]
 
     return render(request, 'show_vehicle.html', {
         'partner': partner,
-        'vehicles': vehicles, 
+        'vehicles': vehicles,
         'last_login': request.COOKIES.get('last_login', ''),
         'query': query,
     })
