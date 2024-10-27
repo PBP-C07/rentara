@@ -4,9 +4,9 @@ from main.models import Vehicle
 from joinpartner.models import Partner
 
 class VehicleForm(ModelForm):
-    store_name = forms.ModelChoiceField(
+    toko = forms.ModelChoiceField(
         queryset=Partner.objects.all(),
-        to_field_name="store_name",
+        to_field_name="toko",
         label="Pilih Toko",
         required=True,
     )

@@ -34,21 +34,21 @@ def show_vehicle(request):
 
     vehicles = list(main_vehicles) + list(partner_vehicles)
 
-    # query = request.GET.get('query', '')  # Get search query
-    # if query:
-    #     vehicles = Vehicles.objects.filter(
-    #         partner=partner
-    #     ).filter(
-    #         Q(merk__icontains=query) | Q(tipe__icontains=query) | Q(jenis_kendaraan__icontains=query) | Q(warna__icontains=query)
-    #     )
-    # else:
-    #     vehicles = Vehicles.objects.filter(partner=partner)
+    query = request.GET.get('query', '')  # Get search query
+    if query:
+        vehicles = Vehicles.objects.filter(
+            partner=partner
+        ).filter(
+            Q(merk__icontains=query) | Q(tipe__icontains=query) | Q(jenis_kendaraan__icontains=query) | Q(warna__icontains=query)
+        )
+    else:
+        vehicles = Vehicles.objects.filter(partner=partner)
 
     return render(request, 'show_vehicle.html', {
         'partner': partner,
         'vehicles': vehicles, 
         'last_login': request.COOKIES.get('last_login', ''),
-        # 'query': query,
+        'query': query,
     })
 
 @login_required(login_url='/login')
