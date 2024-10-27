@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods, require_POST
 from .forms import VehicleForm
+from bookmark.models import Bookmark
 
 def vehicle_list(request):
     vehicles = Vehicle.objects.all()
@@ -60,3 +61,14 @@ def delete_vehicle(request, pk):
         return HttpResponse(b"DELETED", status=200)
     except:
         return HttpResponse(b"ERROR", status=500)
+    
+def full_info(request, pk):
+    vehicle = get_object_or_404(Vehicle, pk=pk)
+    is_bookmarked = False
+    if request.user.is_authenticated:
+        is_bookmarked = Bookmark.objects.filter(user=request.user, vehicle=vehicle).exists()
+
+    return render(request, 'full_info.html', {
+        'vehicle': vehicle,
+        'is_bookmarked': is_bookmarked
+    })

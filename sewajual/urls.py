@@ -10,6 +10,5 @@ urlpatterns = [
     path('vehicles/adm/add/', add_vehicle, name='add_vehicle'),
     path('vehicles/adm/<uuid:pk>/edit/', edit_vehicle, name='edit_vehicle'),
     path('vehicles/adm/<uuid:pk>/delete/', delete_vehicle, name='delete_vehicle'),
-     path('bookmarks/', include('bookmark.urls', namespace='bookmark')),
-
+    path('bookmarks/', include('bookmark.urls', namespace='bookmark')),
 ]

@@ -1,11 +1,9 @@
 from django.urls import path
-from bookmark.views import show_main, add_bookmark, remove_bookmark, toggle_bookmark
+from . import views
 
-app_name = 'main'
+app_name = 'bookmark'  # This sets the namespace to 'bookmark'
 
 urlpatterns = [
-    path('', show_main, name='show_main'),
-    path('add-bookmark/<uuid:vehicle_id>/', add_bookmark, name='add_bookmark'),
-    path('remove-bookmark/<uuid:vehicle_id>/', remove_bookmark, name='remove_bookmark'),
-    path('toggle/<uuid:vehicle_id>/', toggle_bookmark, name='toggle_bookmark'),
+    path('toggle/<uuid:vehicle_id>/', views.toggle_bookmark, name='toggle_bookmark'),
+    path('list/', views.bookmarked_vehicles, name='bookmarked_vehicles'),
 ]
