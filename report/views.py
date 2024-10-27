@@ -16,11 +16,11 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import AuthenticationForm
 
 
-@login_required(login_url='/login')  # Redirect to login page if not logged in
+@login_required(login_url='/login')  
 def create_report_entry(request):
     vehicles = Vehicle.objects.filter(availability=True)
     form = ReportForm(request.POST or None)
-    order_date = timezone.now().date()  # Assuming the order date is today
+    order_date = timezone.now().date()  
 
     if request.method == "POST":
         if form.is_valid():
@@ -40,7 +40,7 @@ def create_report_entry(request):
 def add_report(request):
     vehicles = Vehicle.objects.filter(availability=True)
     form = ReportForm(request.POST or None)
-    order_date = timezone.now().date()  # Assuming the order date is today
+    order_date = timezone.now().date()  
 
     if request.method == "POST":
         if form.is_valid():
