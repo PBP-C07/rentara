@@ -46,12 +46,8 @@
                     <img src="{{ vehicle.vehicle_image }}" alt="{{ vehicle.brand }}"
                         class="max-w-md h-40 object-cover rounded-lg mb-4 mx-auto">
                 </div>
-                <div class="price"> <!-- Harga based on input -->
-                    {% if vehicle.harga %}
+                <div class="price">
                     Rp {{ vehicle.harga }}
-                    {% else %}
-                    Rp {{ vehicle.price_per_day }}
-                    {% endif %}
                 </div>
                 <p>{{ vehicle.status }}</p>
                 {% else %} <!-- Vehicle dari Admin -->
@@ -78,7 +74,7 @@
     </div>
     <div class="hidden md:flex items-center space-x-4">
         <!-- Logout Button -->
-        <a href="{% url 'joinpartner:logout' %}"
+        <a href="{% url 'main:logout' %}"
             class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
             Logout
         </a>

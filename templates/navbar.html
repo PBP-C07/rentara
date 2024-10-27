@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="bg-transparent shadow-sm fixed w-full z-10">
+<nav class="bg-white shadow-sm fixed top-0 left-0 w-full z-10">
     <script>
         tailwind.config = {
             theme: {
@@ -30,9 +30,11 @@
                 </div>
 
                 <div class="flex space-x-8">
-                    <a href="#" class="text-dark-blue hover:text-sage font-medium">Home</a>
-                    <a href="#" class="text-dark-blue hover:text-sage font-medium">Explore</a>
-                    <a href="#" class="text-dark-blue hover:text-sage font-medium">Review</a>
+                    <a href="{% url 'main:show_main' %}" class="text-dark-blue hover:text-sage font-medium">Home</a>
+                    <a href="{% url 'sewajual:vehicle_list' %}"
+                        class="text-dark-blue hover:text-sage font-medium">Explore</a>
+                    <a href="{% url 'reviews:show_reviews' %}"
+                        class="text-dark-blue hover:text-sage font-medium">Review</a>
                 </div>
             </div>
 
@@ -60,16 +62,18 @@
                     <div id="profileDropdown"
                         class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 font-poppins">
                         <div class="py-1">
-                            <a href="#"
+                            <a href="{% url 'joinpartner:show_vehicle' %}"
                                 class="block px-4 py-2 text-sm text-dark-blue hover:bg-light-sage hover:text-teal font-medium">My
                                 Product</a>
+                            <a href="{% url 'bookmark:show_main' %}"
+                                class="block px-4 py-2 text-sm text-dark-blue hover:bg-light-sage hover:text-teal font-medium">Bookmark</a>
                             <a href="{% url 'joinpartner:join_partner' %}"
                                 class="block px-4 py-2 text-sm text-dark-gray hover:bg-light-sage hover:text-teal font-medium">Join
                                 as a Partner
                             </a>
-                            <a href="#"
+                            <a href="{% url 'report:create_report_entry' %}"
                                 class="block px-4 py-2 text-sm text-dark-blue hover:bg-light-sage hover:text-teal font-medium">Report</a>
-                            <a href="{% url 'main:show_main' %}"
+                            <a href="{% url 'main:logout' %}"
                                 class="block px-4 py-2 text-sm text-dark-blue hover:bg-light-sage hover:text-teal font-medium">Logout</a>
                         </div>
                     </div>
@@ -134,6 +138,10 @@
         </div>
     </div>
 </nav>
+
+<div class="pt-16">
+    {% block content %}{% endblock %}
+</div>
 
 <script>
     const profileButton = document.getElementById('profileButton');
