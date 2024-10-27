@@ -16,11 +16,11 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import AuthenticationForm
 
 
-@login_required(login_url='/login')  
+@login_required(login_url='/login')  # Redirect to login page if not logged in
 def create_report_entry(request):
     vehicles = Vehicle.objects.filter(availability=True)
     form = ReportForm(request.POST or None)
-    order_date = timezone.now().date()  
+    order_date = timezone.now().date()  # Assuming the order date is today
 
     if request.method == "POST":
         if form.is_valid():
@@ -40,7 +40,7 @@ def create_report_entry(request):
 def add_report(request):
     vehicles = Vehicle.objects.filter(availability=True)
     form = ReportForm(request.POST or None)
-    order_date = timezone.now().date()  
+    order_date = timezone.now().date()  # Assuming the order date is today
 
     if request.method == "POST":
         if form.is_valid():
@@ -56,37 +56,6 @@ def add_report(request):
         'order_date': order_date,
     }
     return render(request, "report_form.html", context)
-
-@login_required(login_url='/login')
-def show_reports(request):
-    report_entries = Report.objects.all()  
-
-    context = {
-        'reports': report_entries,  
-        'empty_message': "No reports found.",  
-        'random_image': 'static/image/logo.png'  # Specify path to a random image
-    }
-
-    return render(request, "report_list.html", context)
-
-def login_user(request):
-   if request.method == 'POST':
-      form = AuthenticationForm(data=request.POST)
-
-      if form.is_valid():
-        user = form.get_user()
-        login(request, user)
-        response = HttpResponseRedirect(reverse("main:show_main"))
-        response.set_cookie('last_login', str(datetime.datetime.now()))
-        return response
-      else:
-        messages.error(request, "Invalid username or password. Please try again.")
-
-   else:
-      form = AuthenticationForm(request)
-
-   context = {'form': form}
-   return render(request, 'login.html', context)
 
 def edit_report(request, id):
     laporan = Report.objects.get(pk = id)
