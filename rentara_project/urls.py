@@ -25,5 +25,5 @@ urlpatterns = [
     path('', include('joinpartner.urls')),
     path('report/', include('report.urls')),
     path('reviews/', include('reviews.urls')),
-    path('', include('sewajual.urls')),
+    path('', include('sewajual.urls')), 
 ]

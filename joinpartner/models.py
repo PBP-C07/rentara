@@ -30,6 +30,7 @@ class Vehicles(models.Model):
     jenis_kendaraan = models.CharField(max_length=100)  # seperti mobil, motor, dll.
     warna = models.CharField(max_length=50)
     harga = models.IntegerField()
+    bahan_bakar = models.CharField(max_length=50, default="Bensin")
     Sewa = 'Sewa'
     Jual = 'Jual'
     STATUS_CHOICES = [
