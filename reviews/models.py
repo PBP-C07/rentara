@@ -9,4 +9,3 @@ class Reviews(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     rating = models.PositiveIntegerField()
     description = models.TextField()
-    helpful_votes = models.PositiveIntegerField(default=0)
