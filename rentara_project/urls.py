@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('rentdriver.urls')),
     path('', include('bookmark.urls')),
     path('', include('joinpartner.urls')),
-    path('report/', include('report.urls')),
+    path('', include('report.urls')),
     path('reviews/', include('reviews.urls')),
     path('', include('sewajual.urls')),
 ]
