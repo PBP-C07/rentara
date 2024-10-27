@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Detail Produk</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+{% endblock meta %}
+
+{% block content %}
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'dark-blue': '#243642',
+                    'teal': '#387478',
+                    'sage': '#629584',
+                    'light-sage': '#e2f1e7',
+                    'dark-gray': '#272828',
+                }
+            }
+        }
+    }
+</script>
+
+<body class="bg-gray-50 min-h-screen p-2 sm:p-4">
+    <div
+        class="max-w-6xl mx-auto bg-gradient-to-br from-white to-light-sage rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-8 relative overflow-hidden">
+        <div class="relative mb-6 sm:mb-10 md:pr-40 text-center md:text-left">
+            <h1 class="text-2xl sm:text-4xl text-dark-blue font-bold">{{ vehicle.merk }}</h1>
+            <h2 class="text-xl sm:text-2xl text-teal mt-2 font-medium">{{ vehicle.tipe }}</h2>
+
+            <div class="flex justify-center md:justify-start gap-2 md:absolute md:right-10 md:top-0 mt-4 md:mt-0">
+                <button
+                    class="bg-teal hover:bg-dark-blue text-white w-10 sm:w-12 h-10 sm:h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
+                    <i class="fa-solid fa-bookmark"></i>
+                </button>
+                <span
+                    class="bg-sage text-white px-4 sm:px-6 py-2 rounded-full text-base sm:text-lg font-semibold shadow-md flex items-center">
+                    {{ vehicle.status|title }}
+                </span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10">
+            <div
+                class="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-lg group transition-transform duration-300 hover:scale-[1.02] mx-auto md:mx-0 w-full h-[250px] sm:h-[400px]">
+                <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
+                    class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex flex-col gap-3 sm:gap-4">
+                <div
+                    class="bg-white rounded-lg sm:rounded-xl shadow p-3 sm:p-4 hover:translate-x-1 transition-transform duration-200 grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] items-center">
+                    <span class="font-semibold text-dark-gray text-sm sm:text-base">Merk</span>
+                    <span class="text-teal font-medium text-sm sm:text-base">{{ vehicle.merk }}</span>
+                </div>
+
+                <div
+                    class="bg-white rounded-lg sm:rounded-xl shadow p-3 sm:p-4 hover:translate-x-1 transition-transform duration-200 grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] items-center">
+                    <span class="font-semibold text-dark-gray text-sm sm:text-base">Jenis</span>
+                    <span class="text-teal font-medium text-sm sm:text-base">{{ vehicle.jenis_kendaraan|title }}</span>
+                </div>
+
+                <div
+                    class="bg-white rounded-lg sm:rounded-xl shadow p-3 sm:p-4 hover:translate-x-1 transition-transform duration-200 grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] items-center">
+                    <span class="font-semibold text-dark-gray text-sm sm:text-base">Warna</span>
+                    <span class="text-teal font-medium text-sm sm:text-base">{{ vehicle.warna }}</span>
+                </div>
+
+                <div
+                    class="bg-white rounded-lg sm:rounded-xl shadow p-3 sm:p-4 hover:translate-x-1 transition-transform duration-200 grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] items-center">
+                    <span class="font-semibold text-dark-gray text-sm sm:text-base">Harga</span>
+                    <span class="text-teal font-medium text-sm sm:text-base">Rp {{ vehicle.harga }},-</span>
+                </div>
+
+                <div
+                    class="bg-white rounded-lg sm:rounded-xl shadow p-3 sm:p-4 hover:translate-x-1 transition-transform duration-200 grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] items-center">
+                    <span class="font-semibold text-dark-gray text-sm sm:text-base">Toko</span>
+                    <span class="text-teal font-medium text-sm sm:text-base">{{ vehicle.partner.toko }}</span>
+                </div>
+
+                <div
+                    class="bg-white rounded-lg sm:rounded-xl shadow p-3 sm:p-4 hover:translate-x-1 transition-transform duration-200 grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr] items-center">
+                    <span class="font-semibold text-dark-gray text-sm sm:text-base">BBM</span>
+                    <span class="text-teal font-medium text-sm sm:text-base">{{ vehicle.bahan_bakar|title }}</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-2">
+                    <a href="tel:{{ vehicle.partner.notelp }}"
+                        class="inline-flex items-center gap-2 bg-teal text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center text-sm sm:text-base">
+                        <i class="fa-solid fa-phone"></i>
+                        {% if vehicle.notelp %}
+                        {{ vehicle.notelp }}
+                        {% else %}
+                        No. Telp
+                        {% endif %}
+                    </a>
+
+                    <a href="{{ vehicle.partner.link_lokasi }}" target="_blank"
+                        class="inline-flex items-center gap-2 bg-teal text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center text-sm sm:text-base">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Lokasi Toko
+                    </a>
+                </div>
+
+                <a href="{% url 'sewajual:vehicle_list' %}"
+                    class="inline-flex items-center gap-2 bg-dark-gray text-white px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center text-sm sm:text-base mt-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Kembali
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock content %}

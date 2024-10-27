@@ -15,9 +15,16 @@ def vehicle_list(request):
 
 @login_required(login_url='main:login')
 def full_info(request, pk):
-    vehicle = get_object_or_404(Vehicle, pk=pk)
-    vehicles = get_object_or_404(Vehicles, pk=pk)
-    return render(request, 'full_info.html', {'vehicle': vehicle, 'vehicles': vehicles})
+    try:
+        # Coba dapatkan dari model Vehicle
+        vehicle = get_object_or_404(Vehicle, pk=pk)
+        html_file = 'full_info.html'
+    except:
+        # Jika tidak ditemukan, coba dapatkan dari model Vehicles
+        vehicle = get_object_or_404(Vehicles, pk=pk)
+        html_file = 'full_info_joinpartner.html'
+
+    return render(request, html_file, {'vehicle': vehicle})
 
 @staff_member_required
 def admin_vehicle_list(request):
