@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Daftar Laporan Saya</h2>
+  {% if reports %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nama Kendaraan</th>
+          <th>Jenis Masalah</th>
+          <th>Deskripsi</th>
+          <th>Tanggal Laporan</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for report in reports %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ report.vehicle_name }}</td>
+            <td>{{ report.get_issue_type_display }}</td>
+            <td>{{ report.description|default:"-" }}</td>
+            <td>{{ report.created_at|date:"d M Y H:i" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Belum ada laporan yang diajukan.</p>
+  {% endif %}
+{% endblock %}
