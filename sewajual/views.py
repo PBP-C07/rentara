@@ -37,7 +37,7 @@ def add_vehicle(request):
                 partner = get_object_or_404(Partner, toko=toko)
                 vehicle.toko = toko
                 vehicle.save()
-                
+
                 Katalog.objects.create(vehicle=vehicle, owner=partner)
 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -48,7 +48,7 @@ def add_vehicle(request):
                         'merk': vehicle.merk,
                         'tipe': vehicle.tipe
                     })
-                
+
                 messages.success(request, "Kendaraan berhasil ditambahkan.")
                 return redirect('sewajual:admin_vehicle_list')
             except Exception as e:
@@ -68,7 +68,7 @@ def add_vehicle(request):
             messages.error(request, "Form tidak valid.")
     else:
         form = VehicleForm()
-        
+
     return render(request, 'add_vehicle.html', {'form': form})
 
 @staff_member_required
@@ -97,7 +97,6 @@ def delete_vehicle(request, pk):
     try:
         Katalog.objects.filter(vehicle=vehicle).delete()
         vehicle.delete()
-        
         response = {'status': 'success', 'message': 'Data kendaraan berhasil dihapus'}
         if is_ajax:
             return JsonResponse(response)
