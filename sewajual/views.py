@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Vehicle, Katalog
-from joinpartner.models import Vehicles, Partner # check
+from joinpartner.models import Vehicles, Partner
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods, require_POST
 from .forms import VehicleForm
 from django.contrib import messages
 from django.http import JsonResponse
-from django.http import Http404
 
 def format_price(value):
     try:
