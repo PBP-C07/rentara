@@ -31,16 +31,15 @@ def vehicle_list(request):
 @login_required(login_url='main:login')
 def full_info(request, pk):
     try:
-        vehicle = Vehicle.objects.get(pk=pk)
-        vehicle.harga = format_price(vehicle.harga)
-    except Vehicle.DoesNotExist:
-        try:
-            vehicle = Vehicles.objects.get(pk=pk)
-            vehicle.harga = format_price(vehicle.harga)
-        except Vehicles.DoesNotExist:
-            raise Http404("Kendaraan tidak ditemukan")
-    
-    return render(request, 'full_info.html', {'vehicle': vehicle})
+        vehicle = get_object_or_404(Vehicle, pk=pk)
+        html_file = 'full_info.html'
+    except:
+        vehicle = get_object_or_404(Vehicles, pk=pk)
+        html_file = 'full_info_joinpartner.html'
+
+    vehicle.harga = format_price(vehicle.harga)
+
+    return render(request, html_file, {'vehicle': vehicle})
 
 @staff_member_required
 def admin_vehicle_list(request):

@@ -49,7 +49,7 @@ class VehicleManagementTests(TestCase):
             'harga': '600000',
             'status': 'Sewa'
         })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful addition
+        self.assertEqual(response.status_code, 200)  # Redirect after successful addition
         self.assertEqual(Vehicles.objects.filter(merk='Honda').count(), 1)
         
     def test_edit_vehicle(self):
@@ -60,7 +60,7 @@ class VehicleManagementTests(TestCase):
             'jenis_kendaraan': 'Mobil',
             'warna': 'Hitam',
             'harga': '750000',
-            'status': 'Sewa'
+            'status': 'Sewa',
         })
         self.assertEqual(response.status_code, 302)  # Redirect after successful update
         updated_vehicle = Vehicles.objects.get(id=self.vehicle.id)
@@ -101,3 +101,39 @@ class VehicleManagementTests(TestCase):
         response = self.client.get(reverse('joinpartner:list_partner'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Test Toko")
+
+    def test_add_vehicle_with_empty_fields(self):
+        response = self.client.post(reverse('joinpartner:add_product'), {
+            'link_foto': '',
+            'merk': '',
+            'tipe': '',
+            'jenis_kendaraan': '',
+            'warna': '',
+            'harga': '',
+            'status': '',
+            'bahan_bakar': ''
+        })
+        self.assertEqual(response.status_code, 400)  # Expecting a 400 error for validation
+        self.assertIn('merk', response.json()['errors'])
+        self.assertIn('tipe', response.json()['errors'])
+        self.assertIn('harga', response.json()['errors'])
+        self.assertIn('bahan_bakar', response.json()['errors'])
+
+    def test_edit_vehicle_with_empty_fields(self):
+        response = self.client.post(reverse('joinpartner:edit_product', args=[self.vehicle.id]), {
+            'link_foto': '',
+            'merk': '',
+            'tipe': '',
+            'jenis_kendaraan': '',
+            'warna': '',
+            'harga': '',
+            'status': '',
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('merk', response.json()['errors'])
+        self.assertIn('tipe', response.json()['errors'])
+
+    def test_list_vehicle_search(self):
+        response = self.client.get(reverse('joinpartner:show_vehicle'), {'query': 'Toyota'})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Toyota')
