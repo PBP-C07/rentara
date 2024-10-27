@@ -14,6 +14,6 @@ urlpatterns = [path('vehicles/', show_vehicle, name='show_vehicle'),
     path('reject_partner/<uuid:partner_id>/', reject_partner, name='reject_partner'),
     path('pending-approval/', pending_approval, name='pending_approval'),
     path('rejected/', rejected, name='rejected'),
-    path('list_partner/', list_partner, name='list_partner'),
-    path('delete_partner/<uuid:partner_id>/', delete_partner, name='delete_partner'),
+    # path('list_partner/', list_partner, name='list_partner'),
+    # path('delete_partner/<uuid:partner_id>/', delete_partner, name='delete_partner'),
     ]
