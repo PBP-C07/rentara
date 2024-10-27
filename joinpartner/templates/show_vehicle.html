@@ -3,27 +3,25 @@
 {% load static %}
 
 {% block meta %}
-    <title>{{ partner.store_name }} - Vehicles</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .dragging {
-            opacity: 0.5;
-        }
-    </style>
+<title>{{ partner.store_name }} - Vehicles</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    .dragging {
+        opacity: 0.5;
+    }
+</style>
 {% endblock meta %}
 
 {% block content %}
+
 <body class="bg-teal-700 text-gray-800 pt-20">
     <div class="max-w-7xl mx-auto p-5">
         <!-- Header Section -->
         <div class="flex justify-between items-center mb-8">
             <!-- Search Bar -->
             <div class="flex-grow">
-                <input 
-                    type="text" 
-                    placeholder="Search your product" 
-                    class="w-full p-3 rounded-full bg-gray-300 text-sm outline-none focus:ring-2 focus:ring-teal-400"
-                />
+                <input type="text" placeholder="Search your product"
+                    class="w-full p-3 rounded-full bg-gray-300 text-sm outline-none focus:ring-2 focus:ring-teal-400" />
             </div>
             <!-- Action Buttons -->
             <div class="flex gap-3 ml-4">
@@ -39,21 +37,36 @@
         <!-- Grid Layout for Vehicles -->
         <div id="vehicle-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {% for vehicle in vehicles %}
-            <div 
-                class="vehicle-card bg-emerald-50 p-4 rounded-xl shadow-md text-center cursor-pointer"
-                draggable="true"
-                data-vehicle-id="{{ vehicle.id }}"
-            >
+            <div class="vehicle-card bg-emerald-50 p-4 rounded-xl shadow-md text-center cursor-pointer" draggable="true"
+                data-vehicle-id="{{ vehicle.id }}">
+
+                {% if vehicle.partner %} <!-- Vehicle dari Partner -->
                 <p class="font-semibold">{{ vehicle.brand }} {{ vehicle.brand_type }} {{ vehicle.color }}</p>
                 <div class="text-center">
-                    <img src="{{ vehicle.vehicle_image }}" alt="{{ vehicle.brand }}" class="max-w-md h-40 object-cover rounded-lg mb-4 mx-auto">
+                    <img src="{{ vehicle.vehicle_image }}" alt="{{ vehicle.brand }}"
+                        class="max-w-md h-40 object-cover rounded-lg mb-4 mx-auto">
                 </div>
-                <p>Rp{{ vehicle.price_per_day }},-</p>
+                <div class="price">
+                    {% if vehicle.harga %}
+                    Rp {{ vehicle.harga }}
+                    {% else %}
+                    Rp {{ vehicle.price_per_day }}
+                    {% endif %}
+                </div>
                 <p>{{ vehicle.status }}</p>
-                
+                {% else %} <!-- Vehicle dari Admin -->
+                <p class="font-semibold">{{ vehicle.merk }} {{ vehicle.tipe }} {{ vehicle.warna }}</p>
+                <div class="text-center">
+                    <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }}"
+                        class="max-w-md h-40 object-cover rounded-lg mb-4 mx-auto">
+                </div>
+                <p>Rp{{ vehicle.harga }},-</p>
+                <p>{{ vehicle.status }}</p>
+                {% endif %}
+
                 <!-- Edit Button -->
                 <div class="mt-4">
-                    <a href="{% url 'joinpartner:edit_product' vehicle.id %}" class="bg-teal-700 text-white font-bold py-2 px-4 rounded-full hover:bg-teal-600">
+                    <a href="#" class="bg-teal-700 text-white font-bold py-2 px-4 rounded-full hover:bg-teal-600">
                         Edit
                     </a>
                 </div>
@@ -65,14 +78,15 @@
     </div>
     <div class="hidden md:flex items-center space-x-4">
         <!-- Logout Button -->
-        <a href="{% url 'joinpartner:logout' %}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
-          Logout
+        <a href="{% url 'joinpartner:logout' %}"
+            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Logout
         </a>
     </div>
 
     <script>
         // Add button functionality
-        document.getElementById('add-vehicle-btn').addEventListener('click', function() {
+        document.getElementById('add-vehicle-btn').addEventListener('click', function () {
             // Redirect to the add vehicle page
             window.location.href = "{% url 'joinpartner:add_product' %}";
         });
@@ -126,16 +140,16 @@
                         'Content-Type': 'application/json'
                     },
                 })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Kendaraan berhasil dihapus');
-                    } else {
-                        console.error('Gagal menghapus kendaraan');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Kendaraan berhasil dihapus');
+                        } else {
+                            console.error('Gagal menghapus kendaraan');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             }
         }
 

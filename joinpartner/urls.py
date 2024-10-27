@@ -3,11 +3,12 @@ from joinpartner.views import show_vehicle, join_partner, add_product, delete_pr
 
 app_name = 'joinpartner'
 
-urlpatterns = [path('vehicles/', show_vehicle, name='show_vehicle'),
+urlpatterns = [
+    path('vehicles/', show_vehicle, name='show_vehicle'),
     path('vehicles/add/', add_product, name='add_product'),
     path('', join_partner, name='join_partner'),
-    path('vehicles/<int:product_id>/edit/', edit_product, name='edit_product'),
-    path('vehicles/<int:product_id>/delete/', delete_product, name='delete_product'),
+    path('vehicles/<uuid:product_id>/edit/', edit_product, name='edit_product'),  # Ubah ke uuid
+    path('vehicles/<uuid:product_id>/delete/', delete_product, name='delete_product'),  # Ubah ke uuid
     path('profile/edit/', edit_profile, name='edit_profile'),
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
@@ -17,4 +18,4 @@ urlpatterns = [path('vehicles/', show_vehicle, name='show_vehicle'),
     path('reject_partner/<uuid:partner_id>/', reject_partner, name='reject_partner'),
     path('pending-approval/', pending_approval, name='pending_approval'),
     path('rejected/', rejected, name='rejected'),
-    ]
+]
