@@ -30,25 +30,18 @@
             <h2 class="text-2xl text-teal mt-2 font-medium">{{ vehicle.tipe }}</h2>
 
             <div class="inline-flex gap-2 md:absolute md:right-10 md:top-0 mt-4 md:mt-0">
-                <button
-                    class="bg-teal hover:bg-dark-blue text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
-                    <a href="{% url 'bookmark:add_bookmark' vehicle.id %}" class="bookmark-button">
-                    <i class="fa-solid fa-bookmark"></i>
-                </button>
                 {% if request.user.is_authenticated %}
-                    {% if vehicle.bookmarks.filter(user=request.user).exists %}
-                        <a href="{% url 'bookmarks:remove_bookmark' vehicle.id %}" class="bookmark-button">
-                            <button class="bg-teal text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
+                    <a href="{% url 'bookmark:toggle_bookmark' vehicle.id %}" class="bookmark-button">
+                        <button class="bg-teal text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
+                            {% if is_bookmarked %}
                                 <i class="fa-solid fa-bookmark"></i>
-                            </button>
-                        </a>
-                    {% else %}
-                        <a href="{% url 'bookmarks:add_bookmark' vehicle.id %}" class="bookmark-button">
-                            <button class="bg-teal hover:bg-dark-blue text-white w-12 h-12 rounded-full shadow-md flex items-center justify-center transition-colors duration-200">
-                                <i class="fa-solid fa-bookmark"></i>
-                            </button>
-                        </a>
-                    {% endif %}
+                            {% else %}
+                                <i class="fa-regular fa-bookmark"></i>
+                            {% endif %}
+                        </button>
+                    </a>
+                {% else %}
+                    <p><a href="{% url 'login' %}">Log in to bookmark this vehicle</a></p>
                 {% endif %}
                 <span
                     class="bg-sage text-white px-6 py-2 rounded-full text-lg font-semibold shadow-md flex items-center">
@@ -114,5 +107,30 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById("bookmark-button").addEventListener("click", function (event) {
+        event.preventDefault();
+        let bookmarkBtn = this.querySelector("button");
+        bookmarkBtn.classList.toggle("bg-teal");
+        bookmarkBtn.classList.toggle("bg-dark-blue");
+
+        // Update icon based on new state
+        let icon = bookmarkBtn.querySelector("i");
+        if (icon.classList.contains("fa-regular")) {
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");  // Show filled bookmark icon when clicked
+        } else {
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");  // Show empty bookmark icon when toggled off
+        }
+
+        // Send request to toggle bookmark
+        fetch(this.href)
+            .then(response => {
+                if (!response.ok) throw new Error("Network response was not ok.");
+            })
+            .catch(error => console.error("Fetch error:", error));
+    });
+    </script>
 </body>
 {% endblock content %}
