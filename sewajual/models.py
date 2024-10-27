@@ -7,4 +7,4 @@ class Katalog(models.Model):
     owner = models.ForeignKey(Partner, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f"{self.owner.store_name} - {self.vehicle.merk} {self.vehicle.tipe}"
+        return f"{self.owner.toko} - {self.vehicle.merk} {self.vehicle.tipe}"
