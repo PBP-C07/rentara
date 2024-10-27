@@ -47,7 +47,7 @@ Rentara+ berkomitmen untuk menjadi solusi transportasi dan pembelian motor terde
 Fitur Bookmark memungkinkan pengguna untuk menyimpan kendaraan favorit mereka agar dapat ditinjau kembali di kemudian hari. Pengguna dapat membuat daftar pribadi dari opsi transportasi yang disukai, sehingga memudahkan perbandingan sebelum memutuskan untuk menyewa atau membeli.
 
 ### 📃 Community Forum and Feedback 📃
-#### 👩‍💻 Dikerjakan oleh Raisa Sakila ####
+#### 👩‍💻 Dikerjakan oleh Meisya Najla Aqilah ####
 Fitur ini memungkinkan pengguna memberikan ulasan dan penilaian bintang untuk kendaraan yang telah mereka sewa atau beli. Pengguna dapat membagikan pengalaman mereka secara rinci, membantu orang lain membuat keputusan berdasarkan ulasan dari pengalaman nyata.
 
 ### 🚗 Transportation Rentals and Sales 🚗
