@@ -9,15 +9,36 @@ from .forms import VehicleForm
 from django.contrib import messages
 from django.http import JsonResponse
 
+def format_price(value):
+    try:
+        formatted = str(int(float(value)))
+        result = ""
+        while len(formatted) > 3:
+            result = "." + formatted[-3:] + result
+            formatted = formatted[:-3]
+        return formatted + result
+    except (ValueError, TypeError):
+        return value
+    
 def vehicle_list(request):
     vehicles = list(Vehicle.objects.all()) + list(Vehicles.objects.all())
+    for vehicle in vehicles:
+        vehicle.harga = format_price(vehicle.harga)
+    
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
 @login_required(login_url='main:login')
 def full_info(request, pk):
-    vehicle = get_object_or_404(Vehicle, pk=pk)
-    vehicles = get_object_or_404(Vehicles, pk=pk)
-    return render(request, 'full_info.html', {'vehicle': vehicle, 'vehicles': vehicles})
+    try:
+        vehicle = get_object_or_404(Vehicle, pk=pk)
+        html_file = 'full_info.html'
+    except:
+        vehicle = get_object_or_404(Vehicles, pk=pk)
+        html_file = 'full_info_joinpartner.html'
+
+    vehicle.harga = format_price(vehicle.harga)
+
+    return render(request, html_file, {'vehicle': vehicle})
 
 @staff_member_required
 def admin_vehicle_list(request):
