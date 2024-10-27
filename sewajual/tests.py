@@ -5,7 +5,7 @@ from .models import Vehicle, Katalog
 from joinpartner.models import Partner
 from .forms import VehicleForm
 
-class VehicleViewTests(TestCase): # check
+class VehicleViewTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(username='user', password='testpass')
