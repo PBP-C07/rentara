@@ -144,10 +144,7 @@
                 const data = await response.json();
                 if (data.status === 'success') {
                     alert(data.message);
-                    const vehicleCard = document.querySelector(`[data-vehicle-id="${vehicleId}"]`);
-                    if (vehicleCard) {
-                        vehicleCard.remove();
-                    }
+                    location.reload();
                 } else {
                     alert(data.message);
                 }
