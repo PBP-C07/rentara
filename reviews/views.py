@@ -36,14 +36,14 @@ def edit_review(request, id):
     form = ReviewsForm(request.POST or None, instance=review)
     if form.is_valid() and request.method == "POST":
         form.save()
-        return HttpResponseRedirect(reverse('reviews:create_reviews'))
+        return HttpResponseRedirect(reverse('reviews:show_reviews'))
     context = {'form': form}
     return render(request, "edit_review.html", context)
 
 def delete_review(request, id):
     review = Reviews.objects.get(pk = id)
     review.delete()
-    return HttpResponseRedirect(reverse('reviews:create_reviews'))
+    return HttpResponseRedirect(reverse('reviews:show_reviews'))
 
 def review_list(request):
     reviews = Reviews.objects.all()
@@ -79,7 +79,6 @@ def show_json_by_id(request, id):
 
 @csrf_exempt
 @require_POST
-@login_required(login_url='/login')
 def create_reviews_ajax(request):
     title = strip_tags(request.POST.get("title"))
     title = request.POST.get("title")
