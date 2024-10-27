@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <div class="relative break-inside-avoid bg-white shadow-lg rounded-lg p-6 font-[Poppins]" style="width: 445px; height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
     <div>
         <div class="flex justify-between items-center mb-4">
@@ -24,7 +25,7 @@
         <span>{{ review_entry.user }} • {{ review_entry.time|date:"d/m/y" }}</span>
         
         <div class="flex space-x-3">
-            <a href="{% url 'reviews:delete_review' review.id %}" class="bg-transparent border border-[#C96868] hover:bg-[#C96868] text-[#C96868] hover:text-white font-bold py-2 px-4 rounded-lg">
+            <a href="{% url 'reviews:delete_review' review_entry.id %}" class="bg-transparent border border-[#C96868] hover:bg-[#C96868] text-[#C96868] hover:text-white font-bold py-2 px-4 rounded-lg">
                 Delete
             </a>
             <a href="{% url 'reviews:edit_review' review_entries.0.pk %}" class="bg-[#629584] hover:bg-[#387478] text-white font-bold py-2 px-4 rounded-lg">

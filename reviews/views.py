@@ -32,7 +32,7 @@ def create_reviews(request):
     return render(request, "create_review.html", context)
     
 def edit_review(request, id):
-    review = get_object_or_404(Reviews, pk=id)
+    review = Reviews.objects.get(pk = id)
     form = ReviewsForm(request.POST or None, instance=review)
     if form.is_valid() and request.method == "POST":
         form.save()
@@ -77,7 +77,6 @@ def show_json_by_id(request, id):
     data = Reviews.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-
 @csrf_exempt
 @require_POST
 @login_required(login_url='/login')
@@ -87,12 +86,11 @@ def create_reviews_ajax(request):
     rating = request.POST.get("rating")
     description = strip_tags(request.POST.get("description"))
     user = request.user
-    time=request.time
 
-    new_review = ReviewsForm(
+    new_review = Reviews(
         title=title, rating=rating,
         description=description,
-        user=user, time=time
+        user=user
     )
     new_review.save()
 
