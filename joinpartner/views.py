@@ -25,13 +25,12 @@ def show_vehicle(request):
         partner.delete()
         return redirect('joinpartner:rejected')
     
-    partner_vehicles = Vehicle.objects.filter(partner=partner)  # Vehicle dari partner
+    partner_vehicles = Vehicle.objects.filter(partner=partner)
 
     from sewajual.models import Katalog
     katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
     main_vehicles = [katalog.vehicle for katalog in katalogs]  
 
-    # Gabung kedua querysets
     vehicles = list(main_vehicles) + list(partner_vehicles)
 
     return render(request, 'show_vehicle.html', {
