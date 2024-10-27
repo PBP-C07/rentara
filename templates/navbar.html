@@ -22,14 +22,13 @@
 
     <div class="max-w-7xl mx-auto px-4 font-poppins">
         <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
             <div class="flex items-center">
                 <div class="flex-shrink-0">
                     <img src="{% static 'image/logo.png' %}" alt="Logo"
                         class="h-16 w-24 sm:h-22 sm:w-32 object-contain">
                 </div>
 
-                <div class="flex space-x-8">
+                <div class="hidden md:flex space-x-8">
                     <a href="{% url 'main:show_main' %}" class="text-dark-blue hover:text-sage font-medium">Home</a>
                     <a href="{% url 'sewajual:vehicle_list' %}"
                         class="text-dark-blue hover:text-sage font-medium">Explore</a>
@@ -38,17 +37,14 @@
                 </div>
             </div>
 
-            <!-- Desktop Auth Menu -->
             <div class="hidden md:flex items-center space-x-6">
                 {% if user.is_authenticated %}
                 <span class="text-teal font-medium">Welcome, {{ user.username }}!</span>
-
                 <div class="relative">
                     <button id="profileButton" class="flex items-center text-dark-blue hover:text-teal">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="17" viewBox="0 0 16 19"
-                            fill="currentColor">
+                        <svg width="14" height="17" viewBox="0 0 16 19" fill="currentColor">
                             <path
-                                d="M3 5C3 2.23858 5.23858 0 8 0C10.7614 0 13 2.23858 13 5C13 7.76142 10.7614 10 8 10C5.23858 10 3 7.76142 3 5ZM8 8C9.65685 8 11 6.65685 11 5C11 3.34315 9.65685 2 8 2C6.34315 2 5 3.34315 5 5C5 6.65685 6.34315 8 8 8Z"
+                                d="M3 5C3 2.23858 5.23858 0 8 0C10.7614 0 13 2.23858 13 5C13 7.76142 10.7614 10 8 10C5.23858 10 3 7.76142 3 5Z"
                                 fill="dark-blue" />
                             <path
                                 d="M2.34315 13.3431C0.842855 14.8434 0 16.8783 0 19H2C2 17.4087 2.63214 15.8826 3.75736 14.7574C4.88258 13.6321 6.4087 13 8 13C9.5913 13 11.1174 13.6321 12.2426 14.7574C13.3679 15.8826 14 17.4087 14 19H16C16 16.8783 15.1571 14.8434 13.6569 13.3431C12.1566 11.8429 10.1217 11 8 11C5.87827 11 3.84344 11.8429 2.34315 13.3431Z"
@@ -58,9 +54,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-
                     <div id="profileDropdown"
-                        class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 font-poppins">
+                        class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div class="py-1">
                             <a href="{% url 'joinpartner:show_vehicle' %}"
                                 class="block px-4 py-2 text-sm text-dark-blue hover:bg-light-sage hover:text-teal font-medium">My
@@ -69,8 +64,7 @@
                                 class="block px-4 py-2 text-sm text-dark-blue hover:bg-light-sage hover:text-teal font-medium">Bookmark</a>
                             <a href="{% url 'joinpartner:join_partner' %}"
                                 class="block px-4 py-2 text-sm text-dark-gray hover:bg-light-sage hover:text-teal font-medium">Join
-                                as a Partner
-                            </a>
+                                as a Partner</a>
                             <a href="{% url 'report:create_report_entry' %}"
                                 class="block px-4 py-2 text-sm text-dark-blue hover:bg-light-sage hover:text-teal font-medium">Report</a>
                             <a href="{% url 'main:logout' %}"
@@ -80,58 +74,59 @@
                 </div>
                 {% else %}
                 <a href="{% url 'main:login' %}"
-                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-[#FAFAFA] bg-[#629584] hover:bg-teal focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]"
-                    style="width: 100px; text-align: center;">
-                    Sign In
-                </a>
+                    class="py-2 px-4 text-sm font-medium rounded-md text-white bg-sage hover:bg-teal">Sign In</a>
                 <a href="{% url 'main:register' %}"
-                    class="group relative w-full flex justify-center py-2 px-4 border border-[#629584] text-sm font-medium rounded-md text-[#387478] bg-transparent hover:bg-light-sage focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#629584]"
-                    style="width: 100px; text-align: center;">
-                    Register
-                </a>
+                    class="py-2 px-4 text-sm font-medium rounded-md text-teal border border-sage hover:bg-light-sage">Register</a>
                 {% endif %}
+            </div>
+
+            <div class="flex md:hidden">
+                <button id="mobileMenuButton" class="text-dark-gray hover:text-teal">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Home</a>
+                <a href="{% url 'main:show_main' %}"
+                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Home</a>
                 <a href="{% url 'sewajual:vehicle_list' %}"
-                    class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Explore</a>
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Rent
-                    Driver</a>
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Review</a>
-                <a href="#"
-                    class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Join
-                    as Partner</a>
+                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Explore</a>
+                <a href="{% url 'reviews:show_reviews' %}"
+                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Review</a>
+                <a href="{% url 'joinpartner:join_partner' %}"
+                    class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Join as
+                    Partner</a>
             </div>
-
             {% if user.is_authenticated %}
             <div class="pt-4 pb-3 border-t border-gray-200">
                 <div class="px-3">
                     <p class="text-dark-gray font-medium">Welcome, {{ user.username }}!</p>
                 </div>
                 <div class="mt-3 px-2 space-y-1">
-                    <a href="#"
-                        class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">My
-                        Product</a>
-                    <a href="#"
-                        class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Report</a>
+                    {% if is_store_owner %}
+                    <a href="{% url 'joinpartner:show_vehicle' %}"
+                        class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">
+                        My Product
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'report:create_report_entry' %}"
+                        class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Report</a>
                     <a href="{% url 'main:logout' %}"
-                        class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Logout</a>
+                        class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Logout</a>
                 </div>
             </div>
             {% else %}
             <div class="pt-4 pb-3 border-t border-gray-200">
                 <div class="flex flex-col space-y-1 px-2">
                     <a href="{% url 'main:login' %}"
-                        class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Login</a>
+                        class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Login</a>
                     <a href="{% url 'main:register' %}"
-                        class="block px-3 py-2 rounded-md text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Register</a>
+                        class="block px-3 py-2 text-dark-gray hover:text-teal hover:bg-light-sage font-medium">Register</a>
                 </div>
             </div>
             {% endif %}
@@ -151,7 +146,6 @@
         profileButton.addEventListener('click', () => {
             profileDropdown.classList.toggle('hidden');
         });
-
         window.addEventListener('click', (event) => {
             if (!profileButton.contains(event.target)) {
                 profileDropdown.classList.add('hidden');
