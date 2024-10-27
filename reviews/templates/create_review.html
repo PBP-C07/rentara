@@ -7,9 +7,8 @@
 {% block content %}
 {% include 'navbar.html' %}
 <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
-    <h1 class="text-3xl font-bold text-center mb-8 text-[#333333]">Add Your Review</h1>
-  
     <div class="bg-white shadow-md rounded-lg p-6">
+      <h1 class="text-3xl font-bold text-center mb-8 text-[#333333]">Add Your Review</h1>
       <form method="POST" class="space-y-6">
         {% csrf_token %}
         {% for field in form %}
@@ -29,7 +28,7 @@
           </div>
         {% endfor %}
         <div class="flex justify-center mt-6">
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#C96868] hover:bg-[#C96868] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C96868]">
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#629584] hover:bg-[#387478] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C96868]">
             Add Review
           </button>
         </div>
