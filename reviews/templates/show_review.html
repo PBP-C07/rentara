@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block meta %}
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+{% endblock meta %}
+
 {% block content %}
 {% include 'navbar.html' %}
 
 <div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-8 min-h-screen bg-[#FAFAFA] flex flex-col">
+<<<<<<< HEAD
   <div id="review_entry_cards"></div>
   <div id="crudModal" tabindex="-1" aria-hidden="true"
     class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
@@ -132,11 +137,87 @@
   }
 
   refreshReviewEntries();
+=======
+  <div class="flex flex-row flex-wrap gap-5 justify-center">
+    {% for review_entry in review_entries %}
+    <div class="flex mb-4" style="flex-basis: calc(33.333% - 1rem);">
+        {% include 'card_review.html' with review_entry=review_entry %}
+    </div>
+    {% endfor %}
+  </div>
+    <div class="flex justify-center space-x-3 mt-10">
+      <a href="{% url 'reviews:create_reviews' %}"
+      class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 140px; text-align: center;">
+          Add Review
+      </a>
+      <button data-modal-target="crudModal" data-modal-toggle="crudModal"
+      class="bg-[#387478] hover:bg-[#629584] text-white font-bold py-2 px-4 rounded-lg" style="width: 200px; text-align: center;">
+          Add Review by AJAX
+      </button>
+    </div>
+    <div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
+      <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between p-4 border-b rounded-t">
+              <h3 class="text-xl font-semibold text-gray-900">
+                  Add New Review Entry
+              </h3>
+              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" id="closeModalBtn">
+                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+              </button>
+          </div>
+          <!-- Modal body -->
+          <div class="px-6 py-4 space-y-6">
+              <h1 class="text-3xl font-bold text-center text-[#333333]">Edit Your Review</h1>
+              <form id="reviewEntryForm" method="POST" class="space-y-6">
+                  {% csrf_token %}
+                  <div class="flex flex-col">
+                      <label for="title" class="mb-2 font-semibold text-black">Title</label>
+                      <input type="text" id="title" name="title" class="appearance-none rounded-md block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter review title" required>
+                  </div>
+                  <div class="flex flex-col">
+                    <label for="rating" class="mb-2 font-semibold text-black">Rating (1-5)</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" class="appearance-none rounded-md block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                  </div>
+                  <div class="flex flex-col">
+                      <label for="description" class="mb-2 font-semibold text-black">Description</label>
+                      <textarea id="description" name="description" rows="3" class="appearance-none rounded-md block w-full h-52 resize-none border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Describe your review" required></textarea>
+                  </div>
+              </form>
+          </div>
+          <!-- Modal footer -->
+          <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 p-6 border-t border-gray-200 rounded-b justify-center md:justify-end">
+              <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg" id="cancelButton">Cancel</button>
+              <button type="submit" id="submitReviewEntry" form="reviewEntryForm" class="bg-[#629584] hover:bg-[#387478] text-white font-bold py-2 px-4 rounded-lg">Add Review</button>
+          </div>
+      </div>
+  </div>  
+</div>
+
+<script>
+  function addMoodEntry() {
+    fetch("{% url 'reviews:create_reviews_ajax' %}", {
+      method: "POST",
+      body: new FormData(document.querySelector('#reviewEntryForm')),
+    })
+    .then(response => window.location.reload())
+    
+    document.getElementById("reviewEntryForm").reset(); 
+    hideReviewModal(); 
+    return false;
+  }
+
+  document.getElementById("submitReviewEntry").addEventListener("click", addMoodEntry);
+>>>>>>> 196b6f5e6263ce82f9b35a1373a35390a9ff2456
 
   const modal = document.getElementById('crudModal');
   const modalContent = document.getElementById('crudModalContent');
 
   function showReviewModal() {
+<<<<<<< HEAD
     modal.classList.remove('hidden');
     setTimeout(() => {
       modalContent.classList.remove('opacity-0', 'scale-95');
@@ -151,6 +232,22 @@
     setTimeout(() => {
       modal.classList.add('hidden');
     }, 150);
+=======
+      modal.classList.remove('hidden'); 
+      setTimeout(() => {
+        modalContent.classList.remove('opacity-0', 'scale-95');
+        modalContent.classList.add('opacity-100', 'scale-100');
+      }, 50); 
+  }
+
+  function hideReviewModal() {
+      modalContent.classList.remove('opacity-100', 'scale-100');
+      modalContent.classList.add('opacity-0', 'scale-95');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150); 
+>>>>>>> 196b6f5e6263ce82f9b35a1373a35390a9ff2456
   }
 
   document.getElementById("cancelButton").addEventListener("click", hideReviewModal);

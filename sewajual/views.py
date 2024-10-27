@@ -31,11 +31,27 @@ def vehicle_list(request):
 @login_required(login_url='main:login')
 def full_info(request, pk):
     try:
+        # Attempt to fetch from the `Vehicle` model first
         vehicle = get_object_or_404(Vehicle, pk=pk)
         html_file = 'full_info.html'
     except:
-        vehicle = get_object_or_404(Vehicles, pk=pk)
-        html_file = 'full_info_joinpartner.html'
+        # If not found, retrieve from `Vehicles` and transform to `Vehicle` format
+        vehicles = get_object_or_404(Vehicles, pk=pk)
+        vehicle = Vehicle(
+            id=vehicles.id,
+            toko=vehicles.partner.toko, 
+            merk=vehicles.merk,
+            tipe=vehicles.tipe,
+            jenis_kendaraan=vehicles.jenis_kendaraan,
+            warna=vehicles.warna,
+            harga=vehicles.harga,
+            status=vehicles.status,
+            bahan_bakar=vehicles.bahan_bakar,
+            link_foto=vehicles.link_foto,
+            link_lokasi=vehicles.partner.link_lokasi,
+            notelp=vehicles.partner.notelp
+        )
+        html_file = 'full_info.html'
 
     vehicle.harga = format_price(vehicle.harga)
     
@@ -57,8 +73,6 @@ def admin_vehicle_list(request):
     return render(request, 'card_admin.html', {'vehicles': vehicles})
 
 @staff_member_required
-@csrf_exempt
-@require_http_methods(["GET", "POST"])
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
 def add_vehicle(request):
