@@ -245,6 +245,7 @@ def delete_partner(request, partner_id):
         partner.delete()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False}, status=400)
+#ini test
 
 
 
