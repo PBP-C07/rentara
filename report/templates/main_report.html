@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Daftar Laporan</title>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+{% endblock meta %}
+
+{% block content %}
+<!--{% include 'navbar.html' %} -->
+<div class="relative overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gradient-to-b from-[#2b5e2b] via-yellow-200 to-[#8c5722] flex flex-col">
+
+  <div class="flex justify-end mb-6">
+    <button data-modal-target="reportModal" data-modal-toggle="reportModal" class="btn bg-gradient-to-r from-[#456e4d] via-gray-500 to-black text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+      Tambah Laporan Baru
+    </button>
+  </div>
+
+  <!-- Display List of Reports -->
+  <div id="report_list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+    {% for report in reports %}
+      <div class="bg-white p-4 rounded-lg shadow-md border-4 border-[#964B00]">
+        <h2 class="font-bold text-lg">{{ report.title }}</h2>
+        <p>{{ report.description }}</p>
+        <p>Status: {{ report.status }}</p>
+        <p>Submitted: {{ report.date_submitted }}</p>
+      </div>
+    {% empty %}
+      <p>No reports available.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Modal for Report Form -->
+  <div id="reportModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
+    <div id="reportModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 border-b rounded-t">
+        <h3 class="text-xl font-semibold text-gray-900">Tambah Laporan</h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" onclick="hideModal();">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="px-6 py-4">
+        <form id="reportForm" method="POST" action="{% url 'main:create_report_entry' %}">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+            <input type="text" id="title" name="title" class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Enter report title" required>
+          </div>
+          <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea id="description" name="description" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md p-2" placeholder="Enter report description" required></textarea>
+          </div>
+        </form>
+      </div>
+      <!-- Modal footer -->
+      <div class="flex justify-end p-4 border-t border-gray-200 rounded-b">
+        <button type="button" onclick="hideModal();" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg">Cancel</button>
+        <button type="submit" form="reportForm" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg ml-2">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function hideModal() {
+    const modal = document.getElementById('reportModal');
+    const modalContent = document.getElementById('reportModalContent');
+    modalContent.classList.remove('opacity-100', 'scale-100');
+    modalContent.classList.add('opacity-0', 'scale-95');
+    setTimeout(() => modal.classList.add('hidden'), 150);
+  }
+</script>
+{% endblock content %}
