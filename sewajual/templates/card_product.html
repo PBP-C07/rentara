@@ -21,87 +21,92 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-<div class="bg-gray-50 p-5">
-    <div class="max-w-7xl mx-auto px-5 mb-8">
-        <div class="flex gap-4">
-            <div class="flex gap-4">
-                <button
-                    class="filter-button px-6 py-2 rounded-lg text-sm font-medium border-2 transition-all duration-200 bg-teal text-white hover:bg-dark-blue active:bg-dark-blue"
-                    data-filter="all">
-                    Semua
-                </button>
-                <button
-                    class="filter-button px-6 py-2 rounded-lg text-sm font-medium border-2 transition-all duration-200 bg-teal text-white hover:bg-dark-blue active:bg-dark-blue"
-                    data-filter="jual">
-                    Jual
-                </button>
-                <button
-                    class="filter-button px-6 py-2 rounded-lg text-sm font-medium border-2 transition-all duration-200 bg-teal text-white hover:bg-dark-blue active:bg-dark-blue"
-                    data-filter="sewa">
-                    Sewa
-                </button>
-            </div>
-
-            <style>
-                .filter-button.active {
-                    background-color: #243642;
-                    border-color: #243642;
-                }
-            </style>
+<div class="bg-gray-50 p-3 sm:p-5">
+    <div class="max-w-7xl mx-auto px-2 sm:px-5 mb-4 sm:mb-8">
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
+            <button
+                class="filter-button w-full sm:w-auto px-4 sm:px-6 py-2.5 rounded-lg text-sm font-medium border-2 transition-all duration-200 bg-teal text-white hover:bg-dark-blue active:bg-dark-blue"
+                data-filter="all">
+                Semua
+            </button>
+            <button
+                class="filter-button w-full sm:w-auto px-4 sm:px-6 py-2.5 rounded-lg text-sm font-medium border-2 transition-all duration-200 bg-teal text-white hover:bg-dark-blue active:bg-dark-blue"
+                data-filter="jual">
+                Jual
+            </button>
+            <button
+                class="filter-button w-full sm:w-auto px-4 sm:px-6 py-2.5 rounded-lg text-sm font-medium border-2 transition-all duration-200 bg-teal text-white hover:bg-dark-blue active:bg-dark-blue"
+                data-filter="sewa">
+                Sewa
+            </button>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for vehicle in vehicles %}
-        <div class="card bg-white rounded-xl shadow-md p-6 flex flex-col" data-status="{{ vehicle.status|lower }}">
-            <div class="flex justify-between items-center mb-3">
-                <span class="text-dark-gray text-sm">{{ vehicle.jenis_kendaraan }}</span>
-                <span class="bg-sage text-white px-4 py-1 rounded-md text-xs font-medium">
-                    {{ vehicle.status }}
-                </span>
-            </div>
-
-            <h2 class="text-xl font-bold text-dark-blue mb-4 leading-tight">
-                {{ vehicle.merk }} {{ vehicle.tipe }}
-            </h2>
-
-            <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
-                class="object-cover rounded-lg mb-4" width="600" height="400">
-
-            <div class="space-y-3 mb-6">
-                <div class="flex items-center justify-between">
-                    <span class="flex items-center gap-2 text-dark-gray text-sm">
-                        🎨 Warna:
+    <div class="max-w-7xl mx-auto px-2 sm:px-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {% for vehicle in vehicles %}
+            <div class="card bg-white rounded-xl shadow-md p-4 sm:p-6 flex flex-col hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                data-status="{{ vehicle.status|lower }}">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-dark-gray text-xs sm:text-sm">{{ vehicle.jenis_kendaraan|title }}</span>
+                    <span class="bg-sage text-white px-3 py-1.5 rounded-md text-xs font-medium">
+                        {{ vehicle.status|title }}
                     </span>
-                    <span class="text-teal text-sm">{{ vehicle.warna }}</span>
                 </div>
-                <div class="flex items-center justify-between">
-                    <span class="flex items-center gap-2 text-dark-gray text-sm">
-                        ⛽ Bahan Bakar:
-                    </span>
-                    <span class="text-teal text-sm">{{ vehicle.bahan_bakar }}</span>
-                </div>
-            </div>
 
-            <div class="mt-auto pt-4 border-t border-light-sage flex justify-between items-center">
-                <div class="flex items-baseline gap-1">
-                    <span class="text-xl font-bold text-dark-blue">
-                        Rp {{ vehicle.harga|floatformat:0 }}
-                    </span>
-                    <span class="text-sm text-teal">/ hari</span>
+                <h2 class="text-base sm:text-xl font-bold text-dark-blue mb-3 leading-tight line-clamp-2">
+                    {{ vehicle.merk }} {{ vehicle.tipe }}
+                </h2>
+
+                <div class="relative">
+                    <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
+                        class="object-cover w-full h-40 sm:h-48 rounded-lg mb-3">
                 </div>
-                <a href="{% url 'sewajual:full_info' vehicle.pk %}">
-                    <button
-                        class="bg-teal hover:bg-sage text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
-                        Lebih Lanjut
-                    </button>
-                </a>
+
+                <div class="space-y-2.5 mb-4">
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-1.5 text-dark-gray text-xs sm:text-sm">
+                            🎨 Warna:
+                        </span>
+                        <span class="text-teal text-xs sm:text-sm">{{ vehicle.warna }}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="flex items-center gap-1.5 text-dark-gray text-xs sm:text-sm">
+                            ⛽ Bahan Bakar:
+                        </span>
+                        <span class="text-teal text-xs sm:text-sm">{{ vehicle.bahan_bakar|title }}</span>
+                    </div>
+                </div>
+
+                <div class="mt-auto pt-3 border-t border-light-sage">
+                    <div class="flex flex-col sm:flex-row justify-between gap-2.5 items-start sm:items-center">
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-base sm:text-xl font-bold text-dark-blue">
+                                Rp {{ vehicle.harga|floatformat:0 }}
+                            </span>
+                            <span class="text-xs sm:text-sm text-teal">/ hari</span>
+                        </div>
+                        <a href="{% url 'sewajual:full_info' vehicle.pk %}" class="w-full sm:w-auto">
+                            <button
+                                class="w-full sm:w-auto bg-teal hover:bg-sage active:bg-dark-blue text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 flex items-center justify-center gap-1">
+                                <span>Lebih Lanjut</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
+            {% empty %}
+            <p class="text-dark-gray text-center col-span-full text-sm">Tidak ada data kendaraan.</p>
+            {% endfor %}
         </div>
-        {% empty %}
-        <p class="text-dark-gray text-center col-span-full">Tidak ada data kendaraan.</p>
-        {% endfor %}
     </div>
+
 
     <style>
         .filter-button {
