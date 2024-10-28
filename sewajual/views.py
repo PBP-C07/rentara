@@ -75,8 +75,6 @@ def admin_vehicle_list(request):
 @staff_member_required
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
-@csrf_exempt
-@require_http_methods(["GET", "POST"])
 def add_vehicle(request):
     is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
     
