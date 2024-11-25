@@ -154,14 +154,18 @@ def edit_product(request, product_id):
         if form.is_valid():
             form.save()
             return JsonResponse({'success': True}, status=200)  # Success response
-
         else:
-            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
-
+            # If the form is invalid, ensure original data is still passed
+            return render(request, 'edit_product.html', {
+                'form': form,
+                'product': product,  # Pass original product instance
+                'errors': form.errors,
+            }, status=400)
     else:
         form = VehicleForm(instance=product)
 
     return render(request, 'edit_product.html', {'form': form, 'product': product})
+
 
 
 @login_required(login_url='/login')
