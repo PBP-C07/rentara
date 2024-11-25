@@ -7,7 +7,7 @@ from django.utils.html import strip_tags
 class VehicleForm(ModelForm):
     class Meta:
         model = Vehicle
-        fields = ['merk', 'tipe', 'jenis_kendaraan', 'warna', 'harga', 'status', 'notelp', 'bahan_bakar', 'link_lokasi', 'link_foto', 'toko']
+        fields = ['merk', 'tipe', 'jenis_kendaraan', 'warna', 'harga', 'status', 'bahan_bakar', 'link_foto']
     def clean_merk(self):
         merk = self.cleaned_data["merk"]
         return strip_tags(merk)
