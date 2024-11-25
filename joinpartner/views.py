@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Partner, Vehicles
+from .models import Partner
 from main.models import Vehicle
 from django.contrib.auth.decorators import login_required
 from .forms import PartnerForm, VehicleForm
@@ -14,6 +14,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
+from main.models import Vehicle
 
 @login_required(login_url='/login')
 def show_vehicle(request):
@@ -27,15 +28,15 @@ def show_vehicle(request):
         partner.delete()
         return redirect('joinpartner:rejected')
     
-    partner_vehicles = Vehicles.objects.filter(partner=partner)
+    partner_vehicles = Vehicle.objects.filter(toko = partner.toko)
     
-    from sewajual.models import Katalog
-    katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
-    try:
-        main_vehicles = [katalog.vehicle for katalog in katalogs]  
-        vehicles = list(main_vehicles) + list(partner_vehicles)
-    except:
-        vehicles = list(partner_vehicles)
+    # from sewajual.models import Katalog
+    # katalogs = Katalog.objects.filter(owner=partner).select_related('vehicle')
+    # try:
+    #     main_vehicles = [katalog.vehicle for katalog in katalogs]  
+    #     vehicles = list(main_vehicles) + list(partner_vehicles)
+    # except:
+    vehicles = list(partner_vehicles)
 
     query = request.GET.get('query', '')  # Get search query
     if query:
@@ -66,7 +67,10 @@ def add_product(request):
         warna = strip_tags(request.POST.get("warna"))
         harga = request.POST.get("harga")
         status = request.POST.get("status")
-        bahan_bakar = strip_tags(request.POST.get("bahan_bakar"))  # Make sure to get this value
+        bahan_bakar = strip_tags(request.POST.get("bahan_bakar"))
+        toko = partner.toko
+        notelp = partner.notelp 
+        link_lokasi = partner.link_lokasi # Make sure to get this value
 
         # Validate input
         if not merk:
@@ -86,8 +90,8 @@ def add_product(request):
             return JsonResponse({'errors': errors}, status=400)
 
         # If there are no errors, save the new vehicle
-        new_vehicle = Vehicles(
-            partner=partner,
+        new_vehicle = Vehicle(
+            # partner=partner,
             link_foto=link_foto,
             merk=merk,
             tipe=tipe,
@@ -95,7 +99,10 @@ def add_product(request):
             warna=warna,
             harga=harga,
             status=status,
-            bahan_bakar=bahan_bakar  # Make sure to include this field
+            bahan_bakar=bahan_bakar,
+            toko = toko,
+            notelp = notelp,
+            link_lokasi = link_lokasi# Make sure to include this field
         )
         new_vehicle.save()
         return JsonResponse({'success': True})
@@ -138,7 +145,7 @@ def join_partner(request):
 
 @login_required(login_url='/login')
 def edit_product(request, product_id):
-    product = get_object_or_404(Vehicles, id=product_id)
+    product = get_object_or_404(Vehicle, id=product_id)
     partner = get_object_or_404(Partner, user=request.user)
 
     if request.method == 'POST':
@@ -159,7 +166,7 @@ def edit_product(request, product_id):
 
 @login_required(login_url='/login')
 def delete_product(request, product_id):
-    product = get_object_or_404(Vehicles, id=product_id)
+    product = get_object_or_404(Vehicle, id=product_id)
 
 
     product.delete()

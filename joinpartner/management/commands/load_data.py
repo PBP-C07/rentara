@@ -2,7 +2,7 @@ import json
 import uuid
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from joinpartner.models import Partner, Vehicles
+from joinpartner.models import Partner
 from main.models import Vehicle
 
 class Command(BaseCommand):
@@ -50,23 +50,23 @@ class Command(BaseCommand):
                     warna=item['fields']['warna'],
                     harga=item['fields']['harga'],
                     bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
-                    status=item['fields'].get('status', Vehicles.Sewa),  # Default ke 'Sewa' jika tidak disediakan
+                    status=item['fields'].get('status', ''),  # Default ke 'Sewa' jika tidak disediakan
                     toko=item['fields']['toko'],
                     notelp=item['fields']['notelp'],
                     link_lokasi=item['fields']['link_lokasi']
                 )
 
-                Vehicles.objects.create(
-                    partner=partner,
-                    id = item['pk'],
-                    link_foto=item['fields']['link_foto'],
-                    merk=item['fields']['merk'],
-                    tipe=item['fields']['tipe'],
-                    jenis_kendaraan=item['fields']['jenis_kendaraan'],
-                    warna=item['fields']['warna'],
-                    harga=item['fields']['harga'],
-                    bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
-                    status=item['fields'].get('status', Vehicles.Sewa),  # Default ke 'Sewa' jika tidak disediakan
-                )
+                # Vehicles.objects.create(
+                #     partner=partner,
+                #     id = item['pk'],
+                #     link_foto=item['fields']['link_foto'],
+                #     merk=item['fields']['merk'],
+                #     tipe=item['fields']['tipe'],
+                #     jenis_kendaraan=item['fields']['jenis_kendaraan'],
+                #     warna=item['fields']['warna'],
+                #     harga=item['fields']['harga'],
+                #     bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
+                #     status=item['fields'].get('status', Vehicles.Sewa),  # Default ke 'Sewa' jika tidak disediakan
+                # )
 
         self.stdout.write(self.style.SUCCESS('Data loaded successfully'))
