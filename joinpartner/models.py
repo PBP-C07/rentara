@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
+from main.models import Vehicle
 
 class Partner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -13,6 +14,7 @@ class Partner(models.Model):
         choices=[('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected')],
         default='Pending'
     )
+    # vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     
     def get_whatsapp_link(self):
         # Menghasilkan link untuk menghubungi nomor telepon melalui WhatsApp
@@ -21,24 +23,8 @@ class Partner(models.Model):
     def __str__(self):
         return self.toko
     
-class Vehicles(models.Model):
-    id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    partner = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name='vehicles')
-    link_foto =  models.URLField(max_length=500)
-    merk = models.CharField(max_length=100)
-    tipe = models.CharField(max_length=100)
-    jenis_kendaraan = models.CharField(max_length=100)  # seperti mobil, motor, dll.
-    warna = models.CharField(max_length=50)
-    harga = models.IntegerField()
-    bahan_bakar = models.CharField(max_length=50, default="Bensin")
-    Sewa = 'Sewa'
-    Jual = 'Jual'
-    STATUS_CHOICES = [
-        (Sewa, 'Sewa'),
-        (Jual, 'Jual'),
-    ]
-    status = models.CharField(
-        max_length=15,
-        choices=STATUS_CHOICES,
-        default=Sewa
-    )
+
+    
+# class PartnerVehicle(models.Model):
+#     partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
+#     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
