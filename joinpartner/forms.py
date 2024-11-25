@@ -1,12 +1,13 @@
 from django import forms
 from django.forms import ModelForm
-from joinpartner.models import Vehicles, Partner
+from main.models import Vehicle
+from joinpartner.models import Partner
 from django.utils.html import strip_tags
 
 class VehicleForm(ModelForm):
-    class Meta :
-        model = Vehicles
-        fields = ['link_foto', 'merk', 'tipe', 'jenis_kendaraan', 'warna', 'harga', 'status', 'bahan_bakar']
+    class Meta:
+        model = Vehicle
+        fields = ['merk', 'tipe', 'jenis_kendaraan', 'warna', 'harga', 'status', 'notelp', 'bahan_bakar', 'link_lokasi', 'link_foto', 'toko']
     def clean_merk(self):
         merk = self.cleaned_data["merk"]
         return strip_tags(merk)
