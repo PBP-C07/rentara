@@ -55,43 +55,40 @@ def admin_vehicle_list(request):
 
 @staff_member_required
 @csrf_exempt
-@require_http_methods(["GET", "POST"])
+@require_POST
 def add_vehicle(request):
-    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-    
-    if request.method == "POST":
+    try:
         form = VehicleForm(request.POST)
         if form.is_valid():
-            try:
-                vehicle = form.save(commit=False)
-                vehicle.toko = form.cleaned_data['toko']
-                vehicle.save()
-                
-                Katalog.objects.create(
-                    vehicle=vehicle, 
-                    owner=get_object_or_404(Partner, toko=vehicle.toko)
-                )
-                
-                if is_ajax:
-                    return JsonResponse({
-                        'status': 'success',
-                        'message': 'Kendaraan berhasil ditambahkan',
-                        'id': vehicle.pk,
-                        'merk': vehicle.merk,
-                        'tipe': vehicle.tipe
-                    })
-                
-                return redirect('sewajual:admin_vehicle_list')
-                
-            except Exception as e:
-                return JsonResponse({'status': 'error', 'message': str(e)}, status=400) if is_ajax else messages.error(request, str(e))
-        
-        if is_ajax:
-            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
-        messages.error(request, "Form tidak valid.")
+            vehicle = form.save(commit=False)
+            vehicle.toko = form.cleaned_data['toko']
+            vehicle.save()
             
-    return render(request, 'add_vehicle.html', {'form': VehicleForm()})
+            Katalog.objects.create(
+                vehicle=vehicle,
+                owner=get_object_or_404(Partner, toko=vehicle.toko)
+            )
 
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Kendaraan berhasil ditambahkan',
+                'id': str(vehicle.pk),
+                'merk': vehicle.merk,
+                'tipe': vehicle.tipe
+            })
+        else:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Form tidak valid!',
+                'errors': form.errors
+            }, status=400)
+
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=500)
+    
 @staff_member_required
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
@@ -110,29 +107,16 @@ def edit_vehicle(request, pk):
 
 @staff_member_required
 @csrf_exempt
-@require_POST
 def delete_vehicle(request, pk):
-    vehicle = get_object_or_404(Vehicle, pk=pk)
-    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
-
-    try:
-        Katalog.objects.filter(vehicle=vehicle).delete()
+    if request.method == 'POST':
+        vehicle = Vehicle.objects.get(pk=pk)
         vehicle.delete()
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Kendaraan berhasil dihapus'
+        })
         
-        if is_ajax:
-            return JsonResponse({
-                'status': 'success',
-                'message': 'Data kendaraan berhasil dihapus'
-            })
-        
-        messages.success(request, 'Data kendaraan berhasil dihapus')
-        return redirect('sewajual:admin_vehicle_list')
-    except Exception as e:
-        if is_ajax:
-            return JsonResponse({
-                'status': 'error',
-                'message': str(e)
-            }, status=400)
-        
-        messages.error(request, f"Error: {str(e)}")
-        return redirect('sewajual:admin_vehicle_list')
+    return JsonResponse({
+        'status': 'error',
+        'message': 'Invalid request method'
+    })
