@@ -49,9 +49,11 @@ def full_info(request, pk):
     })
 
 @staff_member_required
+@login_required(login_url='main:login')
 def admin_vehicle_list(request):
     vehicles = list(Vehicle.objects.all())
-    return render(request, 'card_admin.html', {'vehicles': vehicles})
+    form = VehicleForm()
+    return render(request, 'card_admin.html', {'vehicles': vehicles, 'form': form})
 
 @staff_member_required
 @csrf_exempt
