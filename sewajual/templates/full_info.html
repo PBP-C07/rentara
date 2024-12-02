@@ -96,10 +96,17 @@
                     <span class="text-teal font-medium">{{ vehicle.bahan_bakar }}</span>
                 </div>
 
-                <a href="{{ vehicle.link_lokasi }}" target="_blank"
-                    class="inline-flex items-center gap-2 bg-teal text-white px-6 py-4 rounded-xl font-semibold mt-2 transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center">
-                    📍 Lihat Lokasi Toko
-                </a>
+                <div class="inline-flex gap-4 mt-2">
+                    <a href="{{ vehicle.link_lokasi }}" target="_blank"
+                        class="flex items-center gap-2 bg-teal text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center w-1/2">
+                        📍 Lihat Lokasi Toko
+                    </a>
+
+                    <a href="tel:{{ vehicle.notelp }}"
+                        class="flex items-center gap-2 bg-teal text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center w-1/2">
+                        📞 Hubungi Toko
+                    </a>
+                </div>
 
                 <a href="{% if next_page == 'bookmark' %}{% url 'bookmark:bookmarked_vehicles' %}{% else %}{% url 'sewajual:vehicle_list' %}{% endif %}"
                     class="inline-flex items-center gap-2 bg-dark-gray text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-dark-blue hover:-translate-y-0.5 shadow-md justify-center">
