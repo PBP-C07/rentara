@@ -5,11 +5,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods, require_POST
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
-from .models import Vehicle, Katalog
+from .models import Vehicle
 from joinpartner.models import Partner
 from bookmark.models import Bookmark
 from .forms import VehicleForm
-import json
 
 def format_price(value):
     try:
@@ -64,12 +63,10 @@ def add_vehicle(request):
         if form.is_valid():
             vehicle = form.save(commit=False)
             vehicle.toko = form.cleaned_data['toko']
+            # Get partner based on toko and set it
+            partner = get_object_or_404(Partner, toko=vehicle.toko)
+            vehicle.partner = partner
             vehicle.save()
-            
-            Katalog.objects.create(
-                vehicle=vehicle,
-                owner=get_object_or_404(Partner, toko=vehicle.toko)
-            )
 
             return JsonResponse({
                 'status': 'success',
@@ -124,60 +121,17 @@ def delete_vehicle(request, pk):
     })
 
 def show_json(request):
-    data = Katalog.objects.all()
+    data = Vehicle.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml(request):
-    data = Katalog.objects.all()
+    data = Vehicle.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json_by_id(request, id):
-    data = Katalog.objects.filter(pk=id)
+    data = Vehicle.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
-    data = Katalog.objects.filter(pk=id)
+    data = Vehicle.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
-@csrf_exempt
-def create_katalog_flutter(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            
-            vehicle = Vehicle.objects.create(
-                toko=data["toko"],
-                merk=data["merk"],
-                tipe=data["tipe"],
-                warna=data["warna"],
-                jenis_kendaraan=data["jenis_kendaraan"],
-                harga=data["harga"],
-                status=data["status"],
-                notelp=data.get("notelp", None),
-                bahan_bakar=data["bahan_bakar"],
-                link_lokasi=data["link_lokasi"],
-                link_foto=data["link_foto"]
-            )
-            
-            owner = get_object_or_404(Partner, pk=data["owner_id"])
-            
-            new_katalog = Katalog.objects.create(
-                vehicle=vehicle,
-                owner=owner
-            )
-            
-            new_katalog.save()
-            
-            return JsonResponse({
-                "status": "success",
-                "message": "Katalog entry created successfully"
-            }, status=200)
-        except Exception as e:
-            return JsonResponse({
-                "status": "error",
-                "message": str(e)
-            }, status=400)
-    return JsonResponse({
-        "status": "error",
-        "message": "Invalid request method"
-    }, status=401)

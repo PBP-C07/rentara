@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from main.models import Vehicle
+from sewajual.models import Vehicle
 from joinpartner.models import Partner
 
 class VehicleForm(ModelForm):
