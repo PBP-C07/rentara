@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Katalog
+from .models import Vehicle
 
-admin.site.register(Katalog)
+admin.site.register(Vehicle)
