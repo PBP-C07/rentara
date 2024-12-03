@@ -257,14 +257,7 @@
         const gridContainer = document.querySelector('.grid');
         const cards = Array.from(gridContainer.querySelectorAll('.card'));
 
-        cards.sort((a, b) => {
-            const id1 = parseInt(a.dataset.vehicleId);
-            const id2 = parseInt(b.dataset.vehicleId);
-            return id2 - id1;
-        });
-
         gridContainer.innerHTML = '';
-
         cards.forEach(card => {
             gridContainer.appendChild(card);
         });
@@ -394,39 +387,42 @@
     async function deleteVehicle(vehicleId) {
         if (!confirm('Anda yakin ingin menghapus produk ini?')) return;
 
-        await fetch(`/vehicles/adm/${vehicleId}/delete/`, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    const card = document.querySelector(`[data-vehicle-id="${vehicleId}"]`);
-
-                    card.classList.add('translate-y-4', 'opacity-0');
-
-                    setTimeout(() => {
-                        card.remove();
-
-                        const gridContainer = document.querySelector('.grid');
-                        if (!gridContainer.children.length) {
-                            gridContainer.innerHTML = '<p class="text-dark-gray text-center col-span-full text-sm">Tidak ada data kendaraan.</p>';
-                        } else {
-                            sortCards();
-                        }
-                    }, 300);
-
-                    alert(data.message);
-                } else {
-                    alert(data.message || 'Terjadi kesalahan saat menghapus data!');
+        try {
+            const response = await fetch(`/vehicles/adm/${vehicleId}/delete/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan saat menghapus data!');
             });
+
+            const data = await response.json();
+
+            if (data.status === 'success') {
+                const card = document.querySelector(`[data-vehicle-id="${vehicleId}"]`);
+                if (!card) {
+                    console.error('Card not found');
+                    return;
+                }
+
+                card.classList.add('translate-y-4', 'opacity-0');
+
+                setTimeout(() => {
+                    card.remove();
+
+                    const gridContainer = document.querySelector('.grid');
+                    if (gridContainer.children.length === 0) {
+                        gridContainer.innerHTML = '<p class="text-dark-gray text-center col-span-full text-sm">Tidak ada data kendaraan.</p>';
+                    }
+                }, 300);
+
+                alert(data.message);
+            } else {
+                alert(data.message || 'Terjadi kesalahan saat menghapus data!');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menghapus data!');
+        }
     }
 </script>
 {% endblock content %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Partner
-from main.models import Vehicle
+from sewajual.models import Vehicle
 from django.contrib.auth.decorators import login_required
 from .forms import PartnerForm, VehicleForm
 from django.http import HttpResponseRedirect, HttpResponseForbidden
@@ -14,7 +14,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
-from main.models import Vehicle
 
 @login_required(login_url='/login')
 def show_vehicle(request):
