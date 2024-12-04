@@ -135,3 +135,30 @@ def show_json_by_id(request, id):
 def show_xml_by_id(request, id):
     data = Vehicle.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+import json
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_vehicle = Vehicle.objects.create(
+            toko=data["toko"],
+            merk=data["merk"],
+            tipe=data["tipe"],
+            warna=data["warna"],
+            jenis_kendaraan=data["jenis_kendaraan"],
+            harga=int(data["harga"]),
+            status=data["status"],
+            notelp=data.get("notelp"),
+            bahan_bakar=data["bahan_bakar"],
+            link_lokasi=data["link_lokasi"],
+            link_foto=data["link_foto"],
+            partner=Partner.objects.get(id=data["partner_id"]) if "partner_id" in data else None
+        )
+
+        new_vehicle.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
