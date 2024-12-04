@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'navbar_admin.html' %}
+<div class="container mx-auto p-6 bg-light-sage">
+    <h1 class="text-3xl font-bold mb-8 text-center text-dark-blue">Edit Driver</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renders the form fields as paragraphs -->
+
+        <button type="submit" class="btn bg-dark-blue text-white mt-4 w-full hover:bg-teal">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

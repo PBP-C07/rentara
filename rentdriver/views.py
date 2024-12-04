@@ -1,4 +1,5 @@
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from rentdriver.forms import DriverForm
@@ -30,33 +31,40 @@ def show_main(request):
         'driver_entries': drivers,
     }
 
-    return render(request, "rentdriver.html", context)
+    return render(request, "rentdriver.html", {'driver_entries': drivers, 'user': request.user})
 
-from django.http import JsonResponse
-
+from django.shortcuts import render
+import json
 
 @staff_member_required
-@login_required(login_url='main:login')
+def manage_drivers(request):
+    load_drivers_from_json()
+    drivers = Driver.objects.all()
+    
+    # Convert QuerySet to a list of dictionaries, converting UUID to string
+    drivers_list = [
+        {
+            'id': str(driver.id),  # Convert UUID to string
+            'name': driver.name,
+            'phone_number': driver.phone_number,
+            'vehicle_type': driver.vehicle_type,
+            'experience_years': driver.experience_years
+        }
+        for driver in drivers
+    ] 
+    return render(request, 'manage_driver.html', {'driver_entries': json.dumps(drivers_list), 'user': request.user})
+
+@staff_member_required
 def edit_driver(request, driver_id):
-    driver = get_object_or_404(Driver, id=driver_id)
+    driver = get_object_or_404(Driver, id=driver_id)  # Fetch the driver by UUID
+
     if request.method == 'POST':
         form = DriverForm(request.POST, instance=driver)
         if form.is_valid():
             form.save()
-            if request.is_ajax():
-                # Send a JSON response if the request is AJAX
-                return JsonResponse({
-                    'success': True,
-                    'name': driver.name,
-                    'phone_number': driver.phone_number,
-                    'vehicle_type': driver.vehicle_type,
-                    'experience_years': driver.experience_years,
-                })
-            return redirect('show_main')
+            return redirect('rentdriver:manage_drivers')  # Redirect back to driver list after saving
     else:
-        form = DriverForm(instance=driver)
+        form = DriverForm(instance=driver)  # Pre-fill form with driver data
 
-    if request.is_ajax():
-        # Render the form as HTML for an AJAX GET request
-        return render(request, 'partials/edit_driver_form.html', {'form': form, 'driver': driver})
-    return render(request, 'edit_driver.html', {'form': form, 'driver': driver})
+    return render(request, 'edit_driver_form.html', {'form': form, 'driver': driver})
+
