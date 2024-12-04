@@ -29,6 +29,8 @@
                         Partner</a>
                     <a href="{% url 'sewajual:admin_vehicle_list' %}" class="text-dark-gray hover:text-teal">Manage
                         Product</a>
+                    <a href="{% url 'rentdriver:manage_drivers' %}" class="text-dark-gray hover:text-teal">Manage
+                        Driver</a>
                     <a href="#" class="text-dark-gray hover:text-teal">Report</a>
                 </div>
             </div>
@@ -81,6 +83,8 @@
                     class="block px-3 py-2 text-dark-gray hover:text-teal">List Partner</a>
                 <a href="{% url 'sewajual:admin_vehicle_list' %}"
                     class="block px-3 py-2 text-dark-gray hover:text-teal">Manage Product</a>
+                <a href="{% url 'rentdriver:manage_drivers' %}"
+                class="block px-3 py-2 text-dark-gray hover:text-teal">Manage Driver</a>
                 <a href="#" class="block px-3 py-2 text-dark-gray hover:text-teal">Report</a>
 
                 {% if user.is_authenticated %}
