@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'navbar_admin.html' %}
+<div class="container mx-auto p-6 bg-light-sage">
+    <h1 class="text-3xl font-bold mb-8 text-center text-dark-blue">Edit Drivers</h1>
+    
+    <div id="driver-cards" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <!-- Cards will be dynamically injected here -->
+    </div>
+</div>
+
+<script>
+    // Get the driver data from the context
+    const drivers = JSON.parse('{{ driver_entries|safe }}');
+
+    // Container where cards will be rendered
+    const driverContainer = document.getElementById('driver-cards');
+
+    drivers.forEach(driver => {
+        const card = document.createElement('div');
+        card.className = 'driver-card bg-white rounded-lg shadow-lg p-4 flex flex-col justify-between';
+
+        card.innerHTML = `
+            <div>
+                <h2 class="text-xl font-semibold text-teal">${driver.name}</h2>
+                <p class="text-dark-gray mt-2">
+                    <strong>Phone:</strong> ${driver.phone_number}<br>
+                    <strong>Vehicle:</strong> ${driver.vehicle_type}<br>
+                    <strong>Experience:</strong> ${driver.experience_years} years
+                </p>
+            </div>
+            <form action="/edit_driver/${driver.id}/" method="GET">
+                <button type="submit" class="btn bg-dark-blue text-white mt-4 w-full hover:bg-teal">Edit</button>
+            </form>
+        `;
+        
+        driverContainer.appendChild(card);
+    });
+</script>
+{% endblock %}
