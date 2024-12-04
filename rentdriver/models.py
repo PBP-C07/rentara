@@ -9,7 +9,7 @@ class Driver(models.Model):
     phone_number = models.CharField(max_length=15)
     vehicle_type = models.CharField(max_length=50, choices=[
         ('car', 'Car'),
-        ('motorcycle', 'Motorcycle')
+        ('minibus', 'Minibus')
     ])
 
     EXPERIENCE_CHOICES = [
