@@ -104,24 +104,22 @@ def edit_vehicle(request, pk):
 
     return render(request, 'edit_vehicle.html', {'form': form, 'vehicle': vehicle})
 
-@staff_member_required
+# @staff_member_required
 @csrf_exempt
 def delete_vehicle(request, pk):
     if request.method == 'POST':
-        vehicle = Vehicle.objects.get(pk=pk)
-        vehicle.delete()
-        return JsonResponse({
-            'status': 'success',
-            'message': 'Kendaraan berhasil dihapus'
-        })
-        
+            vehicle = Vehicle.objects.get(pk=pk)
+            vehicle.delete()
+            return JsonResponse({'status': 'success',
+                'message': 'Kendaraan berhasil dihapus'})
+                
     return JsonResponse({
         'status': 'error',
         'message': 'Invalid request method'
-    })
+    }, status=405)
 
 def show_json(request):
-    data = Vehicle.objects.all()
+    data = list(Vehicle.objects.all())
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml(request):
@@ -158,6 +156,7 @@ def create_product_flutter(request):
         )
 
         new_vehicle.save()
+
 
         return JsonResponse({"status": "success"}, status=200)
     else:
