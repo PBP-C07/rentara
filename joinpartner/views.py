@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from django.core import serializers
 from .models import Partner
 from sewajual.models import Vehicle
 from django.contrib.auth.decorators import login_required
@@ -14,6 +16,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
+import json
+from django.http import JsonResponse
 
 @login_required(login_url='/login')
 def show_vehicle(request):
@@ -141,6 +145,11 @@ def join_partner(request):
 
     return render(request, 'join_partner.html')
 
+@login_required(login_url='/login')
+def check_partner_status(request):
+    is_partner = Partner.objects.filter(user=request.user).exists()
+    return JsonResponse({'is_partner': is_partner})
+
 
 @login_required(login_url='/login')
 def edit_product(request, product_id):
@@ -257,5 +266,67 @@ def delete_partner(request, partner_id):
         partner.delete()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False}, status=400)
+
+def show_partner_json(request):
+    data=Partner.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_vehicle_partner(request):
+    partner = get_object_or_404(Partner, user=request.user)
+    data=Vehicle.objects.filter(toko=partner.toko)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@csrf_exempt
+def create_partner_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        new_partner = Partner.objects.create(
+            user=request.user,
+            toko=data["toko"],
+            link_lokasi=int(data["linkLokasi"]),
+            noTelp=data["noTelp"]
+        )
+
+        new_partner.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+    
+@csrf_exempt
+def create_vehicle_flutter(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+
+            user = request.user
+
+            if not hasattr(user, 'partner'):
+                return JsonResponse({"status": "error", "message": "User is not a partner"}, status=403)
+
+            partner = get_object_or_404(Partner, user=request.user)
+
+            new_vehicle = Vehicle.objects.create(
+                link_foto=data.get('link_foto'),
+                merk=data.get('merk'),
+                tipe=data.get('tipe'),
+                jenis_kendaraan=data.get('jenis_kendaraan'),
+                warna=data.get('warna'),
+                harga=data.get('harga'),
+                status=data.get('status'),
+                bahan_bakar=data.get('bahan_bakar'),
+                toko=partner.toko,
+                notelp=partner.notelp,
+                link_lokasi=partner.link_lokasi,
+            )
+
+            new_vehicle.save()
+
+            return JsonResponse({"status": "success"}, status=200)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid method"}, status=401)
+
 #ini test
 #dummy

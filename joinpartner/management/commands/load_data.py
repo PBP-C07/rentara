@@ -3,7 +3,7 @@ import uuid
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from joinpartner.models import Partner
-from main.models import Vehicle
+from sewajual.models import Vehicle
 
 class Command(BaseCommand):
     help = 'Load data from JSON file into the database'
@@ -53,7 +53,8 @@ class Command(BaseCommand):
                     status=item['fields'].get('status', ''),  # Default ke 'Sewa' jika tidak disediakan
                     toko=item['fields']['toko'],
                     notelp=item['fields']['notelp'],
-                    link_lokasi=item['fields']['link_lokasi']
+                    link_lokasi=item['fields']['link_lokasi'],
+                    partner = partner,
                 )
 
                 # Vehicles.objects.create(
