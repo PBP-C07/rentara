@@ -1,5 +1,5 @@
 from django.urls import path,include
-from joinpartner.views import show_vehicle, join_partner, add_product, delete_product, edit_product, manage_partners, approve_partner, reject_partner, pending_approval,rejected, list_partner, delete_partner
+from joinpartner.views import show_vehicle, join_partner, add_product, delete_product, edit_product, manage_partners, approve_partner, reject_partner, pending_approval,rejected, list_partner, delete_partner, show_partner_json, show_vehicle_partner, check_partner_status, create_vehicle_flutter
 
 app_name = 'joinpartner'
 
@@ -15,4 +15,8 @@ urlpatterns = [path('vehicles/show/', show_vehicle, name='show_vehicle'),
     path('rejected/', rejected, name='rejected'),
     path('list_partner/', list_partner, name='list_partner'),
     path('delete_partner/<uuid:partner_id>/', delete_partner, name='delete_partner'),
+    path('json_by_partner/',show_vehicle_partner, name='show_json_byPartner'),
+    path('partner_json/', show_partner_json, name='show_partner_json'),
+    path('check_status/', check_partner_status, name='check_status'),
+    path('create_vehicle_flutter/', create_vehicle_flutter, name='create_vehicle_flutter'),
     ]
