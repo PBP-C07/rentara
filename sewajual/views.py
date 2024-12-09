@@ -122,17 +122,12 @@ def show_json(request):
     data = list(Vehicle.objects.all())
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-def show_xml(request):
-    data = Vehicle.objects.all()
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
-def show_json_by_id(request, id):
-    data = Vehicle.objects.filter(pk=id)
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-
-def show_xml_by_id(request, id):
-    data = Vehicle.objects.filter(pk=id)
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+@csrf_exempt
+@login_required
+def get_stores(request):
+    stores = Partner.objects.filter(status='Approved')
+    store_list = [{"toko": store.toko} for store in stores]  
+    return JsonResponse(store_list, safe=False)
 
 import json
 @csrf_exempt
