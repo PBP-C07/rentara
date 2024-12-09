@@ -18,6 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import strip_tags
 import json
 from django.http import JsonResponse
+import uuid
 
 @login_required(login_url='/login')
 def show_vehicle(request):
@@ -327,6 +328,115 @@ def create_vehicle_flutter(request):
             return JsonResponse({"status": "error", "message": str(e)}, status=400)
     else:
         return JsonResponse({"status": "error", "message": "Invalid method"}, status=401)
+
+@login_required(login_url='/login')
+def get_partner(request):
+    if request.method == 'GET':
+        try:
+            # Contoh data
+            partner = get_object_or_404(Partner, user=request.user)
+            data = {
+                'status': partner.status,
+                'toko': partner.toko,
+                'notelp': partner.notelp,
+                'link_lokasi': partner.link_lokasi,
+            }
+            return JsonResponse(data)
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)
+
+@login_required(login_url='/login')
+def get_detail_vehicle(request, vehicle_id):
+    print(f"Received vehicle_id: " + vehicle_id)
+    if request.method == 'GET':
+        try:
+            # Convert the vehicle_id to a UUID
+            vehicle_id = uuid.UUID(vehicle_id)
+
+            # Get the Vehicle instance
+            vehicleInstance = get_object_or_404(Vehicle, id=vehicle_id)
+            
+            # Get the Partner instance for the current user
+            
+            # Prepare the response data
+            data = {
+                'id': str(vehicleInstance.id),  # Convert UUID to string
+                'toko': vehicleInstance.toko,
+                'merk': vehicleInstance.merk,
+                'tipe': vehicleInstance.tipe,
+                'warna': vehicleInstance.warna,
+                'jenis_kendaraan': vehicleInstance.jenis_kendaraan,
+                'harga': vehicleInstance.harga,
+                'status': vehicleInstance.status,
+                'notelp': vehicleInstance.notelp,
+                'bahan_bakar': vehicleInstance.bahan_bakar,
+                'link_lokasi': vehicleInstance.link_lokasi,
+                'link_foto': vehicleInstance.link_foto,
+                # Only return the partner's ID or other relevant data
+            }
+            print(f"Returning vehicle data: {data}")
+            return JsonResponse(data)
+        except ValueError:
+            # Handle invalid UUID format
+            return JsonResponse({'status': 'error', 'message': 'Invalid vehicle ID format'}, status=400)
+        except Vehicle.DoesNotExist:
+            # Handle case where vehicle is not found
+            return JsonResponse({'status': 'error', 'message': 'Vehicle not found'}, status=404)
+        except Exception as e:
+            # Handle other exceptions
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+@csrf_exempt
+@login_required(login_url='/login')
+def edit_vehicle_flutter(request, vehicle_id):
+    if request.method == 'POST':
+        try:
+            print(f"Received vehicle ID: {vehicle_id}")
+            print(f"Request body: {request.body}")
+            
+            vehicle_id = uuid.UUID(vehicle_id)
+            data = json.loads(request.body)
+
+            user = request.user
+            if not hasattr(user, 'partner'):
+                return JsonResponse({"status": "error", "message": "User is not a partner"}, status=403)
+
+            vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+
+            # Update vehicle details
+            vehicle.link_foto = data.get('link_foto', vehicle.link_foto)
+            vehicle.merk = data.get('merk', vehicle.merk)
+            vehicle.tipe = data.get('tipe', vehicle.tipe)
+            vehicle.jenis_kendaraan = data.get('jenis_kendaraan', vehicle.jenis_kendaraan)
+            vehicle.warna = data.get('warna', vehicle.warna)
+            vehicle.harga = data.get('harga', vehicle.harga)
+            vehicle.status = data.get('status', vehicle.status)
+            vehicle.bahan_bakar = data.get('bahan_bakar', vehicle.bahan_bakar)
+
+            vehicle.save()
+
+            return JsonResponse({"status": "success", "message": "Vehicle updated successfully"}, status=200)
+        except Exception as e:
+            print(f"Error: {e}")
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid method"}, status=405)
+    
+def delete_vehicle_flutter(request, vehicle_id):
+    if request.method == 'GET':
+        try:
+            # Mengonversi vehicle_id menjadi UUID
+            vehicle_id = uuid.UUID(vehicle_id)
+            # Mengambil objek kendaraan berdasarkan ID
+            vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+            # Menghapus kendaraan
+            vehicle.delete()
+            # Mengembalikan response JSON yang menandakan sukses
+            return JsonResponse({'message': 'Vehicle deleted successfully'}, status=200)
+        except ValueError:
+            return JsonResponse({'error': 'Invalid vehicle ID format'}, status=400)
+
 
 #ini test
 #dummy
