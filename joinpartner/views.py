@@ -146,10 +146,24 @@ def join_partner(request):
 
     return render(request, 'join_partner.html')
 
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .models import Partner  # Pastikan model Partner diimpor dari lokasi yang tepat
+
 @login_required(login_url='/login')
 def check_partner_status(request):
-    is_partner = Partner.objects.filter(user=request.user).exists()
-    return JsonResponse({'is_partner': is_partner})
+    try:
+        partner = Partner.objects.get(user=request.user)
+        return JsonResponse({
+            'is_partner': True,
+            'status': partner.status,
+        })
+    except Partner.DoesNotExist:
+        return JsonResponse({
+            'is_partner': False,
+            'status': None,  # Atau gunakan nilai default lainnya jika diperlukan
+        })
+
 
 
 @login_required(login_url='/login')
@@ -237,9 +251,11 @@ def reject_partner(request, partner_id):
         return JsonResponse({'success': True})  # Mengembalikan respon JSON
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
+@login_required(login_url='/login')
 def pending_approval(request):
     return render(request, 'pending.html')
 
+@login_required(login_url='/login')
 def rejected(request):
     return render(request, 'rejected.html')
 
@@ -268,10 +284,12 @@ def delete_partner(request, partner_id):
         return JsonResponse({'success': True})
     return JsonResponse({'success': False}, status=400)
 
+@login_required(login_url='/login')
 def show_partner_json(request):
     data=Partner.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+@login_required(login_url='/login')
 def show_vehicle_partner(request):
     partner = get_object_or_404(Partner, user=request.user)
     data=Vehicle.objects.filter(toko=partner.toko)
@@ -281,11 +299,12 @@ def show_vehicle_partner(request):
 def create_partner_flutter(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        print(data)
         new_partner = Partner.objects.create(
             user=request.user,
-            toko=data["toko"],
-            link_lokasi=int(data["linkLokasi"]),
-            noTelp=data["noTelp"]
+            toko=data['store_name'],
+            link_lokasi=data['address'],
+            notelp=data['phone_number']
         )
 
         new_partner.save()
@@ -336,6 +355,7 @@ def get_partner(request):
             # Contoh data
             partner = get_object_or_404(Partner, user=request.user)
             data = {
+                'id' : partner.id,
                 'status': partner.status,
                 'toko': partner.toko,
                 'notelp': partner.notelp,
@@ -436,6 +456,61 @@ def delete_vehicle_flutter(request, vehicle_id):
             return JsonResponse({'message': 'Vehicle deleted successfully'}, status=200)
         except ValueError:
             return JsonResponse({'error': 'Invalid vehicle ID format'}, status=400)
+
+def delete_partner_flutter(request, partner_id):
+    if request.method == 'GET':
+        try:
+            # Mengonversi vehicle_id menjadi UUID
+            partner_id= uuid.UUID(partner_id)
+            # Mengambil objek kendaraan berdasarkan ID
+            partner = get_object_or_404(Partner, id=partner_id)
+            # Menghapus kendaraan
+            partner.delete()
+            # Mengembalikan response JSON yang menandakan sukses
+            return JsonResponse({'message': 'Partner deleted successfully'}, status=200)
+        except ValueError:
+            return JsonResponse({'error': 'Invalid partner ID format'}, status=400)
+        
+
+@login_required(login_url='/login')
+@csrf_exempt  # Allow POST requests without CSRF token for testing, but should be handled properly in production
+def edit_partner(request, partner_id):
+    if request.method == 'POST':
+        partner_id = uuid.UUID(partner_id)
+        try:
+            # Parse the incoming JSON request body
+            data = json.loads(request.body)
+
+            # Get the partner object
+            partner = get_object_or_404(Partner, id=partner_id)
+
+            # Update the partner fields with the new data
+            partner.status = data.get('status', partner.status)
+            partner.toko = data.get('toko', partner.toko)
+            partner.notelp = data.get('notelp', partner.notelp)
+            partner.link_lokasi = data.get('link_lokasi', partner.link_lokasi)
+
+            # Save the updated partner object
+            partner.save()
+
+            # Return the updated partner data in the response
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Partner details updated successfully',
+                'partner': {
+                    'id': partner.id,
+                    'status': partner.status,
+                    'toko': partner.toko,
+                    'notelp': partner.notelp,
+                    'link_lokasi': partner.link_lokasi,
+                }
+            })
+
+        except Exception as e:
+            # Return an error message if something goes wrong
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+    
+    return JsonResponse({'status': 'error', 'message': 'Invalid method'}, status=405)
 
 
 #ini test
