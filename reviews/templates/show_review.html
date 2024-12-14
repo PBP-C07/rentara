@@ -69,7 +69,7 @@
 </div>
 
 <script>
-  function addMoodEntry() {
+  function addReviewsEntry() {
     fetch("{% url 'reviews:create_reviews_ajax' %}", {
       method: "POST",
       body: new FormData(document.querySelector('#reviewEntryForm')),
@@ -81,7 +81,7 @@
     return false;
   }
 
-  document.getElementById("submitReviewEntry").addEventListener("click", addMoodEntry);
+  document.getElementById("submitReviewEntry").addEventListener("click", addReviewsEntry);
 
   const modal = document.getElementById('crudModal');
   const modalContent = document.getElementById('crudModalContent');

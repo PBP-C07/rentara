@@ -106,7 +106,8 @@ def add_product(request):
             bahan_bakar=bahan_bakar,
             toko = toko,
             notelp = notelp,
-            link_lokasi = link_lokasi# Make sure to include this field
+            link_lokasi = link_lokasi,
+            partner = partner# Make sure to include this field
         )
         new_vehicle.save()
         return JsonResponse({'success': True})
@@ -178,6 +179,7 @@ def edit_product(request, product_id):
             form.save()
             return JsonResponse({'success': True}, status=200)  # Success response
         else:
+            print(form.errors)
             # If the form is invalid, ensure original data is still passed
             return render(request, 'edit_product.html', {
                 'form': form,
