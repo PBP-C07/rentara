@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-iy%=fq-%&7t9)zdq0u#rq@@4lx0nd%rb#ai#t4@xe29s13wcig'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+PRODUCTION = os.getenv("PRODUCTION", False)
+DEBUG = not PRODUCTION
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "raisa-sakila-rentaraproject.pbp.cs.ui.ac.id", "10.0.2.2"]
 
@@ -58,13 +60,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'None'
 
 ROOT_URLCONF = 'rentara_project.urls'
 
@@ -145,7 +140,13 @@ else:
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", "https://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", 'http://localhost:65046']
+CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", "https://http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", 'http://localhost:65046']
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:65046',  # Add your Flutter app URL
     'http://127.0.0.1:65046',  # Add your Flutter app URL
