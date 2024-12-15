@@ -104,7 +104,7 @@ def edit_vehicle(request, pk):
 
     return render(request, 'edit_vehicle.html', {'form': form, 'vehicle': vehicle})
 
-# @staff_member_required
+@staff_member_required
 @csrf_exempt
 def delete_vehicle(request, pk):
     if request.method == 'POST':
@@ -156,3 +156,44 @@ def create_product_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+    
+@csrf_exempt
+def edit_vehicle_flutter(request, pk):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            vehicle = get_object_or_404(Vehicle, pk=pk)
+            
+            vehicle.toko = data["toko"]
+            vehicle.merk = data["merk"]
+            vehicle.tipe = data["tipe"]
+            vehicle.warna = data["warna"]
+            vehicle.jenis_kendaraan = data["jenis_kendaraan"]
+            vehicle.harga = int(data["harga"])
+            vehicle.status = data["status"]
+            vehicle.notelp = data["notelp"]
+            vehicle.bahan_bakar = data["bahan_bakar"]
+            vehicle.link_lokasi = data["link_lokasi"]
+            vehicle.link_foto = data["link_foto"]
+            
+            vehicle.save()
+            
+            return JsonResponse({
+                "status": "success",
+                "message": "Vehicle updated successfully!"
+            })
+        except Vehicle.DoesNotExist:
+            return JsonResponse({
+                "status": "error",
+                "message": "Vehicle not found"
+            }, status=404)
+        except Exception as e:
+            return JsonResponse({
+                "status": "error",
+                "message": str(e)
+            }, status=400)
+    
+    return JsonResponse({
+        "status": "error",
+        "message": "Invalid request method"
+    }, status=405)
