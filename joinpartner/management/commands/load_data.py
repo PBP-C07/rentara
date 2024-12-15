@@ -39,23 +39,25 @@ class Command(BaseCommand):
                         'status': 'Approved'  # Atau status lain yang Anda inginkan
                     }
                 )
+
+                
                 
                 # Kemudian, buat kendaraan yang terkait dengan partner
-                Vehicle.objects.create(
-                    id = item['pk'],
-                    link_foto=item['fields']['link_foto'],
-                    merk=item['fields']['merk'],
-                    tipe=item['fields']['tipe'],
-                    jenis_kendaraan=item['fields']['jenis_kendaraan'],
-                    warna=item['fields']['warna'],
-                    harga=item['fields']['harga'],
-                    bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
-                    status=item['fields'].get('status', ''),  # Default ke 'Sewa' jika tidak disediakan
-                    toko=item['fields']['toko'],
-                    notelp=item['fields']['notelp'],
-                    link_lokasi=item['fields']['link_lokasi'],
-                    partner = partner,
-                )
+                # Vehicle.objects.create(
+                #     id = item['pk'],
+                #     link_foto=item['fields']['link_foto'],
+                #     merk=item['fields']['merk'],
+                #     tipe=item['fields']['tipe'],
+                #     jenis_kendaraan=item['fields']['jenis_kendaraan'],
+                #     warna=item['fields']['warna'],
+                #     harga=item['fields']['harga'],
+                #     bahan_bakar=item['fields'].get('bahan_bakar', ''),  # Default ke string kosong jika tidak ada
+                #     status=item['fields'].get('status', ''),  # Default ke 'Sewa' jika tidak disediakan
+                #     toko=item['fields']['toko'],
+                #     notelp=item['fields']['notelp'],
+                #     link_lokasi=item['fields']['link_lokasi'],
+                #     partner = partner,
+                # )
 
                 # Vehicles.objects.create(
                 #     partner=partner,
