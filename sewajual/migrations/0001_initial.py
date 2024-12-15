@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        # ('joinpartner', '0001_initial'),
+        ('joinpartner', '0001_initial'),
         ('main', '0001_initial'),
     ]
 
