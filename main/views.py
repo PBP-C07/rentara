@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -26,28 +26,35 @@ def register(request):
     return render(request, 'register.html', context)
 
 def login_user(request):
-   if request.method == 'POST':
-      form = AuthenticationForm(data=request.POST)
-
-      if form.is_valid():
-            user = form.get_user()
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(username=username, password=password)
+        
+        if user is not None:
             login(request, user)
-
+            
             if not request.POST.get('remember_me'):
                 request.session.set_expiry(0)
-
             else:
                 request.session.set_expiry(1209600)
-                
-            if user.is_staff:
-                return HttpResponseRedirect(reverse('joinpartner:manage_partners'))
             
-            return redirect('main:show_main')
+            return JsonResponse({
+                'status': True,
+                'username': user.username,
+                'is_staff': user.is_staff, 
+                'message': 'Successfully Logged In!'
+            })
+        else:
+            return JsonResponse({
+                'status': False,
+                'message': 'Invalid credentials.'
+            }, status=401)
 
-   else:
-      form = AuthenticationForm(request)
-   context = {'form': form}
-   return render(request, 'login.html', context)
+    if request.method == 'GET':
+        form = AuthenticationForm()
+        return render(request, 'login.html', {'form': form})
 
 def logout_user(request):
     logout(request)
