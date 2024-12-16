@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-iy%=fq-%&7t9)zdq0u#rq@@4lx0nd%rb#ai#t4@xe29s13wcig
 PRODUCTION = os.getenv("PRODUCTION", False)
 DEBUG = not PRODUCTION
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "raisa-sakila-rentaraproject.pbp.cs.ui.ac.id", "10.0.2.2", 'web-production-7d15.up.railway.app']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "raisa-sakila-rentaraproject.pbp.cs.ui.ac.id", "10.0.2.2", 'web-production-7d15.up.railway.app', 'rentara-production.up.railway.app']
 
 
 # Application definition
@@ -140,7 +140,7 @@ else:
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", "https://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/",  "https://web-production-7d15.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", "https://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/",  "https://web-production-7d15.up.railway.app", "https://rentara-production.up.railway.app"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_SECURE = True
