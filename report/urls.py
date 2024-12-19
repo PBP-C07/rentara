@@ -3,12 +3,11 @@ from report.views import create_report_entry, show_json, show_xml, show_json_by_
 
 app_name = 'report'
 
-app_name = 'report'
 
 urlpatterns = [
-    path('create_report_entry', create_report_entry, name='create_report_entry'),
-    path('xml/', show_xml, name='show_xml'),
-    path('json/', show_json, name='show_json'), 
+    path('report', create_report_entry, name='create_report_entry'),
+    path('report/xml/', show_xml, name='show_xml'),
+    path('report/json/', show_json, name='show_json'), 
     path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
     path('report-entry-ajax', report_entry_ajax, name='report_entry_ajax'),

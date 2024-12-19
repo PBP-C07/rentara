@@ -48,7 +48,7 @@ def add_report(request):
             report_entry.user = request.user
             report_entry.save()
             messages.success(request, 'Laporan berhasil dibuat!')
-            return redirect('report:create_report_entry') 
+            return redirect('report:report') 
     
     context = {
         'form': form,
