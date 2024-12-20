@@ -52,12 +52,31 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div
-                class="relative rounded-2xl overflow-hidden shadow-lg group transition-transform duration-300 hover:scale-[1.02] mx-auto md:mx-0 w-[500px] h-[400px]">
-                <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
-                    class="w-full h-full object-cover">
-            </div>
+            <div class="flex flex-col items-center">
+                <div
+                    class="relative rounded-2xl overflow-hidden shadow-lg group transition-transform duration-300 hover:scale-[1.02] mx-auto md:mx-0 w-[500px] h-[400px]">
+                    <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
+                        class="w-full h-full object-cover">
+                </div>
 
+                <!-- Reviews Section -->
+                <div
+                    class="mt-6 bg-white rounded-xl shadow p-4 hover:translate-x-1 transition-transform duration-200 w-full max-w-md md:max-w-full">
+                    <span class="font-semibold text-dark-gray">Review</span>
+                    <div class="mt-1 flex flex-col gap-4">
+                        {% for review in reviews %}
+                        <div class="p-4 bg-light-sage rounded-lg shadow">
+                            <p class="text-teal font-medium">{{ review.user.username }}</p>
+                            <p class="text-dark-gray">{{ review.content }}</p>
+                        </div>
+                        {% endfor %}
+
+                        {% if reviews|length == 0 %}
+                        <span class="text-teal font-medium">Belum ada review untuk {{ vehicle.merk }} {{ vehicle.tipe }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
 
             <div class="flex flex-col gap-4">
                 <div
