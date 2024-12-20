@@ -1,5 +1,5 @@
 from django.urls import path
-from reviews.views import show_reviews, create_reviews, edit_review, delete_review, create_reviews_ajax
+from reviews.views import reviews_by_vehicle, show_reviews, create_reviews, edit_review, delete_review, create_reviews_ajax
 from reviews.views import show_xml, show_json, show_xml_by_id, show_json_by_id
 
 app_name = 'reviews'
@@ -14,4 +14,5 @@ urlpatterns = [
     path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
     path('create-reviews-ajax/', create_reviews_ajax, name='create_reviews_ajax'),
+    path('reviews-by-vehicle/', reviews_by_vehicle, name='reviews_by_vehicle'),
 ]

@@ -32,6 +32,15 @@
                   {% endfor %}
                   <input type="hidden" id="rating-input" name="rating" value="">
                 </div>
+              {% elif field.name == 'vehicle' %}
+              <select id="vehicle-select" name="vehicle" class="select2-dropdown w-full bg-gray-100 border-gray-300 rounded-md" style="width: 100% !important;" disabled>
+                {% for vehicle in vehicles %}
+                  <option value="{{ vehicle.id }}" {% if vehicle.id == form.vehicle.value %}selected{% endif %}>
+                    {{ vehicle.merk }} {{ vehicle.tipe }} {{ vehicle.warna }}
+                  </option>
+                {% endfor %}
+              </select>
+              <input type="hidden" name="vehicle" value="{{ form.vehicle.value }}">              
               {% else %}
                 <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="{{ field.label }}">
               {% endif %}

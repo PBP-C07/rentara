@@ -22,7 +22,14 @@
     </div>
 
     <div class="flex justify-between items-center" style="color: #243642; font-size: 16px; font-style: normal; font-weight: 400; line-height: normal;">
-        <span>{{ review_entry.user }} • {{ review_entry.time|date:"d/m/y" }}</span>
+        <div>
+            <span style="display: block;">
+                {{ review_entry.user }} • {{ review_entry.time|date:"d/m/y" }}
+            </span>
+            <span>
+                {{ review_entry.vehicle.merk }} {{ review_entry.vehicle.tipe }} {{ review_entry.vehicle.warna }}
+            </span>
+        </div>
         
         {% if review_entry.user == request.user %}
             <div class="flex space-x-3">

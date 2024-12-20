@@ -6,6 +6,7 @@ import uuid
 class Reviews(models.Model):
     title = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, null=True, related_name='reviews')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     time = models.DateTimeField(auto_now_add=True)
     
@@ -19,6 +20,3 @@ class Reviews(models.Model):
 
     rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
     description = models.TextField()
-
-    def __str__(self):
-        return f"{self.title} - {self.vehicle}"
