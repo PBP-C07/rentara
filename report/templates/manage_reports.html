@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar_admin.html' %}
+
+<div class="container">
+    <h1 class="page-title">Kelola Laporan</h1>
+
+    <!-- Tampilkan Pesan -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="message {{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- Tabel Laporan -->
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Kendaraan</th>
+                <th>Masalah</th>
+                <th>Deskripsi</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in pending_reports %}
+            <tr>
+                <td>{{ report.vehicle }}</td>
+                <td>{{ report.get_issue_type_display }}</td>
+                <td>{{ report.description }}</td>
+                <td>{{ report.get_status_display }}</td>
+                <td class="actions">
+                    <!-- Form Approve -->
+                    <form method="post" action="{% url 'report:approve_report' report.id %}" class="action-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success" onclick="return confirm('Yakin ingin approve laporan ini?')">
+                            Approve
+                        </button>
+                    </form>
+                    <!-- Form Reject -->
+                    <form method="post" action="{% url 'report:reject_report' report.id %}" class="action-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin reject laporan ini?')">
+                            Reject
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="empty-message">Tidak ada laporan yang pending.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Navigasi Kembali -->
+    <a href="{% url 'main:show_main' %}" class="btn btn-secondary">Kembali ke Halaman Utama</a>
+</div>
+
+<!-- Tambahkan CSS untuk konsistensi dengan desain -->
+<style>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-title {
+    color: #003d33;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #004d40;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #2e7d32;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #c62828;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #00695c;
+    color: #fff;
+    display: block;
+    text-align: center;
+    width: 200px;
+    margin: 20px auto 0;
+    text-decoration: none;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.styled-table thead th {
+    background-color: #004d40;
+    color: white;
+    text-align: left;
+    padding: 10px;
+}
+
+.styled-table tbody td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.empty-message {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+.action-form {
+    display: inline;
+    margin: 0 5px;
+}
+</style>
+
+{% endblock %}

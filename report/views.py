@@ -1,7 +1,7 @@
 import datetime
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required 
 from django.contrib.auth import authenticate, login
@@ -14,7 +14,8 @@ from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib.admin.views.decorators import staff_member_required
+from django.forms.models import modelform_factory
 
 @login_required(login_url='/login')  # Redirect to login page if not logged in
 def create_report_entry(request):
@@ -48,7 +49,7 @@ def add_report(request):
             report_entry.user = request.user
             report_entry.save()
             messages.success(request, 'Laporan berhasil dibuat!')
-            return redirect('report:report') 
+            return redirect('main:show_main') 
     
     context = {
         'form': form,
@@ -106,3 +107,55 @@ def report_entry_ajax(request):
     new_report.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+from django.db.models import Q
+from django.contrib.admin.views.decorators import staff_member_required
+
+@csrf_exempt
+@staff_member_required
+def manage_reports(request):
+    query = request.GET.get('query', '')  # Mendapatkan parameter pencarian dari URL
+    if query:
+        pending_reports = Report.objects.filter(
+            Q(issue_type__icontains=query) | Q(description__icontains=query),
+            status='Pending'  # Filter hanya laporan dengan status Pending
+        )
+    else:
+        pending_reports = Report.objects.filter(status='Pending')  # Ambil semua laporan Pending
+
+    context = {
+        'pending_reports': pending_reports,
+        'query': query,
+    }
+    return render(request, 'manage_reports.html', context)
+
+
+
+@staff_member_required
+def approve_report(request, report_id):
+    if request.method == 'POST':
+        report = get_object_or_404(Report, id=report_id)
+        if report.status == 'Pending':  # Hanya ubah jika status masih Pending
+            report.status = 'Approved'
+            report.save()
+            messages.success(request, f"Laporan dengan ID {report_id} berhasil di-approve.")
+            return redirect('report:manage_reports')
+        else:
+            messages.error(request, "Laporan ini sudah diproses sebelumnya.")
+            return redirect('report:manage_reports')
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@csrf_exempt
+@staff_member_required
+def reject_report(request, report_id):
+    if request.method == 'POST':
+        report = get_object_or_404(Report, id=report_id)
+        if report.status == 'Pending':  # Hanya ubah jika status masih Pending
+            report.status = 'Rejected'
+            report.save()
+            messages.success(request, f"Laporan dengan ID {report_id} berhasil di-reject.")
+            return redirect('report:manage_reports')
+        else:
+            messages.error(request, "Laporan ini sudah diproses sebelumnya.")
+            return redirect('report:manage_reports')
+    return JsonResponse({'error': 'Invalid request'}, status=400)

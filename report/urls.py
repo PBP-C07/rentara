@@ -1,5 +1,5 @@
 from django.urls import path
-from report.views import create_report_entry, show_json, show_xml, show_json_by_id, show_xml_by_id, report_entry_ajax, edit_report, delete_report, add_report
+from report.views import create_report_entry, show_json, show_xml, show_json_by_id, show_xml_by_id, report_entry_ajax, edit_report, delete_report, add_report, manage_reports, reject_report, approve_report
 
 app_name = 'report'
 
@@ -13,7 +13,8 @@ urlpatterns = [
     path('report-entry-ajax', report_entry_ajax, name='report_entry_ajax'),
     path('edit-report/<uuid:id>', edit_report, name='edit_report'),
     path('delete/<uuid:id>', delete_report, name='delete_report'), 
-    path('add_report', add_report, name='add_report'), 
-
-
+    path('add_report/', add_report, name='add_report'), 
+    path('manage_reports/', manage_reports, name='manage_reports'),
+    path('approve_report/<uuid:report_id>/', approve_report, name='approve_report'),
+    path('reject_report/<uuid:report_id>/', reject_report, name='reject_report'),
 ]
