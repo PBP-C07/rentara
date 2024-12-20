@@ -49,7 +49,7 @@ def add_report(request):
             report_entry.user = request.user
             report_entry.save()
             messages.success(request, 'Laporan berhasil dibuat!')
-            return redirect('main:show_main') 
+            return redirect('report:create_report_entry') 
     
     context = {
         'form': form,

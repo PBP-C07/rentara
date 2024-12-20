@@ -5,7 +5,7 @@ app_name = 'report'
 
 
 urlpatterns = [
-    path('report', create_report_entry, name='create_report_entry'),
+    path('show_report', create_report_entry, name='create_report_entry'),
     path('report/xml/', show_xml, name='show_xml'),
     path('report/json/', show_json, name='show_json'), 
     path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
