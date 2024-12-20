@@ -1,3 +1,4 @@
+from collections import defaultdict
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
@@ -24,6 +25,7 @@ def show_reviews(request):
 @login_required(login_url='/login')
 def create_reviews(request):
     form = ReviewsForm(request.POST or None)
+    vehicles = Vehicle.objects.all()
 
     if form.is_valid():
         review = form.save(commit=False)
@@ -31,16 +33,17 @@ def create_reviews(request):
         review.save()
         return redirect('reviews:show_reviews')
     
-    context = {'form': form}
+    context = {'form': form, 'vehicles': vehicles}
     return render(request, "create_review.html", context)
     
 def edit_review(request, id):
     review = Reviews.objects.get(pk = id)
+    vehicles = Vehicle.objects.all()
     form = ReviewsForm(request.POST or None, instance=review)
     if form.is_valid() and request.method == "POST":
         form.save()
         return HttpResponseRedirect(reverse('reviews:show_reviews'))
-    context = {'form': form}
+    context = {'form': form, 'vehicles': vehicles}
     return render(request, "edit_review.html", context)
 
 def delete_review(request, id):
@@ -113,3 +116,25 @@ def review_kendaraan(request, pk):
         'average_rating': average_rating,
     }
     return render(request, 'kendaraan_detail.html', context)
+
+def reviews_by_vehicle(request):
+    review_entries = Reviews.objects.select_related('vehicle').all()
+
+    grouped_reviews = defaultdict(list)
+    for review in review_entries:
+        vehicle_key = f"{review.vehicle.merk} {review.vehicle.tipe}"
+        grouped_reviews[vehicle_key].append(review)
+
+    vehicle_ratings = {
+        vehicle_key: {
+            "average_rating": Reviews.objects.filter(vehicle=review.vehicle).aggregate(Avg('rating'))['rating__avg'] or 0.0,
+            "reviews": reviews
+        }
+        for vehicle_key, reviews in grouped_reviews.items()
+    }
+
+    context = {
+        'vehicle_ratings': vehicle_ratings
+    }
+
+    return render(request, "reviews_by_vehicle.html", context)
