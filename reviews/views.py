@@ -8,6 +8,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.core import serializers
 from django.utils.html import strip_tags
+from django.db.models import Avg
+
+from sewajual.models import Vehicle
 
 def show_reviews(request):
     review_entries = Reviews.objects.all()
@@ -52,6 +55,7 @@ def review_list(request):
     for review in reviews:
         formatted_review = {
             'title': review.title,
+            'vehicle': review.vehicle,
             'user': review.user,
             'time': review.time.strftime("%d/%m/%y"),
             'rating': review.rating,
@@ -95,3 +99,17 @@ def create_reviews_ajax(request):
     new_review.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+def review_kendaraan(request, pk):
+    kendaraan = Vehicle.objects.get(pk=pk)
+    reviews = Reviews.objects.filter(kendaraan=kendaraan)
+
+    # Hitung rata-rata rating, default ke 0.0 jika tidak ada ulasan
+    average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0.0
+
+    context = {
+        'kendaraan': kendaraan,
+        'reviews': reviews,
+        'average_rating': average_rating,
+    }
+    return render(request, 'kendaraan_detail.html', context)

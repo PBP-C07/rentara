@@ -2,6 +2,8 @@
 {% load static %}
 {% block meta %}
 <title>Edit Review</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 {% endblock meta %}
 
 {% block content %}
@@ -17,7 +19,22 @@
               {{ field.label }}
             </label>
             <div class="w-full">
-              <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="{{ field.label }}">
+              {% if field.name == 'rating' %}
+                <!-- Bintang Rating -->
+                <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                  <!-- Menampilkan 5 bintang dengan for loop -->
+                  {% for i in "12345" %}
+                    <i 
+                      class="fas fa-star star-icon" 
+                      data-index="{{ i }}" 
+                      style="font-size: 45px; color: #D1D5DB; cursor: pointer; transition: color 0.3s;">
+                    </i>
+                  {% endfor %}
+                  <input type="hidden" id="rating-input" name="rating" value="">
+                </div>
+              {% else %}
+                <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="{{ field.label }}">
+              {% endif %}
             </div>
             {% if field.help_text %}
               <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
@@ -35,4 +52,36 @@
       </form>
     </div>
 </div>
+
+<!-- Script untuk interaksi bintang -->
+<script>
+  // Ambil semua elemen bintang
+  const stars = document.querySelectorAll('.star-icon');
+  const ratingInput = document.getElementById('rating-input');
+
+  // Tambahkan event listener untuk setiap bintang
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+      const rating = index + 1; // Rating berdasarkan bintang yang diklik
+      ratingInput.value = rating; // Set nilai rating ke input hidden
+      updateStars(rating); // Perbarui warna bintang
+    });
+  });
+
+  // Fungsi untuk memperbarui warna bintang
+  function updateStars(rating) {
+    stars.forEach((star, index) => {
+      if (index < rating) {
+        star.style.color = '#FFDE4D'; // Warna kuning untuk bintang yang dipilih
+      } else {
+        star.style.color = '#D1D5DB'; // Warna abu-abu untuk bintang yang belum dipilih
+      }
+    });
+  }
+
+  // Perbarui tampilan awal berdasarkan nilai form.rating.value
+  const initialRating = "";
+  updateStars(parseInt(initialRating) || 0);
+</script>
+
 {% endblock content %}

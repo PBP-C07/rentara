@@ -2,6 +2,8 @@
 
 {% block meta %}
 <title>Sewa dan Jual Kendaraan Mataram</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 <script>
     tailwind.config = {
         theme: {
@@ -71,9 +73,19 @@
                     </span>
                 </div>
 
-                <h2 class="text-base sm:text-xl font-bold text-dark-blue mb-3 leading-tight line-clamp-2">
-                    {{ vehicle.merk }} {{ vehicle.tipe }}
-                </h2>
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-base sm:text-xl font-bold text-dark-blue mb-0 leading-tight flex-grow">
+                        {{ vehicle.merk }} {{ vehicle.tipe }}
+                    </h2>
+                    <p class="font-bold text-dark-blue">
+                        {% if average_rating > 0 %}
+                            {{ average_rating|floatformat:1 }} / 5 ⭐
+                        {% else %}
+                            -
+                        {% endif %}
+                    </p>
+                
+                </div>
 
                 <div class="relative">
                     <img src="{{ vehicle.link_foto }}" alt="{{ vehicle.merk }} {{ vehicle.tipe }}"
