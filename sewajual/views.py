@@ -1,99 +1,45 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.admin.views.decorators import staff_member_required
+from .models import Vehicle
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods, require_POST
-from django.http import HttpResponse, JsonResponse
-from django.core import serializers
-from .models import Vehicle
-from joinpartner.models import Partner
-from bookmark.models import Bookmark
 from .forms import VehicleForm
 
-def format_price(value):
-    try:
-        formatted = str(int(float(value)))
-        result = ""
-        while len(formatted) > 3:
-            result = "." + formatted[-3:] + result
-            formatted = formatted[:-3]
-        return formatted + result
-    except (ValueError, TypeError):
-        return value
-
 def vehicle_list(request):
-    vehicles = list(Vehicle.objects.all())
-    for vehicle in vehicles:
-        vehicle.harga = format_price(vehicle.harga)
-    
+    vehicles = Vehicle.objects.all()
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
 @login_required(login_url='main:login')
 def full_info(request, pk):
     vehicle = get_object_or_404(Vehicle, pk=pk)
-    html_file = 'full_info.html'
-
-    vehicle.harga = format_price(vehicle.harga)
-    
-    is_bookmarked = False
-    if request.user.is_authenticated:
-        is_bookmarked = Bookmark.objects.filter(user=request.user, vehicle=vehicle).exists()
-
-    next_page = request.GET.get('next', 'vehicle_list')
-
-    return render(request, html_file, {
-        'vehicle': vehicle,
-        'is_bookmarked': is_bookmarked,
-        'next_page': next_page
-    })
+    return render(request, 'full_info.html', {'vehicle': vehicle})
 
 @staff_member_required
-@login_required(login_url='main:login')
 def admin_vehicle_list(request):
-    vehicles = list(Vehicle.objects.all())
-    form = VehicleForm()
-    return render(request, 'card_admin.html', {'vehicles': vehicles, 'form': form})
+   vehicles = Vehicle.objects.all()
+   return render(request, 'card_admin.html', {'vehicles': vehicles})
 
-@staff_member_required
+# @staff_member_required
 @csrf_exempt
-@require_POST
+@require_http_methods(["GET", "POST"])
 def add_vehicle(request):
-    try:
+    if request.method == "POST":
         form = VehicleForm(request.POST)
         if form.is_valid():
-            vehicle = form.save(commit=False)
-            vehicle.toko = form.cleaned_data['toko']
-            # Get partner based on toko and set it
-            partner = get_object_or_404(Partner, toko=vehicle.toko)
-            vehicle.partner = partner
-            vehicle.save()
+            form.save()
+            return redirect('sewajual:admin_vehicle_list')
+    else:
+        form = VehicleForm()
 
-            return JsonResponse({
-                'status': 'success',
-                'message': 'Kendaraan berhasil ditambahkan',
-                'id': str(vehicle.pk),
-                'merk': vehicle.merk,
-                'tipe': vehicle.tipe
-            })
-        else:
-            return JsonResponse({
-                'status': 'error',
-                'message': 'Form tidak valid!',
-                'errors': form.errors
-            }, status=400)
+    return render(request, 'vehicle_form.html', {'form': form})
 
-    except Exception as e:
-        return JsonResponse({
-            'status': 'error',
-            'message': str(e)
-        }, status=500)
-
-@staff_member_required
+# @staff_member_required
 @csrf_exempt
 @require_http_methods(["GET", "POST"])
 def edit_vehicle(request, pk):
     vehicle = get_object_or_404(Vehicle, pk=pk)
-
     if request.method == "POST":
         form = VehicleForm(request.POST, instance=vehicle)
         if form.is_valid():
@@ -102,36 +48,15 @@ def edit_vehicle(request, pk):
     else:
         form = VehicleForm(instance=vehicle)
 
-    return render(request, 'edit_vehicle.html', {'form': form, 'vehicle': vehicle})
+    return render(request, 'vehicle_form.html', {'form': form, 'vehicle': vehicle})
 
-@staff_member_required
+# @staff_member_required
 @csrf_exempt
+@require_POST
 def delete_vehicle(request, pk):
-    if request.method == 'POST':
-        vehicle = Vehicle.objects.get(pk=pk)
+    try:
+        vehicle = get_object_or_404(Vehicle, pk=pk)
         vehicle.delete()
-        return JsonResponse({
-            'status': 'success',
-            'message': 'Kendaraan berhasil dihapus'
-        })
-        
-    return JsonResponse({
-        'status': 'error',
-        'message': 'Invalid request method'
-    })
-
-def show_json(request):
-    data = Vehicle.objects.all()
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-
-def show_xml(request):
-    data = Vehicle.objects.all()
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
-def show_json_by_id(request, id):
-    data = Vehicle.objects.filter(pk=id)
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-
-def show_xml_by_id(request, id):
-    data = Vehicle.objects.filter(pk=id)
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+        return HttpResponse(b"DELETED", status=200)
+    except:
+        return HttpResponse(b"ERROR", status=500)
