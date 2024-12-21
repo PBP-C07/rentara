@@ -1,5 +1,5 @@
-from django.urls import path
-from .views import vehicle_list, full_info, admin_vehicle_list, add_vehicle, edit_vehicle, delete_vehicle
+from django.urls import path, include
+from .views import *
 
 app_name = 'sewajual'
 
@@ -10,4 +10,9 @@ urlpatterns = [
     path('vehicles/adm/add/', add_vehicle, name='add_vehicle'),
     path('vehicles/adm/<uuid:pk>/edit/', edit_vehicle, name='edit_vehicle'),
     path('vehicles/adm/<uuid:pk>/delete/', delete_vehicle, name='delete_vehicle'),
+    path('bookmarks/', include('bookmark.urls', namespace='bookmark')),
+    path('vehicle/json/', show_json, name='show_json'),
+    path('vehicle/create-flutter/', create_product_flutter, name='create_vehicle_flutter'),
+    path('vehicle/get-stores/', get_stores, name='get-stores'),
+    path('vehicle/edit-flutter/<uuid:pk>/', edit_vehicle_flutter, name='edit_vehicle_flutter'),
 ]
