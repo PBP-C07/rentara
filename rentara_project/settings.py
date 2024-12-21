@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-iy%=fq-%&7t9)zdq0u#rq@@4lx0nd%rb#ai#t4@xe29s13wcig
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "raisa-sakila-rentaraproject.pbp.cs.ui.ac.id", "10.0.2.2"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "raisa-sakila-rentaraproject.pbp.cs.ui.ac.id"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'reviews',
     'sewajual',
     'rentdriver'
+    'rentdriver'
 ]
 
 MIDDLEWARE = [
@@ -54,15 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'None'
 
 ROOT_URLCONF = 'rentara_project.urls'
 
@@ -78,7 +71,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'main.context_processors.store_owner_status',
             ],
         },
     },
@@ -132,13 +124,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'staticfiles/'
-if DEBUG:
-    STATICFILES_DIRS = [
-        BASE_DIR / 'static'
-    ]
-else:
-    STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = 'static/'
 if DEBUG:
     STATICFILES_DIRS = [
@@ -151,6 +136,4 @@ else:
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", "https://http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/"]
-
 CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/", "https://http://raisa-sakila-rentaraproject.pbp.cs.ui.ac.id/"]

@@ -2,37 +2,92 @@
 {% load static %}
 {% block meta %}
 <title>Add Review</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 {% endblock meta %}
 
 {% block content %}
 {% include 'navbar.html' %}
 <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
     <div class="bg-white shadow-md rounded-lg p-6">
-      <h1 class="text-3xl font-bold text-center mb-8 text-[#333333]">Add Your Review</h1>
-      <form method="POST" class="space-y-6">
-        {% csrf_token %}
-        {% for field in form %}
-          <div class="flex flex-col">
-            <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-black">
-              {{ field.label }}
-            </label>
-            <div class="w-full">
-              <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="{{ field.label }}">
+        <h1 class="text-3xl font-bold text-center mb-8 text-[#333333]">Add Your Review</h1>
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="flex flex-col">
+                <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-black">
+                    {{ field.label }}
+                </label>
+                <div class="w-full">
+                    {% if field.name == 'rating' %}
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                        {% for i in "12345" %}
+                        <i 
+                            class="fas fa-star star-icon" 
+                            data-index="{{ i }}" 
+                            style="font-size: 45px; color: #D1D5DB; cursor: pointer; transition: color 0.3s;">
+                        </i>
+                        {% endfor %}
+                        <input type="hidden" id="rating-input" name="rating" value="{{ form.rating.value }}">
+                    </div>
+                    {% elif field.name == 'vehicle' %}
+                    <select id="vehicle-select" name="vehicle" class="select2-dropdown w-full appearance-none bg-gray-100 border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" style="width: 100% !important;"">
+                        <option value="" selected disabled>Select a vehicle</option>
+                        {% for vehicle in vehicles %}
+                        <option value="{{ vehicle.id }}" {% if form.vehicle.value == vehicle.id %}selected{% endif %}>
+                            {{ vehicle.merk }} {{ vehicle.tipe }} {{ vehicle.warna }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="{{ field.label }}">
+                    {% endif %}
+                </div>
+                {% if field.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+                {% endif %}
+                {% for error in field.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                {% endfor %}
             </div>
-            {% if field.help_text %}
-              <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
-            {% endif %}
-            {% for error in field.errors %}
-              <p class="mt-1 text-sm text-red-600">{{ error }}</p>
             {% endfor %}
-          </div>
-        {% endfor %}
-        <div class="flex justify-center mt-6">
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#629584] hover:bg-[#387478] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C96868]">
-            Add Review
-          </button>
-        </div>
-      </form>
+            <div class="flex justify-center mt-6">
+                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#629584] hover:bg-[#387478] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#C96868]">
+                    Add Review
+                </button>
+            </div>
+        </form>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    const stars = document.querySelectorAll('.star-icon');
+    const ratingInput = document.getElementById('rating-input');
+
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            const rating = index + 1;
+            ratingInput.value = rating;
+            updateStars(rating);
+        });
+    });
+
+    function updateStars(rating) {
+        stars.forEach((star, index) => {
+            star.style.color = index < rating ? '#FFDE4D' : '#D1D5DB';
+        });
+    }
+
+    const initialRating = "";
+  updateStars(parseInt(initialRating) || 0);
+
+    $(document).ready(function() {
+        $('#vehicle-select').select2({
+            placeholder: 'Select a vehicle',
+            allowClear: true
+        });
+    });
+</script>
 {% endblock content %}

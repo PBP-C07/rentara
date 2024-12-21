@@ -1,7 +1,6 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
-from main.models import Vehicle
 
 class Partner(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
