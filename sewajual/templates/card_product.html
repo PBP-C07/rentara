@@ -78,8 +78,8 @@
                         {{ vehicle.merk }} {{ vehicle.tipe }}
                     </h2>
                     <p class="font-bold text-dark-blue">
-                        {% if average_rating > 0 %}
-                            {{ average_rating|floatformat:1 }} / 5 ⭐
+                        {% if vehicle.average_rating > 0 %}
+                            {{ vehicle.average_rating|floatformat:1 }} / 5 ⭐
                         {% else %}
                             -
                         {% endif %}
