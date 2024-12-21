@@ -9,6 +9,7 @@ from .models import Vehicle
 from joinpartner.models import Partner
 from bookmark.models import Bookmark
 from .forms import VehicleForm
+from django.db.models import Avg
 
 def format_price(value):
     try:
@@ -23,8 +24,12 @@ def format_price(value):
 
 def vehicle_list(request):
     vehicles = list(Vehicle.objects.all())
+
     for vehicle in vehicles:
         vehicle.harga = format_price(vehicle.harga)
+        reviews = vehicle.reviews.all()
+        average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+        vehicle.average_rating = average_rating
     
     return render(request, 'card_product.html', {'vehicles': vehicles})
 
@@ -39,11 +44,17 @@ def full_info(request, pk):
     if request.user.is_authenticated:
         is_bookmarked = Bookmark.objects.filter(user=request.user, vehicle=vehicle).exists()
 
+    reviews = vehicle.reviews.all()
+    average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+    review_count = reviews.count()
+
     next_page = request.GET.get('next', 'vehicle_list')
 
     return render(request, html_file, {
         'vehicle': vehicle,
         'is_bookmarked': is_bookmarked,
+        'average_rating': average_rating,
+        'review_count': review_count,
         'next_page': next_page
     })
 
