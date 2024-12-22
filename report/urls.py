@@ -16,6 +16,5 @@ urlpatterns = [
     path('add_report/', add_report, name='add_report'), 
     path('manage_reports/', manage_reports, name='manage_reports'),
     path('accept_report/<uuid:report_id>/', accept_report, name='accept_report'),
-    path('reject_report/<uuid:report_id>/', reject_report, name='reject_report'),
     path('re/create-flutter/', create_report_flutter, name='create_report')
 ]

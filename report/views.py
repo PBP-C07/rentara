@@ -145,20 +145,6 @@ def accept_report(request, report_id):
             return redirect('report:manage_reports')
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
-@csrf_exempt
-@staff_member_required
-def reject_report(request, report_id):
-    if request.method == 'POST':
-        report = get_object_or_404(Report, id=report_id)
-        if report.status == 'Pending':  # Hanya ubah jika status masih Pending
-            report.status = 'Rejected'
-            report.save()
-            messages.success(request, f"Laporan dengan ID {report_id} berhasil di-reject.")
-            return redirect('report:manage_reports')
-        else:
-            messages.error(request, "Laporan ini sudah diproses sebelumnya.")
-            return redirect('report:manage_reports')
-    return JsonResponse({'error': 'Invalid request'}, status=400)
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
