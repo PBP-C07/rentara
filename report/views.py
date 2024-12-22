@@ -190,3 +190,34 @@ def create_report_flutter(request):
             return JsonResponse({"status": "failed", "message": "Format data tidak valid."})
 
     return JsonResponse({"status": "failed", "message": "Metode request tidak valid."})
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .models import Report
+from django.contrib.auth.decorators import login_required
+
+@csrf_exempt
+@login_required
+def update_report(request, id):
+    if request.method == 'POST':
+        try:
+            report = Report.objects.get(id=id, user=request.user)
+            data = json.loads(request.body)
+            report.issue_type = data.get('issue_type', report.issue_type)
+            report.description = data.get('description', report.description)
+            report.save()
+            return JsonResponse({"status": "success", "message": "Report updated successfully."})
+        except Report.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Report not found."})
+
+@csrf_exempt
+@login_required
+def delete_report_flutter(request, id):
+    if request.method == 'DELETE':
+        try:
+            report = Report.objects.get(id=id, user=request.user)
+            report.delete()
+            return JsonResponse({"status": "success", "message": "Report deleted successfully."})
+        except Report.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Report not found."})
