@@ -142,6 +142,7 @@ def get_stores(request):
 
 import json # tessss
 @csrf_exempt
+@require_http_methods(["POST"]) 
 def create_product_flutter(request):
     if request.method == 'POST':
 
