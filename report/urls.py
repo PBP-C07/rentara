@@ -1,5 +1,5 @@
 from django.urls import path
-from report.views import create_report_entry, show_json, show_xml, show_json_by_id, show_xml_by_id, report_entry_ajax, edit_report, delete_report, add_report, manage_reports, reject_report, accept_report, create_report_flutter
+from report.views import create_report_entry, show_json, show_xml, show_json_by_id, show_xml_by_id, report_entry_ajax, edit_report, delete_report, add_report, manage_reports, accept_report, create_report_flutter
 
 app_name = 'report'
 
