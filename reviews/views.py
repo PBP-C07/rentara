@@ -142,10 +142,13 @@ def edit_reviews_flutter(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            review = Reviews.objects.get(pk=id, user=request.user)
+            vehicle_id = uuid.UUID(data["vehicle"])
+            vehicle = Vehicle.objects.get(pk=vehicle_id)
+
+            review = Reviews.objects.get(user=request.user, vehicle=vehicle)
 
             review.title = data.get("title", review.title)
-            review.vehicle = data.get("vehicle", review.vehicle)
+            review.vehicle = vehicle
             review.rating = int(data.get("rating", review.rating))
             review.description = data.get("description", review.description)
             
@@ -158,12 +161,12 @@ def edit_reviews_flutter(request):
         return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
     
 def delete_reviews_flutter(request):
-    if request.method == 'DELETE':
+    if request.method == 'POST':
         try:
             data = json.loads(request.body)
             review_id = data.get("id")
+            
             review = Reviews.objects.get(pk=review_id, user=request.user)
-
             review.delete()
 
             return JsonResponse({"status": "success", "message": "Review deleted successfully"}, status=200)
@@ -192,10 +195,12 @@ def get_vehicle_review_stats(request, vehicle_id):
 def get_current_user(request):
     if request.user.is_authenticated:
         return JsonResponse({
+            'user_id': request.user.id,
             'username': request.user.username,
             'is_authenticated': True
         })
     return JsonResponse({
+        'user_id': None,
         'username': None,
         'is_authenticated': False
     })
