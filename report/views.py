@@ -214,10 +214,12 @@ def update_report(request, id):
 @csrf_exempt
 @login_required
 def delete_report_flutter(request, id):
-    if request.method == 'DELETE':
+    if request.method == 'GET':  # Gunakan metode GET untuk penghapusan
         try:
             report = Report.objects.get(id=id, user=request.user)
             report.delete()
             return JsonResponse({"status": "success", "message": "Report deleted successfully."})
         except Report.DoesNotExist:
             return JsonResponse({"status": "error", "message": "Report not found."})
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid request method."})
