@@ -161,19 +161,19 @@ def edit_reviews_flutter(request):
         return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
     
 def delete_reviews_flutter(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         try:
-            data = json.loads(request.body)
-            review_id = data.get("id")
+            review_id = request.GET.get("id")
             
+            if not review_id:
+                return JsonResponse({"status": "error", "message": "Review ID is required"}, status=400)
+
             review = Reviews.objects.get(pk=review_id, user=request.user)
             review.delete()
 
             return JsonResponse({"status": "success", "message": "Review deleted successfully"}, status=200)
         except Reviews.DoesNotExist:
             return JsonResponse({"status": "error", "message": "Review not found or not authorized to delete this review"}, status=404)
-        except KeyError:
-            return JsonResponse({"status": "error", "message": "Review ID is required"}, status=400)
     else:
         return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
     
