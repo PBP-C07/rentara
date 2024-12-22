@@ -62,16 +62,16 @@
 
                     <div class="flex flex-col">
                         <label for="vehicle" class="mb-2 font-semibold text-black">Vehicle</label>
-                        <select id="vehicle-select" name="vehicle" class="select2-dropdown w-full appearance-none bg-gray-100 border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                          <option value="" selected disabled>Select a vehicle</option>
-                          {% for vehicle in vehicles %}
-                              <option value="{{ vehicle.id }}" {% if form.vehicle.value == vehicle.id %}selected{% endif %}>
-                                  {{ vehicle.merk }} {{ vehicle.tipe }} {{ vehicle.warna }}
-                              </option>
-                          {% endfor %}
-                      </select>
+                        <select id="vehicle-select" name="vehicle" class="select2-dropdown w-full">
+                            <option value="" disabled selected>Select a vehicle</option>
+                            {% for vehicle in vehicles %}
+                                <option value="{{ vehicle.id }}">{{ vehicle.merk }} {{ vehicle.tipe }} {{ vehicle.warna }}</option>
+                            {% empty %}
+                                <option disabled>No vehicles available</option>
+                            {% endfor %}
+                        </select>
                     </div>
-
+                    
                     <div class="flex flex-col">
                         <label for="description" class="mb-2 font-semibold text-black">Description</label>
                         <textarea id="description" name="description" rows="3" class="appearance-none rounded-md block w-full h-52 resize-none border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Describe your review" required></textarea>
@@ -90,112 +90,108 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
-    // Star Rating Interaction
     const stars = document.querySelectorAll('.star-icon');
-    const ratingInput = document.getElementById('rating-input');
+const ratingInput = document.getElementById('rating-input');
 
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const rating = index + 1;
+        ratingInput.value = rating;
+        updateStars(rating);
+    });
+});
+
+function updateStars(rating) {
     stars.forEach((star, index) => {
-        star.addEventListener('click', () => {
-            const rating = index + 1;
-            ratingInput.value = rating;
-            updateStars(rating);
-        });
+        star.style.color = index < rating ? '#FFDE4D' : '#D1D5DB';
     });
+}
 
-    function updateStars(rating) {
-        stars.forEach((star, index) => {
-            star.style.color = index < rating ? '#FFDE4D' : '#D1D5DB';
-        });
-    }
+const initialRating = "{{ form.rating.value|default:0 }}";
+updateStars(parseInt(initialRating) || 0);
 
-    const initialRating = "{{ form.rating.value|default:0 }}";
-    updateStars(parseInt(initialRating) || 0);
-
-    $(document).ready(function() {
-        $('#vehicle-select').select2({
-            placeholder: 'Select a vehicle',
-            allowClear: true
-        });
+$(document).ready(function() {
+    $('#vehicle-select').select2({
+        placeholder: 'Select a vehicle',
+        allowClear: true
     });
+});
 
-    // Submit Review Entry by AJAX
-    function addReviewsEntry(event) {
-      event.preventDefault(); // Mencegah form submit default
+// Submit Review Entry by AJAX
+function addReviewsEntry(event) {
+    event.preventDefault(); // Mencegah form submit default
 
-      const formData = new FormData(document.querySelector('#reviewEntryForm'));
-      const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+    const form = document.querySelector('#reviewEntryForm');
+    const formData = new FormData(form);
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 
-      fetch("{% url 'reviews:create_reviews_ajax' %}", {
-          method: "POST",
-          headers: {
-              "X-CSRFToken": csrfToken,
-          },
-          body: formData,
-      })
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Failed to submit review');
-          }
-          return response.json();
-      })
-      .then(data => {
-          if (data.status === "CREATED") {
-              // Log vehicles data to console for debugging
-              console.log(data.vehicles);
+    fetch("{% url 'reviews:create_reviews_ajax' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": csrfToken,
+        },
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to submit review');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data); // Debugging data
 
-              // Update UI: Example to display vehicles in the dropdown
-              const vehicleSelect = document.getElementById('vehicle-select');
-              vehicleSelect.innerHTML = '<option value="" disabled selected>Select a vehicle</option>';
+        if (data.status === "CREATED") {
+            // Periksa jika data.vehicles ada dan terdefinisi
+            
+            const vehicleSelect = document.getElementById('vehicle-select');
 
-              data.vehicles.forEach(vehicle => {
-                  const option = document.createElement('option');
-                  option.value = vehicle.id;
-                  option.textContent = `${vehicle.merk} ${vehicle.tipe} ${vehicle.warna}`;
-                  vehicleSelect.appendChild(option);
-              });
+            $('#vehicle-select').select2({
+                placeholder: 'Select a vehicle',
+                allowClear: true
+            });
 
-              $('#vehicle-select').select2();
-
-              alert('Review successfully added!');
-          }
-      })
-      .catch(error => {
-          console.error('Error:', error);
-          alert('Failed to add review. Please try again.');
-      });
-
-      document.getElementById("reviewEntryForm").reset();
-      hideReviewModal();
-  }
-
-  // Tambahkan event listener pada tombol submit
-  document.getElementById("submitReviewEntry").addEventListener("click", addReviewsEntry);
-
-    const modal = document.getElementById('crudModal');
-    const modalContent = document.getElementById('crudModalContent');
-
-    function showReviewModal() {
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modalContent.classList.remove('opacity-0', 'scale-95');
-            modalContent.classList.add('opacity-100', 'scale-100');
-        }, 50);
-    }
-
-    function hideReviewModal() {
-        modalContent.classList.remove('opacity-100', 'scale-100');
-        modalContent.classList.add('opacity-0', 'scale-95');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 150);
-    }
-
-    document.getElementById("cancelButton").addEventListener("click", hideReviewModal);
-    document.getElementById("closeModalBtn").addEventListener("click", hideReviewModal);
-
-    document.querySelectorAll('[data-modal-toggle="crudModal"]').forEach((element) => {
-        element.addEventListener("click", showReviewModal);
+            alert('Review successfully added!');
+            hideReviewModal();  // Tutup modal setelah sukses
+            
+        } else {
+            alert('Unexpected response: Review could not be added.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);  // Log error
+        alert('Error: ' + error.message);
     });
+}
+
+// Event listener untuk tombol submit
+document.getElementById("submitReviewEntry").addEventListener("click", addReviewsEntry);
+
+const modal = document.getElementById('crudModal');
+const modalContent = document.getElementById('crudModalContent');
+
+function showReviewModal() {
+    modal.classList.remove('hidden');
+    setTimeout(() => {
+        modalContent.classList.remove('opacity-0', 'scale-95');
+        modalContent.classList.add('opacity-100', 'scale-100');
+    }, 50);
+}
+
+function hideReviewModal() {
+    modalContent.classList.remove('opacity-100', 'scale-100');
+    modalContent.classList.add('opacity-0', 'scale-95');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 150);
+}
+
+document.getElementById("cancelButton").addEventListener("click", hideReviewModal);
+document.getElementById("closeModalBtn").addEventListener("click", hideReviewModal);
+
+document.querySelectorAll('[data-modal-toggle="crudModal"]').forEach((element) => {
+    element.addEventListener("click", showReviewModal);
+});
 </script>
 
 {% endblock content %}

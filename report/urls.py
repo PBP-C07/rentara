@@ -1,5 +1,5 @@
 from django.urls import path
-from report.views import create_report_entry, show_json, show_xml, show_json_by_id, show_xml_by_id, report_entry_ajax, edit_report, delete_report, add_report, manage_reports, accept_report, create_report_flutter, update_report, delete_report_flutter
+from report.views import create_report_entry, show_json, show_xml, show_json_by_id, show_xml_by_id, report_entry_ajax, edit_report, delete_report, add_report, manage_reports, accept_report, create_report_flutter, delete_report_flutter, update_report
 
 app_name = 'report'
 
@@ -17,6 +17,6 @@ urlpatterns = [
     path('manage_reports/', manage_reports, name='manage_reports'),
     path('accept_report/<uuid:report_id>/', accept_report, name='accept_report'),
     path('re/create-flutter/', create_report_flutter, name='create_report'),
-    path('report/update/<uuid:id>/', update_report, name='update_report'),
+    path('report/update/<uuid:id>/', update_report, name='update_report_flutter'),
     path('report/delete/<uuid:id>/', delete_report_flutter, name='delete_report_flutter'),
 ]
