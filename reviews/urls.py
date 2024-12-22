@@ -20,6 +20,6 @@ urlpatterns = [
     path('create-reviews-flutter/', create_reviews_flutter, name='create_reviews_flutter'),
     path('edit-reviews-flutter/', edit_reviews_flutter, name='edit_reviews_flutter'),
     path('delete-reviews-flutter/', delete_reviews_flutter, name='delete_reviews_flutter'),
-    path('vehicle_review_stats/<int:vehicle_id>/', get_vehicle_review_stats, name='vehicle_review_stats'),
+    path('vehicle-review-stats/<uuid:vehicle_id>/', get_vehicle_review_stats, name='vehicle_review_stats'),
     path('get-current-user/', get_current_user, name='get_current_user'),
 ]
