@@ -12,7 +12,7 @@ urlpatterns = [
     path('vehicles/adm/<uuid:pk>/delete/', delete_vehicle, name='delete_vehicle'),
     path('bookmarks/', include('bookmark.urls', namespace='bookmark')),
     path('vehicle/json/', show_json, name='show_json'),
-    path('vehicle/create-flutter/', create_product_flutter, name='create_vehicle_flutter'),
+    path('vehicle/create-flutter/', create_product_flutter, name='create_product_flutter'),
     path('vehicle/get-stores/', get_stores, name='get-stores'),
     path('vehicle/edit-flutter/<uuid:pk>/', edit_vehicle_flutter, name='edit_vehicle_flutter'),
 ]
