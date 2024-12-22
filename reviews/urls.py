@@ -1,7 +1,7 @@
 from django.urls import path
 from authentication import views
 from reviews.views import create_reviews_flutter, delete_reviews_flutter, edit_reviews_flutter, get_vehicle_review_stats, show_reviews, create_reviews, edit_review, delete_review, create_reviews_ajax
-from reviews.views import show_xml, show_json, show_xml_by_id, show_json_by_id
+from reviews.views import show_xml, show_json, show_xml_by_id, show_json_by_id, get_current_user
 
 app_name = 'reviews'
 
@@ -21,4 +21,5 @@ urlpatterns = [
     path('edit-reviews-flutter/', edit_reviews_flutter, name='edit_reviews_flutter'),
     path('delete-reviews-flutter/', delete_reviews_flutter, name='delete_reviews_flutter'),
     path('vehicle_review_stats/<int:vehicle_id>/', get_vehicle_review_stats, name='vehicle_review_stats'),
+    path('get-current-user/', get_current_user, name='get_current_user'),
 ]
