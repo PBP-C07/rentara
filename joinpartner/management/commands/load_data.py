@@ -73,4 +73,3 @@ class Command(BaseCommand):
                 # )
 
         self.stdout.write(self.style.SUCCESS('Data loaded successfully'))
-

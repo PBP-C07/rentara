@@ -517,4 +517,3 @@ def edit_partner(request, partner_id):
 
 #ini test
 #dummy
-#dummy
