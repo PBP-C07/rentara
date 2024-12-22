@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
@@ -9,6 +10,7 @@ from django.views.decorators.http import require_POST
 from django.core import serializers
 from django.utils.html import strip_tags
 from sewajual.models import Vehicle
+from django.db.models import Avg
 
 def show_reviews(request):
     review_entries = Reviews.objects.all()
@@ -65,12 +67,18 @@ def review_list(request):
 
     return render(request, 'card_review.html', {'reviews': formatted_reviews})
 
-def show_xml(request):
-    data = Reviews.objects.filter(user=request.user)
+def show_xml(request, vehicle_id=None):
+    if vehicle_id:
+        data = Reviews.objects.filter(vehicle_id=vehicle_id)
+    else:
+        data = Reviews.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
-def show_json(request):
-    data = Reviews.objects.filter(user=request.user)
+def show_json(request, vehicle_id=None):
+    if vehicle_id:
+        data = Reviews.objects.filter(vehicle_id=vehicle_id)
+    else:
+        data = Reviews.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
@@ -105,3 +113,69 @@ def create_reviews_ajax(request):
         "status": "CREATED",
         "vehicles": vehicles_data
     }, status=201)
+
+@csrf_exempt
+@login_required(login_url='/login')
+def create_reviews_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_product = Reviews.objects.create(
+            user=request.user,
+            title=data["title"],
+            vehicle=data["vehicle"],
+            rating=int(data["rating"]),
+            description=data["description"],            
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+    
+@csrf_exempt
+def edit_reviews_flutter(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            review = Reviews.objects.get(pk=id, user=request.user)
+
+            review.title = data.get("title", review.title)
+            review.vehicle = data.get("vehicle", review.vehicle)
+            review.rating = int(data.get("rating", review.rating))
+            review.description = data.get("description", review.description)
+            
+            review.save()
+
+            return JsonResponse({"status": "success", "message": "Review updated successfully"}, status=200)
+        except Reviews.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Review not found or not authorized to edit this review"}, status=404)
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
+    
+def delete_reviews_flutter(request):
+    if request.method == 'DELETE':
+        try:
+            data = json.loads(request.body)
+            review_id = data.get("id")
+            review = Reviews.objects.get(pk=review_id, user=request.user)
+
+            review.delete()
+
+            return JsonResponse({"status": "success", "message": "Review deleted successfully"}, status=200)
+        except Reviews.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Review not found or not authorized to delete this review"}, status=404)
+        except KeyError:
+            return JsonResponse({"status": "error", "message": "Review ID is required"}, status=400)
+    else:
+        return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
+    
+def get_vehicle_review_stats(request, vehicle_id):
+    reviews = Reviews.objects.filter(vehicle_id=vehicle_id)
+    total_reviews = reviews.count()
+    average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+    return JsonResponse({
+        'average_rating': round(average_rating, 1),
+        'review_count': total_reviews,
+    })
