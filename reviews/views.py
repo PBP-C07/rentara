@@ -176,7 +176,7 @@ def delete_reviews_flutter(request):
     
 def get_vehicle_review_stats(request, vehicle_id):
     try:
-        vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+        vehicle = get_object_or_404(Vehicle, pk=vehicle_id)
         reviews = Reviews.objects.filter(vehicle=vehicle)
         total_reviews = reviews.count()
         average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
@@ -186,6 +186,7 @@ def get_vehicle_review_stats(request, vehicle_id):
         })
     except ValueError:
         return JsonResponse({'error': 'Invalid vehicle ID'}, status=400)
+
 
 @csrf_exempt
 def get_current_user(request):
