@@ -132,7 +132,7 @@ def manage_reports(request):
 
 
 @staff_member_required
-def approve_report(request, report_id):
+def accept_report(request, report_id):
     if request.method == 'POST':
         report = get_object_or_404(Report, id=report_id)
         if report.status == 'Pending':  # Hanya ubah jika status masih Pending

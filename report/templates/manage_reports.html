@@ -34,18 +34,11 @@
                 <td>{{ report.description }}</td>
                 <td>{{ report.get_status_display }}</td>
                 <td class="actions">
-                    <!-- Form Approve -->
-                    <form method="post" action="{% url 'report:approve_report' report.id %}" class="action-form">
+                    <!-- Form Accept -->
+                    <form method="post" action="{% url 'report:accept_report' report.id %}" class="action-form">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-success" onclick="return confirm('Yakin ingin approve laporan ini?')">
-                            Approve
-                        </button>
-                    </form>
-                    <!-- Form Reject -->
-                    <form method="post" action="{% url 'report:reject_report' report.id %}" class="action-form">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin reject laporan ini?')">
-                            Reject
+                        <button type="submit" class="btn btn-success" onclick="return confirm('Yakin ingin menerima laporan ini?')">
+                            Accept
                         </button>
                     </form>
                 </td>
@@ -59,7 +52,7 @@
     </table>
 
     <!-- Navigasi Kembali -->
-    <a href="{% url 'main:show_main' %}" class="btn btn-secondary">Kembali ke Halaman Utama</a>
+    <a href="{% url 'joinpartner:manage_partners' %}" class="btn btn-secondary">Kembali ke Halaman Utama</a>
 </div>
 
 <!-- Tambahkan CSS untuk konsistensi dengan desain -->
