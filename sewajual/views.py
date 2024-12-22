@@ -131,8 +131,6 @@ def delete_vehicle(request, pk):
 
 def show_json(request):
     data = list(Vehicle.objects.all())
-    # Add debug print
-    print("Sending JSON response:", serializers.serialize("json", data))
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 @csrf_exempt
