@@ -15,9 +15,11 @@ from django.db.models import Avg
 
 def show_reviews(request):
     review_entries = Reviews.objects.all()
+    vehicles = Vehicle.objects.all()
 
     context = {
-        'review_entries': review_entries
+        'review_entries': review_entries,
+        'vehicles': vehicles
     }
 
     return render(request, "show_review.html", context)
@@ -95,16 +97,23 @@ def show_json_by_id(request, id):
 @login_required(login_url='/login')
 def create_reviews_ajax(request):
     title = strip_tags(request.POST.get("title"))
-    title = request.POST.get("title")
     rating = request.POST.get("rating")
     description = strip_tags(request.POST.get("description"))
+    vehicle_id = request.POST.get("vehicle")
     user = request.user
 
-    vehicles = Vehicle.objects.all()
-    vehicles_data = [{"merk": v.merk, "tipe": v.tipe, "warna": v.warna} for v in vehicles]
-
+    try:
+        vehicle = Vehicle.objects.get(id=vehicle_id)
+    except Vehicle.DoesNotExist:
+        return JsonResponse({
+            "status": "ERROR",
+            "message": "Vehicle not found."
+        }, status=404)
+    
     new_review = Reviews(
-        title=title, rating=rating,
+        title=title,
+        vehicle=vehicle,
+        rating=rating,
         description=description,
         user=user
     )
@@ -112,7 +121,6 @@ def create_reviews_ajax(request):
 
     return JsonResponse({
         "status": "CREATED",
-        "vehicles": vehicles_data
     }, status=201)
 
 @csrf_exempt
