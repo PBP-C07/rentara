@@ -159,3 +159,48 @@ def reject_report(request, report_id):
             messages.error(request, "Laporan ini sudah diproses sebelumnya.")
             return redirect('report:manage_reports')
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+import json
+
+@login_required
+def user_reports(request):
+    reports = Report.objects.filter(user=request.user).values('title', 'description', 'date')
+    return JsonResponse({"reports": list(reports)})
+
+from django.http import JsonResponse
+from .models import Report
+from django.contrib.auth.decorators import login_required
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .models import Report
+from django.contrib.auth.decorators import login_required
+
+@csrf_exempt
+@login_required
+def create_report_flutter(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            vehicle = data.get("vehicle")
+            issue_type = data.get("issue_type")
+            description = data.get("description")
+
+            if not vehicle or not issue_type:
+                return JsonResponse({"status": "failed", "message": "Data tidak lengkap."})
+
+            Report.objects.create(
+                vehicle=vehicle,
+                issue_type=issue_type,
+                description=description,
+                user=request.user,
+            )
+            return JsonResponse({"status": "success", "message": "Report berhasil dibuat."})
+        except json.JSONDecodeError:
+            return JsonResponse({"status": "failed", "message": "Format data tidak valid."})
+
+    return JsonResponse({"status": "failed", "message": "Metode request tidak valid."})
