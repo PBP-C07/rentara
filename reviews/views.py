@@ -2,7 +2,7 @@ import json
 import uuid
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 from reviews.forms import ReviewsForm
 from reviews.models import Reviews
@@ -175,13 +175,17 @@ def delete_reviews_flutter(request):
         return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
     
 def get_vehicle_review_stats(request, vehicle_id):
-    reviews = Reviews.objects.filter(vehicle_id=vehicle_id)
-    total_reviews = reviews.count()
-    average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
-    return JsonResponse({
-        'average_rating': round(average_rating, 1),
-        'review_count': total_reviews,
-    })
+    try:
+        vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+        reviews = Reviews.objects.filter(vehicle=vehicle)
+        total_reviews = reviews.count()
+        average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+        return JsonResponse({
+            'average_rating': round(average_rating, 1),
+            'review_count': total_reviews,
+        })
+    except ValueError:
+        return JsonResponse({'error': 'Invalid vehicle ID'}, status=400)
 
 @csrf_exempt
 def get_current_user(request):
