@@ -136,9 +136,9 @@ def accept_report(request, report_id):
     if request.method == 'POST':
         report = get_object_or_404(Report, id=report_id)
         if report.status == 'Pending':  # Hanya ubah jika status masih Pending
-            report.status = 'Approved'
+            report.status = 'Accepted'
             report.save()
-            messages.success(request, f"Laporan dengan ID {report_id} berhasil di-approve.")
+            messages.success(request, f"Laporan dengan ID {report_id} berhasil diterima.")
             return redirect('report:manage_reports')
         else:
             messages.error(request, "Laporan ini sudah diproses sebelumnya.")
