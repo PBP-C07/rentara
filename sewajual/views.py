@@ -140,34 +140,67 @@ def get_stores(request):
     store_list = [{"toko": store.toko} for store in stores]  
     return JsonResponse(store_list, safe=False)
 
+@csrf_exempt
+def get_partner_id(request, store_name):
+    try:
+        partner = Partner.objects.get(toko=store_name)
+        return JsonResponse({
+            'partner_id': str(partner.id)
+        })
+    except Partner.DoesNotExist:
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Partner not found'
+        }, status=404)
+    
 import json # tessss
 @csrf_exempt
-@require_http_methods(["POST"]) 
 def create_product_flutter(request):
     if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            partner = None
+            if 'partner_id' in data:
+                try:
+                    partner = Partner.objects.get(id=data['partner_id'])
+                except Partner.DoesNotExist:
+                    return JsonResponse({
+                        "status": "error",
+                        "message": "Partner not found"
+                    }, status=404)
 
-        data = json.loads(request.body)
-        new_vehicle = Vehicle.objects.create(
-            toko=data["toko"],
-            merk=data["merk"],
-            tipe=data["tipe"],
-            warna=data["warna"],
-            jenis_kendaraan=data["jenis_kendaraan"],
-            harga=int(data["harga"]),
-            status=data["status"],
-            notelp=data.get("notelp"),
-            bahan_bakar=data["bahan_bakar"],
-            link_lokasi=data["link_lokasi"],
-            link_foto=data["link_foto"],
-            partner=Partner.objects.get(id=data["partner_id"]) if "partner_id" in data else None
-        )
+            new_vehicle = Vehicle.objects.create(
+                toko=data["toko"],
+                merk=data["merk"],
+                tipe=data["tipe"],
+                warna=data["warna"],
+                jenis_kendaraan=data["jenis_kendaraan"],
+                harga=int(data["harga"]),
+                status=data["status"],
+                notelp=data.get("notelp"),
+                bahan_bakar=data["bahan_bakar"],
+                link_lokasi=data["link_lokasi"],
+                link_foto=data["link_foto"],
+                partner=partner
+            )
 
-        new_vehicle.save()
+            new_vehicle.save()
 
-
-        return JsonResponse({"status": "success"}, status=200)
+            return JsonResponse({
+                "status": "success",
+                "message": "Vehicle created successfully"
+            }, status=200)
+        except Exception as e:
+            return JsonResponse({
+                "status": "error",
+                "message": str(e)
+            }, status=400)
     else:
-        return JsonResponse({"status": "error"}, status=401)
+        return JsonResponse({
+            "status": "error",
+            "message": "Invalid request method"
+        }, status=405)
     
 @csrf_exempt
 def edit_vehicle_flutter(request, pk):
