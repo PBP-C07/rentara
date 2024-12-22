@@ -29,6 +29,7 @@ DEBUG = not PRODUCTION
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "raisa-sakila-rentaraproject.pbp.cs.ui.ac.id", "10.0.2.2", 'web-production-7d15.up.railway.app', 'rentara-production.up.railway.app']
 
+#dummy
 
 # Application definition
 
