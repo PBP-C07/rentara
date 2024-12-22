@@ -140,7 +140,7 @@ def get_stores(request):
     store_list = [{"toko": store.toko} for store in stores]  
     return JsonResponse(store_list, safe=False)
 
-import json
+import json # tessss
 @csrf_exempt
 def create_product_flutter(request):
     if request.method == 'POST':
