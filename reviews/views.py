@@ -1,4 +1,5 @@
 import json
+import uuid
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
@@ -115,17 +116,19 @@ def create_reviews_ajax(request):
     }, status=201)
 
 @csrf_exempt
-@login_required(login_url='/login')
 def create_reviews_flutter(request):
     if request.method == 'POST':
 
         data = json.loads(request.body)
+        vehicle_id = uuid.UUID(data["vehicle"])
+        vehicle = Vehicle.objects.get(pk=vehicle_id)
+
         new_product = Reviews.objects.create(
             user=request.user,
-            title=data["title"],
-            vehicle=data["vehicle"],
-            rating=int(data["rating"]),
-            description=data["description"],            
+                title=data["title"],
+                vehicle=vehicle, 
+                rating=int(data["rating"]),
+                description=data["description"]        
         )
 
         new_product.save()
@@ -179,3 +182,37 @@ def get_vehicle_review_stats(request, vehicle_id):
         'average_rating': round(average_rating, 1),
         'review_count': total_reviews,
     })
+
+@csrf_exempt
+def get_current_user(request):
+    if request.user.is_authenticated:
+        return JsonResponse({
+            'username': request.user.username,
+            'is_authenticated': True
+        })
+    return JsonResponse({
+        'username': None,
+        'is_authenticated': False
+    })
+
+@csrf_exempt
+def show_reviews_json(request):
+    reviews = Reviews.objects.all()
+    return JsonResponse(
+        [
+            {
+                "model": "reviews.reviews",
+                "pk": str(review.pk),
+                "fields": {
+                    "title": review.title,
+                    "user": review.user.id,  
+                    "vehicle": str(review.vehicle.pk) if review.vehicle else None, 
+                    "time": review.time.isoformat(),
+                    "rating": review.rating,
+                    "description": review.description,
+                }
+            }
+            for review in reviews
+        ],
+        safe=False
+    )
