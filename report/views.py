@@ -197,19 +197,32 @@ import json
 from .models import Report
 from django.contrib.auth.decorators import login_required
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+import json
+
 @csrf_exempt
 @login_required
 def update_report(request, id):
     if request.method == 'POST':
         try:
+            # Cari laporan berdasarkan id dan user yang sesuai
             report = Report.objects.get(id=id, user=request.user)
             data = json.loads(request.body)
+
+            # Update field sesuai input
+            report.vehicle = data.get('vehicle', report.vehicle)  # Tambahkan update vehicle
             report.issue_type = data.get('issue_type', report.issue_type)
             report.description = data.get('description', report.description)
+
             report.save()
             return JsonResponse({"status": "success", "message": "Report updated successfully."})
         except Report.DoesNotExist:
             return JsonResponse({"status": "error", "message": "Report not found."})
+        except json.JSONDecodeError:
+            return JsonResponse({"status": "error", "message": "Invalid JSON data."})
+    return JsonResponse({"status": "error", "message": "Invalid request method."})
 
 @csrf_exempt
 @login_required
